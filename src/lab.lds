@@ -9,7 +9,7 @@ ENTRY(_start)
 
 SECTIONS
 {
-    . = 0x8000;
+ /*   . = 0x8000;*/
     _IMAGE_START = .;
 
     _TEXT_BEGIN = .;
@@ -54,8 +54,8 @@ SECTIONS
         *(COMMON)
         *(.bss*)
         /* Allocate room for stack */
-        .   =  ALIGN(8);
-        .   += 4096;
+        .   =  ALIGN(4K);
+        .   += 64K;
         _stack_top =  . - 16;        
     }
     _BSS_END = .;
@@ -64,7 +64,7 @@ SECTIONS
     _IMAGE_SIZE = _IMAGE_END - _IMAGE_START;
 
 	/DISCARD/ : {
-		*(.interp .dynamic)
+		*(.interp )
 		*(.dynsym .dynstr .hash .gnu.hash)
 	}
 }

@@ -1,8 +1,7 @@
-[target.aarch64-unknown-linux-gnu]
+[target.lab]
 rustflags = [
-    "-C", "relocation-model=pie", 
+    "-C", "force-unwind-tables=off",   
+    "-C", "default-linker-libraries=off",  
     "-C", "code-model=large",
     "-C", "link-arg=-Tsrc/lab.lds",
 ]
-
-linker = "ld.lld"

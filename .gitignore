@@ -1,1 +1,6 @@
 /target
+/.vscode
+*.log
+*.bin
+*.elf
+*.Image

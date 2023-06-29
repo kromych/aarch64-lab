@@ -19,10 +19,10 @@ alias ranlib=$RANLIB
 alias objcopy=$OBJCOPY
 alias nm=$NM
 
-cargo clippy --target aarch64-unknown-linux-gnu
-cargo build --release --target aarch64-unknown-linux-gnu
+cargo clippy --target ./lab.json -Zbuild-std=core -Zbuild-std-features=compiler-builtins-mem
+cargo build --release --target ./lab.json -Zbuild-std=core -Zbuild-std-features=compiler-builtins-mem
 
 objcopy \
     -O binary -R .note -R .note.gnu.build-id -R .comment -S \
-    target/aarch64-unknown-linux-gnu/release/aarch64-lab \
-    target/aarch64-unknown-linux-gnu/release/aarch64-lab.Image
+    target/lab/release/aarch64-lab \
+    target/lab/release/aarch64-lab.Image
