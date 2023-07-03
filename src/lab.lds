@@ -7,93 +7,107 @@ OUTPUT_FORMAT(elf64-aarch64)
 OUTPUT_ARCH(aarch64)
 ENTRY(_start)
 
+_stack_size = 0x20000;
+
+. = 0;
+
 PHDRS
 {
-    headers PT_PHDR PHDRS;
-    text PT_LOAD FILEHDR PHDRS;
-    rodata PT_LOAD;
-    data PT_LOAD;
-    dynamic PT_DYNAMIC;
+  hdr PT_LOAD;
+  text PT_LOAD;
+  rodata PT_LOAD;
+  data PT_LOAD;
 }
 
-SECTIONS
-{
-    . = SIZEOF_HEADERS;
-    . = 4K;
-    _IMAGE_START = .;
+SECTIONS {
+    _base = .;
 
-    .text : {
-        _TEXT_BEGIN = .;
-        *(.init.text*)
-        *(.text*)
-        _TEXT_END = .;
+    _text_start = .;
+    .init : ALIGN(0x4000) {
+        *(.init)
+        *(.init.*)
     } :text
-
-    .init_array : ALIGN(4K) {
-        _INIT_BEGIN = .;
-        KEEP(*(SORT(.init_array.*)))
-        KEEP(*(.init_array))
-        _INIT_END = .;
+    .text : ALIGN(0x4000) {
+        *(.text)
+        *(.text.*)
+        . = ALIGN(8);
+        *(.got.plt)
+        . = ALIGN(0x4000);
+    } :text
+    _text_size = . - _text_start;
+    .rodata : ALIGN(0x4000) {
+        *(.rodata)
+        *(.rodata.*)
+        . = ALIGN(8);
     } :rodata
-
-    .rodata : ALIGN(4K) {
-        _RODATA_BEGIN = .;
-        *(.rodata*)
-        _RODATA_END = .;
+    .rela.dyn : {
+        _rela_start = .;
+        *(.rela)
+        *(.rela.text)
+        *(.rela.got)
+        *(.rela.plt)
+        *(.rela.bss)
+        *(.rela.ifunc)
+        *(.rela.text.*)
+        *(.rela.data)
+        *(.rela.data.*)
+        *(.rela.rodata)
+        *(.rela.rodata*)
+        *(.rela.dyn)
+        _rela_end = .;
+        . = ALIGN(0x4000);
     } :rodata
-
-    .data.rel.ro : ALIGN(4K) {
-        _RELRO_BEGIN = .;
-        *(.data.rel.ro*)
-        _RELRO_END = .;
-    } :rodata
-
-    .rela.dyn : ALIGN(4K) {
-        _RELA_BEGIN = .;
-        *(.rela.dyn*)
-        _RELA_END = .;
-    } :rodata
-
-    .got.plt : ALIGN(4K) {
-        _GOT_PLT_BEGIN = .;
-        *(.got.plt*)
-        _GOT_PLT_END = .;
-    } :rodata
-
-    .got : ALIGN(4K) {
-        _GOT_BEGIN = .;
-        *(.got*)
-        _GOT_END = .;
-    } :rodata
-
-    .plt : ALIGN(4K) {
-        _PLT_BEGIN = .;
-        *(.plt*)
-        _PLT_END = .;
-    } :rodata
-
-    .dynamic : ALIGN(4K) {
-        _DYNAMIC = .;
-        *(.dynamic*)
-    } :rodata
-
-    .data : ALIGN(4K) {
-        _DATA_BEGIN = .;
-        *(.data*)
-        _DATA_END = .;
+    _rodata_end = .;
+    _data_start = .;
+    .data : ALIGN(0x4000) {
+        *(.data)
+        *(.data.*)
+        . = ALIGN(8);
+        _got_start = .;
+        *(.got)
+        _got_end = .;
+        . = ALIGN(0x4000);
+        _file_end = .;
     } :data
-
-    .bss : ALIGN(4K) {
-        _BSS_BEGIN = .;
-        *(.bss*)
-        _BSS_END = .;
+    .bss : ALIGN(0x4000) {
+        _bss_start = .;
+        *(.bss)
+        *(.bss.*)
+        *(.dynbss)
+        *(COMMON)
+        _bss_end = .;
+    } : data
+    .stack : ALIGN(0x4000) {
+        PROVIDE(_stack_top = .);
+        . += _stack_size - 8;
+        QUAD(0x544f424b43415453);
+        PROVIDE(_stack_bot = .);
     } :data
+    ASSERT(ALIGN(0x4000) == ., "Stack size is not aligned!")
+    _data_size = . - _data_start;
+    _end = .;
+    _image_size = _end - _base;
+    _payload_start = .;
 
-    /* Allocate room for stack */
-    .   =  ALIGN(4K);
-    .   += 64K;
-    _STACK_TOP = .;        
+    /DISCARD/ : {
+        *(.discard)
+        *(.discard.*)
+        *(.interp .dynamic)
+        *(.dynsym .dynstr .hash .gnu.hash)
+        *(.eh_frame)
+        *(.gnu.version*)
+        *(.note*)
+        *(.comment*)
+    }
 
-    _IMAGE_END = .;
-    _IMAGE_SIZE = _IMAGE_END - _IMAGE_START;
+    .empty (NOLOAD) : {
+        *(.plt) *(.plt.*) *(.iplt) *(.igot)
+        *(.data.rel.ro)
+    }
+    ASSERT(SIZEOF(.empty) == 0, "Unexpected sections detected!")
+
+    .got.plt (NOLOAD) : {
+        *(.got.plt)
+    }
+    ASSERT(SIZEOF(.got.plt) == 0 || SIZEOF(.got.plt) == 0x18, "Unexpected GOT PLT detected!")
 }

@@ -17,11 +17,10 @@ fn main() -> ! {
     semihosting::write_char('H');
     pl011.write_str("ello ").ok();
     semihosting::write_hex(id);
+    semihosting::write_char('\n');
+    semihosting::write_str0(b"Printed via semihosting\n\0");
 
-    // Rust compiler produces globals for formatting calls,
-    // need to relocate.
-    //
-    // write!(pl011, "PL011 {id:x}").ok();
+    writeln!(pl011, "PL011 {id:#x}").ok();
 
     semihosting::exit(0);
 }
