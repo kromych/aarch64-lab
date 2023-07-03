@@ -13,10 +13,11 @@ _stack_size = 0x20000;
 
 PHDRS
 {
-  hdr PT_LOAD;
-  text PT_LOAD;
-  rodata PT_LOAD;
-  data PT_LOAD;
+    hdr     PT_LOAD;
+    text    PT_LOAD;
+    rodata  PT_LOAD;
+    data    PT_LOAD;
+    dynamic PT_DYNAMIC;
 }
 
 SECTIONS {
@@ -69,6 +70,11 @@ SECTIONS {
         . = ALIGN(0x4000);
         _file_end = .;
     } :data
+    .dynamic : ALIGN(0x4000){
+        _dynamic_start = .;
+        *(.dynamic)
+        _dynamic_end = .;
+    } :data :dynamic
     .bss : ALIGN(0x4000) {
         _bss_start = .;
         *(.bss)

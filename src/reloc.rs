@@ -1,21 +1,23 @@
-extern "C" {
-    fn _base();
-    fn _rela_start();
-    fn _rela_end();
-    fn _got_start();
-    fn _got_end();
-}
+use crate::semihosting::Semihosting;
+use core::fmt::Write;
 
 const R_AARCH64_RELATIVE: u32 = 0x403;
 
 #[repr(C, packed)]
-struct elf64_rela {
+#[derive(Debug)]
+struct Elf64Dyn {
+    tag: isize,
+    val: usize,
+}
+
+#[repr(C, packed)]
+struct Elf64Rela {
     offset: u64,
     info: u64,
     addend: u64,
 }
 
-fn rela_type(rela: &elf64_rela) -> u32 {
+fn rela_type(rela: &Elf64Rela) -> u32 {
     rela.info as u32
 }
 
@@ -36,8 +38,8 @@ fn apply_got(load_addr: u64, begin: usize, end: usize) {
 fn apply_rela(load_addr: u64, begin: usize, end: usize) {
     let rela = unsafe {
         core::slice::from_raw_parts_mut(
-            begin as *mut elf64_rela,
-            (end - begin) / core::mem::size_of::<elf64_rela>(),
+            begin as *mut Elf64Rela,
+            (end - begin) / core::mem::size_of::<Elf64Rela>(),
         )
     };
     for rel in rela {
@@ -48,5 +50,19 @@ fn apply_rela(load_addr: u64, begin: usize, end: usize) {
         unsafe {
             *((rel.offset + load_addr) as *mut u64) = rel.addend + load_addr;
         }
+    }
+}
+
+#[no_mangle]
+fn apply_dynamic(_load_addr: u64, begin: usize, end: usize) {
+    let dyna = unsafe {
+        core::slice::from_raw_parts_mut(
+            begin as *mut Elf64Dyn,
+            (end - begin) / core::mem::size_of::<Elf64Dyn>(),
+        )
+    };
+    let mut semi = Semihosting;
+    for d in dyna {
+        writeln!(semi, "{d:#x?}").ok();
     }
 }

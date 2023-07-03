@@ -1,6 +1,9 @@
 	.arch armv8-a
 	.file	"start.S"
     .extern main, relocate, apply_got, apply_rela, _stack_bot, _image_size
+	.weak _DYNAMIC
+	.hidden _DYNAMIC
+
 	.global	_start
 
 	.section ".init.text", "ax", @progbits
@@ -44,6 +47,14 @@ _start:
     adrp 	x2, _rela_end
     add 	x2, x2, :lo12:_rela_end
 	bl 		apply_rela
+
+    adrp 	x0, _base
+    mov 	x20, x0
+    adrp 	x1, _dynamic_start
+    add 	x1, x1, :lo12:_dynamic_start
+    adrp 	x2, _dynamic_end
+    add 	x2, x2, :lo12:_dynamic_end
+	bl 		apply_dynamic
 
 	// Run the Rust main
 
