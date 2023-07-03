@@ -1,6 +1,6 @@
 	.arch armv8-a
 	.file	"start.S"
-    .extern main, relocate, _IMAGE_SIZE, _stack_top
+    .extern main, relocate, _IMAGE_SIZE, _STACK_TOP
 	.global	_start
 
 	.section ".init.text", "ax", @progbits
@@ -18,9 +18,14 @@
 	.ascii	"ARM\x64"	// Signature
 
 _start:
-    adr     x20, _stack_top
+	// Set up the stack
+    adrp    x20, _STACK_TOP
+	sub		x20, x20, 64
     mov     sp, x20
+
+    adrp	x0, .
 	bl 		relocate
+
 	bl      main
 	b       .
 	.size	_start, .-_start

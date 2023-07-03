@@ -14,4 +14,4 @@ qemu-system-aarch64 \
     -chardev file,path=serial2.log,id=char1 \
     -serial chardev:char1 \
     -nographic \
-    -d guest_errors -d cpu_reset -d int -D qemu.log
+#    -d guest_errors -d cpu_reset -d int -D qemu.log

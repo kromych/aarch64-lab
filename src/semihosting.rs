@@ -38,14 +38,33 @@ pub fn exit(code: u64) -> ! {
     unsafe { unreachable_unchecked() }
 }
 
-// pub fn write_str(s: &str) {
-//     const SYS_WRITE0: u32 = 0x04;
-// }
-
 pub fn write_char(c: char) {
     const SYS_WRITEC: u32 = 0x03;
     let data = [c as u64];
     unsafe {
         semi_call(SYS_WRITEC, data.as_ptr());
     }
+}
+
+pub fn write_str0(s: &[u8]) {
+    const SYS_WRITE0: u32 = 0x04;
+    unsafe {
+        semi_call(SYS_WRITE0, s.as_ptr().cast());
+    }
+}
+
+pub fn write_hex(h: u64) {
+    let mut hs = [0_u16; 11];
+    hs[0] = u16::from_le_bytes([b'0', b'x']);
+
+    let hexn = |nibble| match nibble {
+        0..=9 => nibble + b'0',
+        10..=15 => nibble - 10 + b'a',
+        _ => panic!("Nibble out of range"),
+    };
+    for (n, &b) in h.to_be_bytes().iter().enumerate() {
+        hs[n + 1] = ((hexn(b & 0xf) as u16) << 8) | (hexn(b >> 4) as u16);
+    }
+    let hs = unsafe { core::slice::from_raw_parts(hs.as_ptr() as *const u8, hs.len() * 2) };
+    write_str0(hs);
 }
