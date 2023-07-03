@@ -27,9 +27,19 @@ fn main() -> ! {
 }
 
 #[panic_handler]
-fn panic(_info: &core::panic::PanicInfo) -> ! {
-    let semi: semihosting::Semihosting = semihosting::Semihosting;
-
-    semi.write_str0(b"panic\n\0");
+fn panic(info: &core::panic::PanicInfo) -> ! {
+    let mut semi: semihosting::Semihosting = semihosting::Semihosting;
+    if let Some(loc) = info.location() {
+        writeln!(
+            semi,
+            "\nPanic at {}:{}:{}",
+            loc.file(),
+            loc.line(),
+            loc.column()
+        )
+        .ok();
+    } else {
+        writeln!(semi, "\nPanic").ok();
+    }
     semi.exit(!0);
 }
