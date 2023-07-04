@@ -159,6 +159,22 @@ pub struct SystemControlEl1Val {
     pub tidcp: u64,
 }
 
+impl Default for SystemControlEl1Val {
+    fn default() -> Self {
+        Self(0)
+            .with_eos(1)
+            .with_tscxt(1)
+            .with_eis(1)
+            .with_n_tlsmd(1)
+            .with_lsmaoe(1)
+            // Disable support for SETEND and IT of Aarch32
+            // in EL0
+            .with_sed(1)
+            .with_itd(1)
+    }
+}
+
+// Must be aligned to a 2KB boundary
 #[bitfield(u64)]
 pub struct VectorBaseEl1Val {
     #[bits(10)]
