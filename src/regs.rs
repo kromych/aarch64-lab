@@ -177,10 +177,10 @@ impl Default for SystemControlEl1Val {
 // Must be aligned to a 2KB boundary
 #[bitfield(u64)]
 pub struct VectorBaseEl1Val {
-    #[bits(10)]
+    #[bits(11)]
     _mbz0: u64,
-    #[bits(54)]
-    pub vbar: u64,
+    #[bits(53)]
+    pub vbar_shift_11: u64,
 }
 
 #[derive(Debug)]
