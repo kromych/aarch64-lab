@@ -23,8 +23,8 @@
 
 	// This resembles the Linux kernel Image header
 
-	nop
-	bl _start
+	add     x13, x18, #0x16  // code0: UEFI "MZ" signature magic instruction
+	bl      _start
 	.quad	0				// Image load offset from start of RAM, little-endian
 	.quad	_image_size		// Kernel size, little-endian
 	.quad	0x0A			// Flags, little-endian: LE kernel(bit 0), 4K pages(bits 1-2), phys addr(bit 3)
