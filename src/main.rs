@@ -64,7 +64,7 @@ fn main() -> ! {
     writeln!(semi, "ESR_EL1\t{esr_el1_raw:#016x?}").ok();
     writeln!(semi, "SPSR_EL1\t{spsr_el1_raw:#016x?}").ok();
 
-    semi.exit(0);
+    semi.exit(0)
 }
 
 #[panic_handler]
@@ -82,5 +82,6 @@ fn panic(info: &core::panic::PanicInfo) -> ! {
     } else {
         writeln!(semi, "\nPanic").ok();
     }
-    semi.exit(!0);
+
+    semi.exit(!0)
 }
