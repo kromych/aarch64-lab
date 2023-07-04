@@ -1,4 +1,4 @@
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Clone, Copy, PartialEq, Eq)]
 #[repr(u64)]
 #[allow(dead_code)]
 enum ElfDynTag {
@@ -71,13 +71,14 @@ enum ElfDynTag {
 
 const R_AARCH64_RELATIVE: u32 = 0x403;
 
+#[derive(Clone, Copy)]
 #[repr(C)]
-#[derive(Debug)]
 struct Elf64Dyn {
     tag: ElfDynTag,
     val: usize,
 }
 
+#[derive(Clone, Copy)]
 #[repr(C)]
 struct Elf64Rela {
     offset: u64,
@@ -85,6 +86,7 @@ struct Elf64Rela {
     addend: u64,
 }
 
+#[derive(Clone, Copy)]
 #[repr(C)]
 struct Elf64Rel {
     offset: u64,
