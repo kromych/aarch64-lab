@@ -41,7 +41,7 @@ fn main() -> ! {
 
     let current_el = CurrentElVal::from(current_el_raw).el();
     let sctlr_el1 = SystemControlEl1Val::from(sctlr_el1_raw);
-    let vbar_el1 = VectorBaseEl1Val::from(vbar_el1_raw).vbar();
+    let vbar_el1 = VectorBaseEl1Val::from(vbar_el1_raw);
     let mair_el1 = MemoryAttributeIndirectionEl1Val::from(mair_el1_raw);
     let tcr_el1 = TranslationControlEl1Val::from(tcr_el1_raw);
     let ttbr0_el1 = TranslationBaseEl1Val::from(ttbr0_el1_raw);
@@ -50,7 +50,14 @@ fn main() -> ! {
 
     writeln!(semi, "CurrentEL\t{current_el_raw:#016x?}: {current_el:?}").ok();
     writeln!(semi, "SCTLR_EL1\t{sctlr_el1_raw:#016x?}: {sctlr_el1:?}").ok();
-    writeln!(semi, "VBAR_EL1\t{vbar_el1_raw:#016x?}: {vbar_el1:#x?}").ok();
+    writeln!(
+        semi,
+        "Default SCTLR_EL1\t{:#016x?}: {:?}",
+        u64::from(SystemControlEl1Val::default()),
+        SystemControlEl1Val::default()
+    )
+    .ok();
+    writeln!(semi, "VBAR_EL1\t{vbar_el1_raw:#016x?}: {vbar_el1:x?}").ok();
     writeln!(semi, "MAIR_EL1\t{mair_el1_raw:#016x?}: {mair_el1:x?}").ok();
     writeln!(semi, "TCR_EL1\t{tcr_el1_raw:#016x?}: {tcr_el1:?}").ok();
     writeln!(semi, "TTBR0_EL1\t{ttbr0_el1_raw:#016x?}: {ttbr0_el1:x?}").ok();
