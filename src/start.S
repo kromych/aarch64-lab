@@ -33,6 +33,7 @@
 	.quad	0				// Reserved
 	.ascii	"ARM\x64"		// Signature
 
+    // Vector table must be aligned to a 2KB boundary
 	.balign 0x800
 _vector_table_el1:
     // Target and source at same exception level with source SP = SP_EL0
@@ -63,11 +64,14 @@ _start:
     adrp 	x3, _vector_table_el1
     add 	x3, x3, :lo12:_vector_table_el1
     msr     VBAR_EL1, x3
+    isb
 
-    // NEON setup. To be exactly correct need to see
+    // NEON and FP setup. To be exactly correct need to see
 	// what the current EL is.
-    mov 	x1, #(0x3 << 20)
-    msr 	CPACR_EL1, x1
+	mrs	x0, CPACR_EL1
+	orr	x0, x0, #(3 << 20)
+	orr	x0, x0, #(3 << 16)
+	msr	CPACR_EL1, x0
     isb
 
 	// Set up the stack
