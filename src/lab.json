@@ -13,7 +13,8 @@
   "relro-level": "off",
   "target-pointer-width": "64",
   "code-model": "small",
-  "relocation-model": "pic",
+  "relocation-model": "pie",
+  "executables": "yes",
   "pre-link-args": {
     "ld.lld": ["--script=src/lab.ld"]
   }
