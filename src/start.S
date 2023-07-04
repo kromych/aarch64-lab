@@ -24,6 +24,12 @@
 	.ascii	"ARM\x64"		// Signature
 
 _start:
+    // NEON setup. To be exactly correct need to see
+	// what the current EL is.
+    mov 	x1, #(0x3 << 20)
+    msr 	cpacr_el1, x1
+    isb
+
 	// Set up the stack
     adrp    x1, _stack_bot
 	sub		x1, x1, 64
