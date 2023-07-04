@@ -25,15 +25,14 @@
 
 _start:
 	// Set up the stack
-    adrp    x20, _stack_bot
-	sub		x20, x20, 64
-    mov     sp, x20
+    adrp    x1, _stack_bot
+	sub		x1, x1, 64
+    mov     sp, x1
 
     // Rust compiler produces globals for formatting calls,
     // need to relocate.
 
     adrp 	x0, _base
-    mov 	x20, x0
     adrp 	x1, _DYNAMIC
     add 	x1, x1, :lo12:_DYNAMIC
 	bl 		relocate

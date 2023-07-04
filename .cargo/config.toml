@@ -3,5 +3,5 @@ rustflags = [
     "-C", "force-unwind-tables=off",   
     "-C", "default-linker-libraries=off",  
     "-C", "code-model=small",
-    "-C", "link-args=-Tsrc/lab.lds",
+    "-C", "link-args=-Tsrc/lab.ld",
 ]
