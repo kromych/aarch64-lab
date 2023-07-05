@@ -17,6 +17,7 @@ PHDRS
     text    PT_LOAD;
     rodata  PT_LOAD;
     data    PT_LOAD;
+    bss     PT_LOAD;
     dynamic PT_DYNAMIC;
 }
 
@@ -24,19 +25,19 @@ SECTIONS {
     _base = .;
 
     _text_start = .;
-    .init : ALIGN(0x4000) {
+    .init : ALIGN(4K) {
         *(.init)
         *(.init.*)
     } :text
-    .text : ALIGN(0x4000) {
+    .text : ALIGN(4K) {
         *(.text)
         *(.text.*)
         . = ALIGN(8);
         *(.got.plt)
-        . = ALIGN(0x4000);
+        . = ALIGN(4K);
     } :text
     _text_size = . - _text_start;
-    .rodata : ALIGN(0x4000) {
+    .rodata : ALIGN(4K) {
         *(.rodata)
         *(.rodata.*)
         . = ALIGN(8);
@@ -56,41 +57,43 @@ SECTIONS {
         *(.rela.rodata*)
         *(.rela.dyn)
         _rela_end = .;
-        . = ALIGN(0x4000);
+        . = ALIGN(4K);
     } :rodata
     _rodata_end = .;
     _data_start = .;
-    .data : ALIGN(0x4000) {
+    .data : ALIGN(4K) {
         *(.data)
         *(.data.*)
         . = ALIGN(8);
         _got_start = .;
         *(.got)
         _got_end = .;
-        . = ALIGN(0x4000);
+        . = ALIGN(4K);
         _file_end = .;
     } :data
-    .dynamic : ALIGN(0x4000){
+    .dynamic : ALIGN(4K){
         _dynamic_start = .;
         *(.dynamic)
         _dynamic_end = .;
     } :data :dynamic
-    .bss : ALIGN(0x4000) {
+    _data_size = . - _data_start;
+
+    .stack (NOLOAD) : ALIGN(4K) {
+        PROVIDE(_stack_top = .);
+        . += _stack_size - 8;
+        QUAD(0x544f424b43415453);
+        PROVIDE(_stack_bot = .);
+    } : bss
+    ASSERT(ALIGN(4K) == ., "Stack size is not aligned!")
+
+    .bss (NOLOAD) : ALIGN(4K) {
         _bss_start = .;
         *(.bss)
         *(.bss.*)
         *(.dynbss)
         *(COMMON)
         _bss_end = .;
-    } : data
-    .stack : ALIGN(0x4000) {
-        PROVIDE(_stack_top = .);
-        . += _stack_size - 8;
-        QUAD(0x544f424b43415453);
-        PROVIDE(_stack_bot = .);
-    } :data
-    ASSERT(ALIGN(0x4000) == ., "Stack size is not aligned!")
-    _data_size = . - _data_start;
+    } : bss
     _end = .;
     _image_size = _end - _base;
     _payload_start = .;

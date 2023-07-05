@@ -3,6 +3,7 @@
 
 core::arch::global_asm!(include_str!("start.S"));
 
+mod mmu;
 mod pl011;
 mod regs;
 mod reloc;
@@ -70,6 +71,17 @@ fn main() -> ! {
     writeln!(semi, "ELR_EL1\t{elr_el1_raw:#016x?}").ok();
     writeln!(semi, "ESR_EL1\t{esr_el1_raw:#016x?}").ok();
     writeln!(semi, "SPSR_EL1\t{spsr_el1_raw:#016x?}").ok();
+
+    writeln!(
+        semi,
+        "Page tables are located at\t[{:#016x};{:#016x}]",
+        mmu::page_tables_area_start_addr(),
+        mmu::page_tables_area_end_addr()
+    )
+    .ok();
+
+    // let page_table = mmu::reset_tables_area();
+    // writeln!(semi, "Page tables area size\t{:#016x}", page_table.len()).ok();
 
     semi.exit(0)
 }
