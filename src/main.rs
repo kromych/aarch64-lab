@@ -12,6 +12,7 @@ mod semihosting;
 use crate::regs::*;
 use aarch64_cpu::registers::*;
 use core::fmt::Write;
+use mmu::PageTableSpace;
 use tock_registers::interfaces::Readable;
 
 #[no_mangle]
@@ -72,16 +73,22 @@ fn main() -> ! {
     writeln!(semi, "ESR_EL1\t{esr_el1_raw:#016x?}").ok();
     writeln!(semi, "SPSR_EL1\t{spsr_el1_raw:#016x?}").ok();
 
+    let mut page_tables = PageTableSpace::new(
+        mmu::page_tables_phys_start(),
+        mmu::page_tables_phys_end(),
+        mmu::page_tables_area(),
+    );
     writeln!(
         semi,
         "Page tables are located at\t[{:#016x};{:#016x}]",
-        mmu::page_tables_area_start_addr(),
-        mmu::page_tables_area_end_addr()
+        page_tables.start(),
+        page_tables.end()
     )
     .ok();
 
-    // let page_table = mmu::reset_tables_area();
-    // writeln!(semi, "Page tables area size\t{:#016x}", page_table.len()).ok();
+    page_tables
+        .map_range(0, mmu::VirtualAddress::from(0), 0x4000000)
+        .unwrap();
 
     semi.exit(0)
 }
