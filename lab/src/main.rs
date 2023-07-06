@@ -1,6 +1,8 @@
 #![no_std]
 #![no_main]
 
+use core::arch::asm;
+
 core::arch::global_asm!(include_str!("start.S"));
 
 mod page_table_space {
@@ -32,9 +34,7 @@ use aarch64::mmu::PageTableSpace;
 use aarch64::pl011;
 use aarch64::regs::*;
 use aarch64::semihosting;
-use aarch64_cpu::registers::*;
 use core::fmt::Write;
-use tock_registers::interfaces::Readable;
 
 #[no_mangle]
 fn start() -> ! {
@@ -50,34 +50,37 @@ fn start() -> ! {
     writeln!(semi, "Semihosting {id:#x}").ok();
     writeln!(pl011, "PL011 {id:#x}").ok();
 
-    let current_el_raw = CurrentEL.get();
-    let sctlr_el1_raw = SCTLR_EL1.get();
-    let vbar_el1_raw = VBAR_EL1.get();
-    let mair_el1_raw = MAIR_EL1.get();
-    let tcr_el1_raw = TCR_EL1.get();
-    let ttbr0_el1_raw = TTBR0_EL1.get();
-    let ttbr1_el1_raw = TTBR1_EL1.get();
-    let id_aa64mmfr0_el1_raw = ID_AA64MMFR0_EL1.get();
-    let elr_el1_raw = ELR_EL1.get();
-    let esr_el1_raw = ESR_EL1.get();
-    let spsr_el1_raw = SPSR_EL1.get();
+    let current_el = CurrentEl::get();
+    let sctlr_el1 = SystemControlEl1::get();
+    let vbar_el1 = VectorBaseEl1::get();
+    let mair_el1 = MemoryAttributeIndirectionEl1::get();
+    let tcr_el1 = TranslationControlEl1::get();
+    let ttbr0_el1 = TranslationBaseEl1::get_lower();
+    let ttbr1_el1 = TranslationBaseEl1::get_upper();
+    let id_aa64mmfr0_el1 = MmuFeatures0El1::get();
+    let elr_el1 = aarch64::get_sys_reg!(ELR_EL1);
+    let esr_el1 = aarch64::get_sys_reg!(ESR_EL1);
+    let spsr_el1 = aarch64::get_sys_reg!(SPSR_EL1);
 
-    let current_el = CurrentElVal::from(current_el_raw).el();
-    let sctlr_el1 = SystemControlEl1Val::from(sctlr_el1_raw);
-    let vbar_el1 = VectorBaseEl1Val::from(vbar_el1_raw);
-    let mair_el1 = MemoryAttributeIndirectionEl1Val::from(mair_el1_raw);
-    let tcr_el1 = TranslationControlEl1Val::from(tcr_el1_raw);
-    let ttbr0_el1 = TranslationBaseEl1Val::from(ttbr0_el1_raw);
-    let ttbr1_el1 = TranslationBaseEl1Val::from(ttbr1_el1_raw);
-    let id_aa64mmfr0_el1 = MmuFeatures0El1Val::from(id_aa64mmfr0_el1_raw);
+    let current_el_raw: u64 = current_el.into();
+    let sctlr_el1_raw: u64 = sctlr_el1.into();
+    let vbar_el1_raw: u64 = vbar_el1.into();
+    let mair_el1_raw: u64 = mair_el1.into();
+    let tcr_el1_raw: u64 = tcr_el1.into();
+    let ttbr0_el1_raw: u64 = ttbr0_el1.into();
+    let ttbr1_el1_raw: u64 = ttbr1_el1.into();
+    let id_aa64mmfr0_el1_raw: u64 = id_aa64mmfr0_el1.into();
+    let elr_el1_raw: u64 = elr_el1;
+    let esr_el1_raw: u64 = esr_el1;
+    let spsr_el1_raw: u64 = spsr_el1;
 
     writeln!(semi, "CurrentEL\t{current_el_raw:#016x?}: {current_el:?}").ok();
     writeln!(semi, "SCTLR_EL1\t{sctlr_el1_raw:#016x?}: {sctlr_el1:?}").ok();
     writeln!(
         semi,
         "Default SCTLR_EL1\t{:#016x?}: {:?}",
-        u64::from(SystemControlEl1Val::default()),
-        SystemControlEl1Val::default()
+        u64::from(SystemControlEl1::default()),
+        SystemControlEl1::default()
     )
     .ok();
     writeln!(semi, "VBAR_EL1\t{vbar_el1_raw:#016x?}: {vbar_el1:x?}").ok();
@@ -106,6 +109,9 @@ fn start() -> ! {
         page_table_space::page_tables_phys_end()
     )
     .ok();
+
+    let mair_el1 = MemoryAttributeIndirectionEl1::default();
+    mair_el1.set();
 
     page_tables
         .map_range(0, mmu::VirtualAddress::from(0), 0x4000000)

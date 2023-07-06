@@ -28,7 +28,7 @@ impl From<u64> for El {
 }
 
 #[bitfield(u64)]
-pub struct CurrentElVal {
+pub struct CurrentEl {
     #[bits(2)]
     _mbz0: u64,
     #[bits(2)]
@@ -38,7 +38,7 @@ pub struct CurrentElVal {
 }
 
 #[bitfield(u64)]
-pub struct SystemControlEl1Val {
+pub struct SystemControlEl1 {
     #[bits(1)]
     pub m: u64,
     #[bits(1)]
@@ -159,7 +159,7 @@ pub struct SystemControlEl1Val {
     pub tidcp: u64,
 }
 
-impl Default for SystemControlEl1Val {
+impl Default for SystemControlEl1 {
     fn default() -> Self {
         Self(0)
             .with_eos(1)
@@ -176,7 +176,7 @@ impl Default for SystemControlEl1Val {
 
 // Must be aligned to a 2KB boundary
 #[bitfield(u64)]
-pub struct VectorBaseEl1Val {
+pub struct VectorBaseEl1 {
     #[bits(11)]
     _mbz0: u64,
     #[bits(53)]
@@ -184,11 +184,42 @@ pub struct VectorBaseEl1Val {
 }
 
 #[derive(Debug)]
-pub struct MemoryAttributeIndirectionEl1Val([u8; 8]);
+#[allow(non_camel_case_types)]
+#[repr(u8)]
+pub enum MemoryAttributeEl1 {
+    Device_nGnRnE = 0,
+    Normal_NonCacheable = 0x44,
+    Normal_WriteThrough = 0xbb,
+    Normal_WriteBack = 0xff,
+}
 
-impl From<u64> for MemoryAttributeIndirectionEl1Val {
+#[derive(Debug, Clone, Copy)]
+pub struct MemoryAttributeIndirectionEl1([u8; 8]);
+
+impl Default for MemoryAttributeIndirectionEl1 {
+    fn default() -> Self {
+        Self([
+            MemoryAttributeEl1::Device_nGnRnE as u8,
+            MemoryAttributeEl1::Normal_NonCacheable as u8,
+            MemoryAttributeEl1::Normal_WriteBack as u8,
+            MemoryAttributeEl1::Normal_WriteThrough as u8,
+            MemoryAttributeEl1::Device_nGnRnE as u8,
+            MemoryAttributeEl1::Device_nGnRnE as u8,
+            MemoryAttributeEl1::Device_nGnRnE as u8,
+            MemoryAttributeEl1::Device_nGnRnE as u8,
+        ])
+    }
+}
+
+impl From<u64> for MemoryAttributeIndirectionEl1 {
     fn from(value: u64) -> Self {
-        Self(value.to_le_bytes())
+        MemoryAttributeIndirectionEl1(value.to_le_bytes())
+    }
+}
+
+impl From<MemoryAttributeIndirectionEl1> for u64 {
+    fn from(value: MemoryAttributeIndirectionEl1) -> Self {
+        u64::from_le_bytes(value.0)
     }
 }
 
@@ -281,7 +312,7 @@ impl From<IntermPhysAddrSize> for u64 {
 }
 
 #[bitfield(u64)]
-pub struct TranslationControlEl1Val {
+pub struct TranslationControlEl1 {
     #[bits(6)]
     pub t0sz: u64,
     #[bits(1)]
@@ -371,7 +402,7 @@ pub struct TranslationControlEl1Val {
 }
 
 #[bitfield(u64)]
-pub struct TranslationBaseEl1Val {
+pub struct TranslationBaseEl1 {
     // #[bits(1)]
     // pub cnp: u64,
     #[bits(48)]
@@ -604,7 +635,7 @@ impl From<MmufTGran64KB> for u64 {
 }
 
 #[bitfield(u64)]
-pub struct MmuFeatures0El1Val {
+pub struct MmuFeatures0El1 {
     #[bits(4)]
     pub pa_range: MmufPaRange,
     #[bits(4)]
@@ -635,4 +666,81 @@ pub struct MmuFeatures0El1Val {
     pub fgt: u64,
     #[bits(4)]
     pub ecv: u64,
+}
+
+#[cfg(target_arch = "aarch64")]
+pub mod access {
+    use super::*;
+    use core::arch::asm;
+
+    #[macro_export]
+    macro_rules! get_sys_reg {
+        ($reg:ident) => {{
+            let reg_val: u64;
+            unsafe {
+                asm!(concat!("mrs {}, ", stringify!($reg)), out(reg) reg_val);
+            }
+            reg_val
+        }};
+    }
+
+    #[macro_export]
+    macro_rules! set_sys_reg {
+        ($reg:ident, $val:expr) => {{
+            let val: u64 = $val;
+            unsafe {
+                asm!(concat!("msr ", stringify!($reg), ", {}"), in(reg) val);
+            }
+        }};
+    }
+
+    macro_rules! impl_register_access {
+        ($register_type:ident, $register:ident) => {
+            impl $register_type {
+                pub fn get() -> Self {
+                    get_sys_reg!($register).into()
+                }
+
+                pub fn set(&self) {
+                    let val: u64 = (*self).into();
+                    set_sys_reg!($register, val)
+                }
+            }
+        };
+    }
+
+    macro_rules! impl_register_access_ro {
+        ($register_type:ident, $register:ident) => {
+            impl $register_type {
+                pub fn get() -> Self {
+                    get_sys_reg!($register).into()
+                }
+            }
+        };
+    }
+
+    impl TranslationBaseEl1 {
+        pub fn get_lower() -> Self {
+            get_sys_reg!(TTBR0_EL1).into()
+        }
+
+        pub fn get_upper() -> Self {
+            get_sys_reg!(TTBR1_EL1).into()
+        }
+
+        pub fn set_lower(&self) {
+            set_sys_reg!(TTBR0_EL1, self.0)
+        }
+
+        pub fn set_upper(&self) {
+            set_sys_reg!(TTBR1_EL1, self.0)
+        }
+    }
+
+    impl_register_access_ro!(MmuFeatures0El1, ID_AA64MMFR0_EL1);
+    impl_register_access_ro!(CurrentEl, CurrentEL);
+    impl_register_access!(SystemControlEl1, SCTLR_EL1);
+    impl_register_access!(VectorBaseEl1, VBAR_EL1);
+    impl_register_access!(TranslationControlEl1, TCR_EL1);
+    impl_register_access!(MemoryAttributeIndirectionEl1, MAIR_EL1);
 }

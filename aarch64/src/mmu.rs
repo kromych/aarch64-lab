@@ -281,6 +281,8 @@ impl<'a> PageTableSpace<'a> {
         page_entry = PageBlockEntry::new()
             .with_valid(true)
             .with_page(true)
+            .with_share_perm(3)
+            .with_mair_idx(3)
             .with_address_pfn(phys_addr >> PAGE_SHIFT_4K);
 
         self.write_entry(
