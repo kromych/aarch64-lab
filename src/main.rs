@@ -3,6 +3,28 @@
 
 core::arch::global_asm!(include_str!("start.S"));
 
+mod page_table_space {
+    extern "C" {
+        fn _page_tables_start();
+        fn _page_tables_end();
+    }
+
+    pub fn page_tables_phys_start() -> usize {
+        _page_tables_start as usize
+    }
+
+    pub fn page_tables_phys_end() -> usize {
+        _page_tables_end as usize
+    }
+
+    #[allow(dead_code)]
+    pub fn page_tables_area() -> &'static mut [u8] {
+        let s = page_tables_phys_start();
+        let e = page_tables_phys_end();
+        unsafe { core::slice::from_raw_parts_mut(s as *mut u8, e - s) }
+    }
+}
+
 mod mmu;
 mod pl011;
 mod regs;
@@ -16,7 +38,7 @@ use mmu::PageTableSpace;
 use tock_registers::interfaces::Readable;
 
 #[no_mangle]
-fn main() -> ! {
+fn start() -> ! {
     let mut pl011: pl011::Pl011 = pl011::Pl011;
     let mut semi: semihosting::Semihosting = semihosting::Semihosting;
     let id = pl011.reset_and_init();
@@ -74,15 +96,15 @@ fn main() -> ! {
     writeln!(semi, "SPSR_EL1\t{spsr_el1_raw:#016x?}").ok();
 
     let mut page_tables = PageTableSpace::new(
-        mmu::page_tables_phys_start(),
-        mmu::page_tables_phys_end(),
-        mmu::page_tables_area(),
-    );
+        page_table_space::page_tables_phys_start(),
+        page_table_space::page_tables_area(),
+    )
+    .unwrap();
     writeln!(
         semi,
         "Page tables are located at\t[{:#016x};{:#016x}]",
-        page_tables.start(),
-        page_tables.end()
+        page_table_space::page_tables_phys_start(),
+        page_table_space::page_tables_phys_end()
     )
     .ok();
 
