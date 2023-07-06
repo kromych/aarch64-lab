@@ -17,6 +17,12 @@ fn test_mmu() {
         .expect("can map a page");
 
     page_tables
+        .map_small_page(0x4000, VirtualAddress::from(0xffff_8000_0000_4000))
+        .expect("can map a page");
+
+    page_tables
         .map_small_page(0x5000, VirtualAddress::from(0xffff_8000_0000_5000))
         .expect("can map a page");
+
+    std::fs::write("page_tables.bin", space).expect("can dump the page tables");
 }
