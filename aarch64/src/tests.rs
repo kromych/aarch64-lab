@@ -5,7 +5,7 @@ use crate::mmu::VirtualAddress;
 
 #[test]
 fn test_mmu() {
-    let mut space = vec![0; 0x10000];
+    let mut space = vec![0xaa; 0x10000];
     let mut page_tables =
         PageTableSpace::new(0x00000040248000, &mut space).expect("Can initialize page tables");
 
