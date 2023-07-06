@@ -59,13 +59,13 @@ pub struct VirtualAddress {
     #[bits(12)]
     pub offset: u64,
     #[bits(9)]
-    pub lvl1: usize,
+    pub lvl3: usize,
     #[bits(9)]
     pub lvl2: usize,
     #[bits(9)]
-    pub lvl3: usize,
+    pub lvl1: usize,
     #[bits(9)]
-    pub lvl4: usize,
+    pub lvl0: usize,
     #[bits(16)]
     pub asid: usize,
 }
@@ -78,10 +78,10 @@ impl VirtualAddress {
 
     pub fn lvl_index(&self, index: usize) -> usize {
         match index {
-            1 => self.lvl1(),
-            2 => self.lvl2(),
             3 => self.lvl3(),
-            4 => self.lvl4(),
+            2 => self.lvl2(),
+            1 => self.lvl1(),
+            0 => self.lvl0(),
             _ => panic!("invalid VA level index"),
         }
     }
@@ -95,7 +95,7 @@ const PAGE_SIZE_4K: u64 = 1 << PAGE_SHIFT_4K;
 const PAGE_SIZE_2M: u64 = 1 << PAGE_SHIFT_2M;
 const PAGE_SIZE_1G: u64 = 1 << PAGE_SHIFT_1G;
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum PageMapError {
     OutOfMemory,
     NonCanonicalVirtAddress,
@@ -204,7 +204,7 @@ impl<'a> PageTableSpace<'a> {
         if phys_addr & (PAGE_SIZE_1G - 1) != 0 {
             return Err(PageMapError::MisalignedPhysAddress);
         }
-        if virt_addr.offset() != 0 || virt_addr.lvl1() != 0 || virt_addr.lvl2() != 0 {
+        if virt_addr.offset() != 0 || virt_addr.lvl3() != 0 || virt_addr.lvl2() != 0 {
             return Err(PageMapError::MisalignedVirtAddress);
         }
         if !virt_addr.is_canonical() {
@@ -222,7 +222,7 @@ impl<'a> PageTableSpace<'a> {
         if phys_addr & (PAGE_SIZE_2M - 1) != 0 {
             return Err(PageMapError::MisalignedPhysAddress);
         }
-        if virt_addr.offset() != 0 || virt_addr.lvl1() != 0 {
+        if virt_addr.offset() != 0 || virt_addr.lvl3() != 0 {
             return Err(PageMapError::MisalignedVirtAddress);
         }
         if !virt_addr.is_canonical() {
@@ -248,16 +248,16 @@ impl<'a> PageTableSpace<'a> {
         }
 
         let mut table_phys_addr = self.phys_page_table_root as u64;
-        let mut level = 4;
-        while level >= 1 {
+        let mut level = 0;
+        while level < 3 {
             let mut table_entry =
                 PageTableEntry::from(self.read_entry(table_phys_addr, virt_addr.lvl_index(level)));
             if !table_entry.valid() {
                 let next_table_phys_addr = self.allocate_page_table()?;
 
-                table_entry = PageTableEntry::new()
+                table_entry = PageTableEntry::from(1 << 10)
                     .with_valid(true)
-                    .with_table(true)
+                    .with_table(false)
                     .with_next_table_pfn(next_table_phys_addr >> PAGE_SHIFT_4K);
 
                 self.write_entry(
@@ -268,10 +268,9 @@ impl<'a> PageTableSpace<'a> {
             }
             table_phys_addr = table_entry.next_table_pfn() << PAGE_SHIFT_4K;
 
-            level -= 1;
+            level += 1;
         }
 
-        let level = 1;
         let mut page_entry =
             PageBlockEntry::from(self.read_entry(table_phys_addr, virt_addr.lvl_index(level)));
         if page_entry.valid() {
@@ -281,6 +280,7 @@ impl<'a> PageTableSpace<'a> {
         page_entry = PageBlockEntry::new()
             .with_valid(true)
             .with_page(true)
+            .with_access_perm(1)
             .with_share_perm(3)
             .with_mair_idx(3)
             .with_address_pfn(phys_addr >> PAGE_SHIFT_4K);

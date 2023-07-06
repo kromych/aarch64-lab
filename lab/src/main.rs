@@ -31,32 +31,21 @@ mod reloc;
 
 use aarch64::mmu;
 use aarch64::mmu::PageTableSpace;
-use aarch64::pl011;
+//use aarch64::pl011;
 use aarch64::regs::*;
 use aarch64::semihosting;
 use core::fmt::Write;
 
-#[no_mangle]
-fn start() -> ! {
-    let mut pl011: pl011::Pl011 = pl011::Pl011;
+fn print_registers() {
     let mut semi: semihosting::Semihosting = semihosting::Semihosting;
-    let id = pl011.reset_and_init();
-
-    semi.write_char('H');
-    pl011.write_str("ello ").ok();
-    semi.write_hex(id);
-    semi.write_char('\n');
-
-    writeln!(semi, "Semihosting {id:#x}").ok();
-    writeln!(pl011, "PL011 {id:#x}").ok();
 
     let current_el = CurrentEl::get();
     let sctlr_el1 = SystemControlEl1::get();
     let vbar_el1 = VectorBaseEl1::get();
     let mair_el1 = MemoryAttributeIndirectionEl1::get();
     let tcr_el1 = TranslationControlEl1::get();
-    let ttbr0_el1 = TranslationBaseEl1::get_lower();
-    let ttbr1_el1 = TranslationBaseEl1::get_upper();
+    let ttbr0_el1 = TranslationBase0El1::get();
+    let ttbr1_el1 = TranslationBase1El1::get();
     let id_aa64mmfr0_el1 = MmuFeatures0El1::get();
     let elr_el1 = aarch64::get_sys_reg!(ELR_EL1);
     let esr_el1 = aarch64::get_sys_reg!(ESR_EL1);
@@ -96,6 +85,10 @@ fn start() -> ! {
     writeln!(semi, "ELR_EL1\t{elr_el1_raw:#016x?}").ok();
     writeln!(semi, "ESR_EL1\t{esr_el1_raw:#016x?}").ok();
     writeln!(semi, "SPSR_EL1\t{spsr_el1_raw:#016x?}").ok();
+}
+
+fn setup_mmu() {
+    let mut semi: semihosting::Semihosting = semihosting::Semihosting;
 
     let mut page_tables = PageTableSpace::new(
         page_table_space::page_tables_phys_start(),
@@ -110,13 +103,64 @@ fn start() -> ! {
     )
     .ok();
 
-    let mair_el1 = MemoryAttributeIndirectionEl1::default();
-    mair_el1.set();
-
     page_tables
-        .map_range(0, mmu::VirtualAddress::from(0), 0x4000000)
+        .map_pages(
+            0x4000_0000,
+            mmu::VirtualAddress::from(0x4000_0000),
+            0x200_0000,
+            mmu::PageSize::Small,
+        )
         .unwrap();
 
+    MemoryAttributeIndirectionEl1::default().set();
+    TranslationBase0El1::new()
+        .with_asid(0)
+        .with_baddr(page_table_space::page_tables_phys_start() as u64)
+        .set();
+    TranslationBase1El1::new().set();
+    TranslationControlEl1::new()
+        .with_t0sz(16)
+        .with_irgn0(1)
+        .with_orgn0(1)
+        .with_sh0(3)
+        .with_tg0(TranslationGranule0::_4KB)
+        .with_epd1(1)
+        .with_tg1(TranslationGranule1::_4KB)
+        .with_ips(IntermPhysAddrSize::_48_bits_256TB)
+        .set();
+
+    writeln!(semi, "Enabling MMU").ok();
+
+    let sctlr_el1 = SystemControlEl1::get();
+    sctlr_el1.with_m(1).set();
+
+    writeln!(semi, "MMU enabled").ok();
+}
+
+fn use_pl011() {
+    // let mut semi: semihosting::Semihosting = semihosting::Semihosting;
+    // let mut pl011: pl011::Pl011 = pl011::Pl011;
+    // let id = pl011.reset_and_init();
+
+    // semi.write_char('H');
+    // pl011.write_str("ello ").ok();
+    // semi.write_hex(id);
+    // semi.write_char('\n');
+
+    // writeln!(semi, "Semihosting {id:#x}").ok();
+    // writeln!(pl011, "PL011 {id:#x}").ok();
+}
+
+#[no_mangle]
+fn start() -> ! {
+    let mut semi: semihosting::Semihosting = semihosting::Semihosting;
+
+    use_pl011();
+    print_registers();
+    setup_mmu();
+    print_registers();
+
+    writeln!(semi, "Exiting").ok();
     semi.exit(0)
 }
 

@@ -402,7 +402,17 @@ pub struct TranslationControlEl1 {
 }
 
 #[bitfield(u64)]
-pub struct TranslationBaseEl1 {
+pub struct TranslationBase0El1 {
+    // #[bits(1)]
+    // pub cnp: u64,
+    #[bits(48)]
+    pub baddr: u64,
+    #[bits(16)]
+    pub asid: u64,
+}
+
+#[bitfield(u64)]
+pub struct TranslationBase1El1 {
     // #[bits(1)]
     // pub cnp: u64,
     #[bits(48)]
@@ -689,7 +699,7 @@ pub mod access {
         ($reg:ident, $val:expr) => {{
             let val: u64 = $val;
             unsafe {
-                asm!(concat!("msr ", stringify!($reg), ", {}"), in(reg) val);
+                asm!(concat!("msr ", stringify!($reg), ", {}; ", "dsb ishst; dsb ish; isb"), in(reg) val);
             }
         }};
     }
@@ -719,28 +729,12 @@ pub mod access {
         };
     }
 
-    impl TranslationBaseEl1 {
-        pub fn get_lower() -> Self {
-            get_sys_reg!(TTBR0_EL1).into()
-        }
-
-        pub fn get_upper() -> Self {
-            get_sys_reg!(TTBR1_EL1).into()
-        }
-
-        pub fn set_lower(&self) {
-            set_sys_reg!(TTBR0_EL1, self.0)
-        }
-
-        pub fn set_upper(&self) {
-            set_sys_reg!(TTBR1_EL1, self.0)
-        }
-    }
-
     impl_register_access_ro!(MmuFeatures0El1, ID_AA64MMFR0_EL1);
     impl_register_access_ro!(CurrentEl, CurrentEL);
     impl_register_access!(SystemControlEl1, SCTLR_EL1);
     impl_register_access!(VectorBaseEl1, VBAR_EL1);
     impl_register_access!(TranslationControlEl1, TCR_EL1);
+    impl_register_access!(TranslationBase0El1, TTBR0_EL1);
+    impl_register_access!(TranslationBase1El1, TTBR1_EL1);
     impl_register_access!(MemoryAttributeIndirectionEl1, MAIR_EL1);
 }
