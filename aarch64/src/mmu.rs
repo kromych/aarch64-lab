@@ -72,14 +72,8 @@ pub struct VirtualAddress {
 
 impl VirtualAddress {
     pub fn is_canonical(&self) -> bool {
-        if self.asid() != 0 && self.asid() != 0xffff {
-            return false;
-        }
-        if self.asid() & 1 != self.lvl4() >> 7 {
-            return false;
-        }
-
-        true
+        // The 16 most significant bits must be eqial to the 47th one.
+        ((self.0 as i64) << 16 >> 16) == self.0 as i64
     }
 
     pub fn lvl_index(&self, index: usize) -> usize {
@@ -277,6 +271,7 @@ impl<'a> PageTableSpace<'a> {
             level -= 1;
         }
 
+        let level = 1;
         let mut page_entry =
             PageBlockEntry::from(self.read_entry(table_phys_addr, virt_addr.lvl_index(level)));
         if page_entry.valid() {
