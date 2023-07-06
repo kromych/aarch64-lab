@@ -4,11 +4,7 @@ members = ["aarch64", "lab"]
 
 [workspace.dependencies]
 aarch64 = { path = "aarch64" }
-
-aarch64-cpu = "9.3"
 bitfield-struct = { version = "0.4", default-features = false }
-tock-registers = { version = "0.8", default-features = false }
-zerocopy = { version = "0.6", default-features = false }
 
 [profile.dev]
 panic = "abort"
