@@ -1,12 +1,12 @@
 #!/bin/sh
 
-TARGET_JSON="./src/lab.json"
+TARGET_JSON="./lab/lab.json"
 TARGET="lab"
 CARGO_OPT="-Zbuild-std=core -Zbuild-std-features=compiler-builtins-mem"
 
-cargo clippy --target ${TARGET_JSON} ${CARGO_OPT}
-cargo build --release --target ${TARGET_JSON} ${CARGO_OPT}
-cargo build --target ${TARGET_JSON} ${CARGO_OPT}
+cargo clippy --target ${TARGET_JSON} ${CARGO_OPT} -p aarch64-lab
+cargo build --release --target ${TARGET_JSON} ${CARGO_OPT} -p aarch64-lab
+cargo build --target ${TARGET_JSON} ${CARGO_OPT} -p aarch64-lab
 
 OBJCOPY=$(find `rustc --print sysroot` -name "llvm-objcopy")
 

@@ -3,14 +3,6 @@
 version = 3
 
 [[package]]
-name = "aarch64"
-version = "0.1.0"
-dependencies = [
- "bitfield-struct",
- "zerocopy",
-]
-
-[[package]]
 name = "aarch64-cpu"
 version = "9.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -23,7 +15,6 @@ dependencies = [
 name = "aarch64-lab"
 version = "0.1.0"
 dependencies = [
- "aarch64",
  "aarch64-cpu",
  "bitfield-struct",
  "tock-registers",
@@ -38,7 +29,7 @@ checksum = "0526e3752c9058af187599111a39eff3669ff8cc775063cf94709db66f0afcac"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 2.0.23",
+ "syn 2.0.22",
 ]
 
 [[package]]
@@ -58,9 +49,9 @@ dependencies = [
 
 [[package]]
 name = "quote"
-version = "1.0.29"
+version = "1.0.28"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "573015e8ab27661678357f27dc26460738fd2b6c86e46f386fde94cb5d913105"
+checksum = "1b9ab9c7eadfd8df19006f1cf1a4aed13540ed5cbc047010ece5826e10825488"
 dependencies = [
  "proc-macro2",
 ]
@@ -78,9 +69,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "2.0.23"
+version = "2.0.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "59fb7d6d8281a51045d62b8eb3a7d1ce347b76f312af50cd3dc0af39c87c1737"
+checksum = "2efbeae7acf4eabd6bcdcbd11c92f45231ddda7539edc7806bd1a04a03b24616"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -95,9 +86,9 @@ checksum = "696941a0aee7e276a165a978b37918fd5d22c55c3d6bda197813070ca9c0f21c"
 
 [[package]]
 name = "unicode-ident"
-version = "1.0.10"
+version = "1.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "22049a19f4a68748a168c0fc439f9516686aa045927ff767eca0a85101fb6e73"
+checksum = "b15811caf2415fb889178633e7724bad2509101cde276048e013b9def5e51fa0"
 
 [[package]]
 name = "zerocopy"

@@ -404,9 +404,3 @@ impl<'a> PageTableSpace<'a> {
         Ok(())
     }
 }
-
-#[cfg(test)]
-mod test {
-    #[test]
-    fn test() {}
-}

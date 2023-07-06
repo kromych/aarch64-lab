@@ -25,16 +25,15 @@ mod page_table_space {
     }
 }
 
-mod mmu;
-mod pl011;
-mod regs;
 mod reloc;
-mod semihosting;
 
-use crate::regs::*;
+use aarch64::mmu;
+use aarch64::mmu::PageTableSpace;
+use aarch64::pl011;
+use aarch64::regs::*;
+use aarch64::semihosting;
 use aarch64_cpu::registers::*;
 use core::fmt::Write;
-use mmu::PageTableSpace;
 use tock_registers::interfaces::Readable;
 
 #[no_mangle]

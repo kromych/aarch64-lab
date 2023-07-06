@@ -16,6 +16,6 @@
   "relocation-model": "pie",
   "executables": "yes",
   "pre-link-args": {
-    "ld.lld": ["--script=src/lab.ld"]
+    "ld.lld": ["--script=./lab/lab.ld"]
   }
 }
