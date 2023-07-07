@@ -27,6 +27,26 @@ mod page_table_space {
     }
 }
 
+mod image_data {
+    extern "C" {
+        fn _base();
+        fn _end();
+        fn _image_size();
+    }
+
+    pub fn base() -> usize {
+        _base as usize
+    }
+
+    pub fn end() -> usize {
+        _end as usize
+    }
+
+    pub fn size() -> usize {
+        _image_size as usize
+    }
+}
+
 mod reloc;
 
 use aarch64::mmu;
@@ -102,12 +122,13 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
     let mair_el1 = MemoryAttributeIndirectionEl1::default();
     mair_el1.set();
 
+    let page_size = mmu::PageSize::Small;
     page_tables
         .map_pages(
-            0x4000_0000,
-            mmu::VirtualAddress::from(0x4000_0000),
-            0x2000,
-            mmu::PageSize::Small,
+            image_data::base() as u64,
+            mmu::VirtualAddress::from(image_data::base() as u64),
+            image_data::size() / page_size as usize,
+            page_size,
             mair_el1
                 .get_index(MemoryAttributeEl1::Normal_WriteBack)
                 .expect("must be some WB memory available"),
@@ -168,6 +189,14 @@ fn start() {
     };
 
     writeln!(out, "PL011 {id:#x}").ok();
+    writeln!(
+        out,
+        "Image base {:#x}, end {:#x}, size {:#x}",
+        image_data::base(),
+        image_data::end(),
+        image_data::size()
+    )
+    .ok();
 
     print_registers(out);
     setup_mmu(out);
