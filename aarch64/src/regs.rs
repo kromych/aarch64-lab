@@ -870,4 +870,11 @@ pub mod access {
     impl_register_access!(TranslationBase0El1, TTBR0_EL1);
     impl_register_access!(TranslationBase1El1, TTBR1_EL1);
     impl_register_access!(MemoryAttributeIndirectionEl1, MAIR_EL1);
+
+    #[macro_export]
+    macro_rules! register {
+        ($reg:tt) => {
+            &mut $reg::new() as &mut dyn Aarch64Register
+        };
+    }
 }

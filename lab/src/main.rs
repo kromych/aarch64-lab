@@ -51,24 +51,25 @@ use aarch64::mmu;
 use aarch64::mmu::PageTableSpace;
 use aarch64::pl011;
 use aarch64::pl011::PL011_BASE;
+use aarch64::register;
 use aarch64::regs::access::Aarch64Register;
 use aarch64::regs::*;
 use aarch64::semihosting;
 
 fn print_registers(out: &mut dyn core::fmt::Write) {
     let regs = [
-        &mut CurrentEl::new() as &mut dyn Aarch64Register,
-        &mut SystemControlEl1::new() as &mut dyn Aarch64Register,
-        &mut VectorBaseEl1::new() as &mut dyn Aarch64Register,
-        &mut MemoryAttributeIndirectionEl1::new() as &mut dyn Aarch64Register,
-        &mut TranslationControlEl1::new() as &mut dyn Aarch64Register,
-        &mut TranslationBase0El1::new() as &mut dyn Aarch64Register,
-        &mut TranslationBase1El1::new() as &mut dyn Aarch64Register,
-        &mut MmFeatures0El1::new() as &mut dyn Aarch64Register,
-        &mut MmFeatures1El1::new() as &mut dyn Aarch64Register,
-        &mut ExceptionLinkEl1::new() as &mut dyn Aarch64Register,
-        &mut ExceptionSyndromeEl1::new() as &mut dyn Aarch64Register,
-        &mut SavedProgramStateEl1::new() as &mut dyn Aarch64Register,
+        register!(CurrentEl),
+        register!(SystemControlEl1),
+        register!(VectorBaseEl1),
+        register!(MemoryAttributeIndirectionEl1),
+        register!(TranslationControlEl1),
+        register!(TranslationBase0El1),
+        register!(TranslationBase1El1),
+        register!(MmFeatures0El1),
+        register!(MmFeatures1El1),
+        register!(ExceptionLinkEl1),
+        register!(ExceptionSyndromeEl1),
+        register!(SavedProgramStateEl1),
     ];
 
     for r in regs {
