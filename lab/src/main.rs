@@ -76,7 +76,7 @@ fn print_registers(out: &mut dyn core::fmt::Write) {
 
         let raw: u64 = r.bits();
         let name = r.name();
-        writeln!(out, "{name}\t{raw:#016x?}: {r:?}").ok();
+        writeln!(out, "{name}\t{raw:#016x?}: {r:x?}").ok();
     }
 }
 
