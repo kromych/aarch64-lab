@@ -215,6 +215,10 @@ pub enum MemoryAttributeEl1 {
 pub struct MemoryAttributeIndirectionEl1([u8; 8]);
 
 impl MemoryAttributeIndirectionEl1 {
+    pub fn new() -> Self {
+        Self([0; 8])
+    }
+
     pub fn get_index(&self, a: MemoryAttributeEl1) -> Option<usize> {
         self.0.iter().position(|&x| x == a as u8)
     }
@@ -800,25 +804,31 @@ pub mod access {
         }};
     }
 
-    pub trait Aarch64Register {
-        fn get() -> Self;
-        fn name() -> &'static str;
+    pub trait Aarch64Register: core::fmt::Debug {
+        fn read(&mut self);
+        fn name(&self) -> &'static str;
+        fn bits(&self) -> u64;
     }
 
     macro_rules! impl_register_access {
         ($register_type:ident, $register:ident) => {
             impl Aarch64Register for $register_type {
-                fn get() -> Self {
-                    get_sys_reg!($register).into()
+                fn read(&mut self) {
+                    let val: u64 = get_sys_reg!($register).into();
+                    *self = Self::from(val);
                 }
 
-                fn name() -> &'static str {
+                fn name(&self) -> &'static str {
                     stringify!($register)
+                }
+
+                fn bits(&self) -> u64 {
+                    (*self).into()
                 }
             }
 
             impl $register_type {
-                pub fn set(&self) {
+                pub fn write(&mut self) {
                     let val: u64 = (*self).into();
                     set_sys_reg!($register, val)
                 }
@@ -829,12 +839,17 @@ pub mod access {
     macro_rules! impl_register_access_ro {
         ($register_type:ident, $register:ident) => {
             impl Aarch64Register for $register_type {
-                fn get() -> Self {
-                    get_sys_reg!($register).into()
+                fn read(&mut self) {
+                    let val: u64 = get_sys_reg!($register).into();
+                    *self = Self::from(val);
                 }
 
-                fn name() -> &'static str {
+                fn name(&self) -> &'static str {
                     stringify!($register)
+                }
+
+                fn bits(&self) -> u64 {
+                    (*self).into()
                 }
             }
         };

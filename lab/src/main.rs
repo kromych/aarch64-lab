@@ -56,59 +56,28 @@ use aarch64::regs::*;
 use aarch64::semihosting;
 
 fn print_registers(out: &mut dyn core::fmt::Write) {
-    let current_el = CurrentEl::get();
-    let sctlr_el1 = SystemControlEl1::get();
-    let vbar_el1 = VectorBaseEl1::get();
-    let mair_el1 = MemoryAttributeIndirectionEl1::get();
-    let tcr_el1 = TranslationControlEl1::get();
-    let ttbr0_el1 = TranslationBase0El1::get();
-    let ttbr1_el1 = TranslationBase1El1::get();
-    let id_aa64mmfr0_el1 = MmFeatures0El1::get();
-    let id_aa64mmfr1_el1 = MmFeatures1El1::get();
-    let elr_el1 = ExceptionLinkEl1::get();
-    let esr_el1 = ExceptionSyndromeEl1::get();
-    let spsr_el1 = SavedProgramStateEl1::get();
+    let regs = [
+        &mut CurrentEl::new() as &mut dyn Aarch64Register,
+        &mut SystemControlEl1::new() as &mut dyn Aarch64Register,
+        &mut VectorBaseEl1::new() as &mut dyn Aarch64Register,
+        &mut MemoryAttributeIndirectionEl1::new() as &mut dyn Aarch64Register,
+        &mut TranslationControlEl1::new() as &mut dyn Aarch64Register,
+        &mut TranslationBase0El1::new() as &mut dyn Aarch64Register,
+        &mut TranslationBase1El1::new() as &mut dyn Aarch64Register,
+        &mut MmFeatures0El1::new() as &mut dyn Aarch64Register,
+        &mut MmFeatures1El1::new() as &mut dyn Aarch64Register,
+        &mut ExceptionLinkEl1::new() as &mut dyn Aarch64Register,
+        &mut ExceptionSyndromeEl1::new() as &mut dyn Aarch64Register,
+        &mut SavedProgramStateEl1::new() as &mut dyn Aarch64Register,
+    ];
 
-    let current_el_raw: u64 = current_el.into();
-    let sctlr_el1_raw: u64 = sctlr_el1.into();
-    let vbar_el1_raw: u64 = vbar_el1.into();
-    let mair_el1_raw: u64 = mair_el1.into();
-    let tcr_el1_raw: u64 = tcr_el1.into();
-    let ttbr0_el1_raw: u64 = ttbr0_el1.into();
-    let ttbr1_el1_raw: u64 = ttbr1_el1.into();
-    let id_aa64mmfr0_el1_raw: u64 = id_aa64mmfr0_el1.into();
-    let id_aa64mmfr1_el1_raw: u64 = id_aa64mmfr1_el1.into();
-    let elr_el1_raw: u64 = elr_el1.into();
-    let esr_el1_raw: u64 = esr_el1.into();
-    let spsr_el1_raw: u64 = spsr_el1.into();
+    for r in regs {
+        r.read();
 
-    writeln!(out, "CurrentEL\t{current_el_raw:#016x?}: {current_el:?}").ok();
-    writeln!(out, "SCTLR_EL1\t{sctlr_el1_raw:#016x?}: {sctlr_el1:?}").ok();
-    writeln!(
-        out,
-        "Default SCTLR_EL1\t{:#016x?}: {:?}",
-        u64::from(SystemControlEl1::default()),
-        SystemControlEl1::default()
-    )
-    .ok();
-    writeln!(out, "VBAR_EL1\t{vbar_el1_raw:#016x?}: {vbar_el1:x?}").ok();
-    writeln!(out, "MAIR_EL1\t{mair_el1_raw:#016x?}: {mair_el1:x?}").ok();
-    writeln!(out, "TCR_EL1\t{tcr_el1_raw:#016x?}: {tcr_el1:?}").ok();
-    writeln!(out, "TTBR0_EL1\t{ttbr0_el1_raw:#016x?}: {ttbr0_el1:x?}").ok();
-    writeln!(out, "TTBR1_EL1\t{ttbr1_el1_raw:#016x?}: {ttbr1_el1:x?}").ok();
-    writeln!(
-        out,
-        "AA64MMFR0_EL1\t{id_aa64mmfr0_el1_raw:#016x?}: {id_aa64mmfr0_el1:?}"
-    )
-    .ok();
-    writeln!(
-        out,
-        "AA64MMFR1_EL1\t{id_aa64mmfr1_el1_raw:#016x?}: {id_aa64mmfr1_el1:?}"
-    )
-    .ok();
-    writeln!(out, "ELR_EL1\t{elr_el1_raw:#016x?}").ok();
-    writeln!(out, "ESR_EL1\t{esr_el1_raw:#016x?}").ok();
-    writeln!(out, "SPSR_EL1\t{spsr_el1_raw:#016x?}").ok();
+        let raw: u64 = r.bits();
+        let name = r.name();
+        writeln!(out, "{name}\t{raw:#016x?}: {r:?}").ok();
+    }
 }
 
 fn setup_mmu(out: &mut dyn core::fmt::Write) {
@@ -125,8 +94,8 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
     )
     .ok();
 
-    let mair_el1 = MemoryAttributeIndirectionEl1::default();
-    mair_el1.set();
+    let mut mair_el1 = MemoryAttributeIndirectionEl1::default();
+    mair_el1.write();
 
     let page_size = mmu::PageSize::Small;
     page_tables
@@ -156,8 +125,8 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
     TranslationBase0El1::new()
         .with_asid(0)
         .with_baddr(page_table_space::page_tables_phys_start() as u64)
-        .set();
-    TranslationBase1El1::new().set();
+        .write();
+    TranslationBase1El1::new().write();
     TranslationControlEl1::new()
         .with_t0sz(16)
         .with_irgn0(1)
@@ -169,13 +138,14 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
         .with_ips(IntermPhysAddrSize::_48_bits_256TB)
         // .with_ha(1) // Should checked against the MMU feature reg #1
         // .with_hd(1) // Should checked against the MMU feature reg #1
-        .set();
+        .write();
 
     writeln!(out, "Page tables use {:#x} bytes", page_tables.used_space()).ok();
     writeln!(out, "Enabling MMU").ok();
 
-    let sctlr_el1 = SystemControlEl1::get();
-    sctlr_el1.with_m(1).with_a(1).with_c(1).with_i(1).set();
+    let mut sctlr_el1 = SystemControlEl1::new();
+    sctlr_el1.read();
+    sctlr_el1.with_m(1).with_a(1).with_c(1).with_i(1).write();
 
     writeln!(out, "MMU enabled").ok();
 }
