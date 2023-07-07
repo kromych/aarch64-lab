@@ -921,7 +921,7 @@ pub mod access {
 
     #[macro_export]
     macro_rules! register {
-        ($reg:tt) => {
+        ($reg:ident) => {
             &mut $reg::new() as &mut dyn Aarch64Register
         };
     }
