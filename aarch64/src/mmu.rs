@@ -240,6 +240,11 @@ impl<'a> PageTableSpace<'a> {
         while level < leaf_level {
             let mut table_entry =
                 PageTableEntry::from(self.read_entry(table_phys_addr, virt_addr.lvl_index(level)));
+
+            if table_entry.valid() && !table_entry.table() {
+                return Err(PageMapError::AlreadyMapped);
+            }
+
             if !table_entry.valid() {
                 let next_table_phys_addr = self.allocate_page_table()?;
 
