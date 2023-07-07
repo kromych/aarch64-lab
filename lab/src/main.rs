@@ -102,7 +102,7 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
         .map_pages(
             image_data::base() as u64,
             mmu::VirtualAddress::from(image_data::base() as u64),
-            image_data::size() / page_size as usize,
+            core::cmp::max(image_data::size() / page_size as usize, 1),
             page_size,
             mair_el1
                 .get_index(MemoryAttributeEl1::Normal_WriteBack)
