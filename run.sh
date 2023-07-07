@@ -8,7 +8,7 @@ KERNEL="target/${TARGET}/${FLAVOR}/aarch64-lab.Image"
 qemu-system-aarch64 \
     -nodefaults \
     -kernel ${KERNEL} \
-    -machine virt,highmem=off -nographic -accel hvf -cpu host \
+    -machine virt,highmem=off -nographic -accel tcg -cpu max \
     -smp 1 \
     -m 256M \
     --semihosting \
