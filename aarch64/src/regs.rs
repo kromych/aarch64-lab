@@ -778,6 +778,52 @@ pub struct MmFeatures2El1 {
     pub e0pd: u64,
 }
 
+#[bitfield(u64)]
+pub struct MmFeatures3El1 {
+    #[bits(4)]
+    pub tcrx: u64,
+    #[bits(4)]
+    pub sctlrx: u64,
+    #[bits(4)]
+    pub s1pie: u64,
+    #[bits(4)]
+    pub s2pie: u64,
+    #[bits(4)]
+    pub s1poe: u64,
+    #[bits(4)]
+    pub s2poe: u64,
+    #[bits(4)]
+    pub aie: u64,
+    #[bits(4)]
+    pub mec: u64,
+    #[bits(4)]
+    pub d128: u64,
+    #[bits(4)]
+    pub d128_2: u64,
+    #[bits(4)]
+    pub snerr: u64,
+    #[bits(4)]
+    pub anerr: u64,
+    #[bits(4)]
+    pub res0: u64,
+    #[bits(4)]
+    pub sderr: u64,
+    #[bits(4)]
+    pub aderr: u64,
+    #[bits(4)]
+    pub spec_fpacc: u64,
+}
+
+#[bitfield(u64)]
+pub struct MmFeatures4El1 {
+    #[bits(4)]
+    _mbz0: u64,
+    #[bits(4)]
+    pub eiesb: u64,
+    #[bits(56)]
+    _mbz1: u64,
+}
+
 #[cfg(target_arch = "aarch64")]
 pub mod access {
     use super::*;
@@ -858,11 +904,13 @@ pub mod access {
     impl_register_access_ro!(MmFeatures0El1, ID_AA64MMFR0_EL1);
     impl_register_access_ro!(MmFeatures1El1, ID_AA64MMFR1_EL1);
     impl_register_access_ro!(MmFeatures2El1, ID_AA64MMFR2_EL1);
+    impl_register_access_ro!(MmFeatures3El1, ID_AA64MMFR3_EL1);
+    impl_register_access_ro!(MmFeatures4El1, ID_AA64MMFR4_EL1);
+
     impl_register_access_ro!(CurrentEl, CurrentEL);
 
     impl_register_access!(SystemControlEl1, SCTLR_EL1);
     impl_register_access!(VectorBaseEl1, VBAR_EL1);
-
     impl_register_access!(ExceptionLinkEl1, ELR_EL1);
     impl_register_access!(ExceptionSyndromeEl1, ESR_EL1);
     impl_register_access!(SavedProgramStateEl1, SPSR_EL1);
