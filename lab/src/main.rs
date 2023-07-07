@@ -127,12 +127,14 @@ fn setup_mmu() {
         .with_epd1(1)
         .with_tg1(TranslationGranule1::_4KB)
         .with_ips(IntermPhysAddrSize::_48_bits_256TB)
+        .with_ha(1) // Should checked againdt the MMU feature reg #1
+        .with_hd(1) // Should checked againdt the MMU feature reg #1
         .set();
 
     writeln!(semi, "Enabling MMU").ok();
 
     let sctlr_el1 = SystemControlEl1::get();
-    sctlr_el1.with_m(1).set();
+    sctlr_el1.with_m(1).with_a(1).with_c(1).with_i(1).set();
 
     writeln!(semi, "MMU enabled").ok();
 }

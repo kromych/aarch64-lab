@@ -4,8 +4,10 @@ use bitfield_struct::bitfield;
 pub struct PageTableEntry {
     pub valid: bool,
     pub table: bool, // Use PageBlockEntry if `false`
-    #[bits(10)]
+    #[bits(8)]
     _mbz0: u64,
+    pub accessed: bool,
+    pub not_global: bool,
     #[bits(35)]
     pub next_table_pfn: u64,
     #[bits(12)]
@@ -255,9 +257,14 @@ impl<'a> PageTableSpace<'a> {
             if !table_entry.valid() {
                 let next_table_phys_addr = self.allocate_page_table()?;
 
-                table_entry = PageTableEntry::from(1 << 10)
+                // Without setting the `accessed` flag, qemu fails translation
+                // if the HA flag is not enabled in the TCR register. Support for
+                // HA in indicated in the MMU features register #1.
+
+                table_entry = PageTableEntry::new()
                     .with_valid(true)
                     .with_table(false)
+                    .with_accessed(true)
                     .with_next_table_pfn(next_table_phys_addr >> PAGE_SHIFT_4K);
 
                 self.write_entry(
@@ -280,6 +287,7 @@ impl<'a> PageTableSpace<'a> {
         page_entry = PageBlockEntry::new()
             .with_valid(true)
             .with_page(true)
+            .with_accessed(true)
             .with_access_perm(1)
             .with_share_perm(3)
             .with_mair_idx(3)
