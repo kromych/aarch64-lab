@@ -857,7 +857,7 @@ pub mod access {
 
     impl_register_access_ro!(MmFeatures0El1, ID_AA64MMFR0_EL1);
     impl_register_access_ro!(MmFeatures1El1, ID_AA64MMFR1_EL1);
-    impl_register_access_ro!(MmFeatures2El1, ID_AA64MMFR1_EL1);
+    impl_register_access_ro!(MmFeatures2El1, ID_AA64MMFR2_EL1);
     impl_register_access_ro!(CurrentEl, CurrentEL);
 
     impl_register_access!(SystemControlEl1, SCTLR_EL1);

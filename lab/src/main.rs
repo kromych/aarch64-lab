@@ -67,6 +67,7 @@ fn print_registers(out: &mut dyn core::fmt::Write) {
         register!(TranslationBase1El1),
         register!(MmFeatures0El1),
         register!(MmFeatures1El1),
+        register!(MmFeatures2El1),
         register!(ExceptionLinkEl1),
         register!(ExceptionSyndromeEl1),
         register!(SavedProgramStateEl1),
