@@ -4,3 +4,4 @@
 *.bin
 *.elf
 *.Image
+.DS_Store
