@@ -201,6 +201,94 @@ pub struct SavedProgramStateEl1 {
     pub bits: u64,
 }
 
+#[bitfield(u64)]
+pub struct MainIdEl1 {
+    #[bits(4)]
+    pub revision: u64,
+    #[bits(12)]
+    pub part_num: u64,
+    #[bits(4)]
+    pub architecture: u64,
+    #[bits(4)]
+    pub variant: u64,
+    #[bits(8)]
+    pub implementer: u64,
+    #[bits(32)]
+    _mbz0: u64,
+}
+
+#[bitfield(u64)]
+pub struct ProcessorFeatures0El1 {
+    #[bits(4)]
+    pub el0: u64,
+    #[bits(4)]
+    pub el1: u64,
+    #[bits(4)]
+    pub el2: u64,
+    #[bits(4)]
+    pub el3: u64,
+    #[bits(4)]
+    pub fp: u64,
+    #[bits(4)]
+    pub adv_simd: u64,
+    #[bits(4)]
+    pub gic: u64,
+    #[bits(4)]
+    pub ras: u64,
+    #[bits(4)]
+    pub sve: u64,
+    #[bits(4)]
+    pub sel2: u64,
+    #[bits(4)]
+    pub mpam: u64,
+    #[bits(4)]
+    pub amu: u64,
+    #[bits(4)]
+    pub dit: u64,
+    #[bits(4)]
+    pub rme: u64,
+    #[bits(4)]
+    pub csv2: u64,
+    #[bits(4)]
+    pub csv3: u64,
+}
+
+#[bitfield(u64)]
+pub struct ProcessorFeatures1El1 {
+    #[bits(4)]
+    pub bt: u64,
+    #[bits(4)]
+    pub ssbs: u64,
+    #[bits(4)]
+    pub mte: u64,
+    #[bits(4)]
+    pub ras_frac: u64,
+    #[bits(4)]
+    pub mpam_frac: u64,
+    #[bits(4)]
+    pub res0: u64,
+    #[bits(4)]
+    pub sme: u64,
+    #[bits(4)]
+    pub rndr_trap: u64,
+    #[bits(4)]
+    pub csv2_frac: u64,
+    #[bits(4)]
+    pub nmi: u64,
+    #[bits(4)]
+    pub mte_frac: u64,
+    #[bits(4)]
+    pub gcs: u64,
+    #[bits(4)]
+    pub the: u64,
+    #[bits(4)]
+    pub mtex: u64,
+    #[bits(4)]
+    pub df2: u64,
+    #[bits(4)]
+    pub pfar: u64,
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[allow(non_camel_case_types)]
 #[repr(u8)]
@@ -901,6 +989,9 @@ pub mod access {
         };
     }
 
+    impl_register_access_ro!(MainIdEl1, MIDR_EL1);
+    impl_register_access_ro!(ProcessorFeatures0El1, ID_AA64PFR0_EL1);
+    impl_register_access_ro!(ProcessorFeatures1El1, ID_AA64PFR1_EL1);
     impl_register_access_ro!(MmFeatures0El1, ID_AA64MMFR0_EL1);
     impl_register_access_ro!(MmFeatures1El1, ID_AA64MMFR1_EL1);
     impl_register_access_ro!(MmFeatures2El1, ID_AA64MMFR2_EL1);

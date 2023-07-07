@@ -58,6 +58,14 @@ use aarch64::semihosting;
 
 fn print_registers(out: &mut dyn core::fmt::Write) {
     let regs = [
+        register!(MainIdEl1),
+        register!(ProcessorFeatures0El1),
+        register!(ProcessorFeatures1El1),
+        register!(MmFeatures0El1),
+        register!(MmFeatures1El1),
+        register!(MmFeatures2El1),
+        register!(MmFeatures3El1),
+        register!(MmFeatures4El1),
         register!(CurrentEl),
         register!(SystemControlEl1),
         register!(VectorBaseEl1),
@@ -65,11 +73,6 @@ fn print_registers(out: &mut dyn core::fmt::Write) {
         register!(TranslationControlEl1),
         register!(TranslationBase0El1),
         register!(TranslationBase1El1),
-        register!(MmFeatures0El1),
-        register!(MmFeatures1El1),
-        register!(MmFeatures2El1),
-        register!(MmFeatures3El1),
-        register!(MmFeatures4El1),
         register!(ExceptionLinkEl1),
         register!(ExceptionSyndromeEl1),
         register!(SavedProgramStateEl1),
