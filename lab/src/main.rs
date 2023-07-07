@@ -170,8 +170,8 @@ fn start() {
     setup_mmu(&mut pl011);
     print_registers(&mut pl011);
 
+    writeln!(pl011, "Exiting").ok();
     if USE_SEMIHOSTING {
-        writeln!(semi, "Exiting").ok();
         semi.exit(0)
     }
 }
