@@ -183,6 +183,24 @@ pub struct VectorBaseEl1 {
     pub vbar_shift_11: u64,
 }
 
+#[bitfield(u64)]
+pub struct ExceptionLinkEl1 {
+    #[bits(64)]
+    pub bits: u64,
+}
+
+#[bitfield(u64)]
+pub struct ExceptionSyndromeEl1 {
+    #[bits(64)]
+    pub bits: u64,
+}
+
+#[bitfield(u64)]
+pub struct SavedProgramStateEl1 {
+    #[bits(64)]
+    pub bits: u64,
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[allow(non_camel_case_types)]
 #[repr(u8)]
@@ -430,7 +448,7 @@ pub struct TranslationBase1El1 {
 #[derive(Debug)]
 #[repr(u64)]
 #[allow(non_camel_case_types)]
-pub enum MmufPaRange {
+pub enum MmfPaRange {
     _32_bits_4GB = 0b0000,
     _36_bits_64GB = 0b0001,
     _40_bits_1TB = 0b0010,
@@ -441,24 +459,24 @@ pub enum MmufPaRange {
     _56_bits_64PB = 0b0111,
 }
 
-impl From<u64> for MmufPaRange {
+impl From<u64> for MmfPaRange {
     fn from(value: u64) -> Self {
         match value {
-            0b0000 => MmufPaRange::_32_bits_4GB,
-            0b0001 => MmufPaRange::_36_bits_64GB,
-            0b0010 => MmufPaRange::_40_bits_1TB,
-            0b0011 => MmufPaRange::_42_bits_4TB,
-            0b0100 => MmufPaRange::_44_bits_16TB,
-            0b0101 => MmufPaRange::_48_bits_256TB,
-            0b0110 => MmufPaRange::_52_bits_4PB,
-            0b0111 => MmufPaRange::_56_bits_64PB,
+            0b0000 => MmfPaRange::_32_bits_4GB,
+            0b0001 => MmfPaRange::_36_bits_64GB,
+            0b0010 => MmfPaRange::_40_bits_1TB,
+            0b0011 => MmfPaRange::_42_bits_4TB,
+            0b0100 => MmfPaRange::_44_bits_16TB,
+            0b0101 => MmfPaRange::_48_bits_256TB,
+            0b0110 => MmfPaRange::_52_bits_4PB,
+            0b0111 => MmfPaRange::_56_bits_64PB,
             _ => panic!("Invalid physical address range representation"),
         }
     }
 }
 
-impl From<MmufPaRange> for u64 {
-    fn from(value: MmufPaRange) -> Self {
+impl From<MmfPaRange> for u64 {
+    fn from(value: MmfPaRange) -> Self {
         value as u64
     }
 }
@@ -466,23 +484,23 @@ impl From<MmufPaRange> for u64 {
 #[derive(Debug)]
 #[repr(u64)]
 #[allow(non_camel_case_types)]
-pub enum MmufAsidBits {
+pub enum MmfAsidBits {
     _8_bits_ASID = 0b0000,
     _16_bits_ASID = 0b0010,
 }
 
-impl From<u64> for MmufAsidBits {
+impl From<u64> for MmfAsidBits {
     fn from(value: u64) -> Self {
         match value {
-            0b0000 => MmufAsidBits::_8_bits_ASID,
-            0b0010 => MmufAsidBits::_16_bits_ASID,
+            0b0000 => MmfAsidBits::_8_bits_ASID,
+            0b0010 => MmfAsidBits::_16_bits_ASID,
             _ => panic!("Invalid ASID representation"),
         }
     }
 }
 
-impl From<MmufAsidBits> for u64 {
-    fn from(value: MmufAsidBits) -> Self {
+impl From<MmfAsidBits> for u64 {
+    fn from(value: MmfAsidBits) -> Self {
         value as u64
     }
 }
@@ -490,27 +508,27 @@ impl From<MmufAsidBits> for u64 {
 #[derive(Debug)]
 #[repr(u64)]
 #[allow(non_camel_case_types)]
-pub enum MmufTGran4KBStage2 {
+pub enum MmfTGran4KBStage2 {
     AsStage1 = 0b0000,
     No = 0b0001,
     Yes = 0b0010,
     Yes_52bit = 0b0011,
 }
 
-impl From<u64> for MmufTGran4KBStage2 {
+impl From<u64> for MmfTGran4KBStage2 {
     fn from(value: u64) -> Self {
         match value {
-            0b0000 => MmufTGran4KBStage2::AsStage1,
-            0b0001 => MmufTGran4KBStage2::No,
-            0b0010 => MmufTGran4KBStage2::Yes,
-            0b0011 => MmufTGran4KBStage2::Yes_52bit,
+            0b0000 => MmfTGran4KBStage2::AsStage1,
+            0b0001 => MmfTGran4KBStage2::No,
+            0b0010 => MmfTGran4KBStage2::Yes,
+            0b0011 => MmfTGran4KBStage2::Yes_52bit,
             _ => panic!("Invalid 4KB granule stage 2 representation"),
         }
     }
 }
 
-impl From<MmufTGran4KBStage2> for u64 {
-    fn from(value: MmufTGran4KBStage2) -> Self {
+impl From<MmfTGran4KBStage2> for u64 {
+    fn from(value: MmfTGran4KBStage2) -> Self {
         value as u64
     }
 }
@@ -519,27 +537,27 @@ impl From<MmufTGran4KBStage2> for u64 {
 #[repr(u64)]
 #[allow(non_camel_case_types)]
 
-pub enum MmufTGran16KBStage2 {
+pub enum MmfTGran16KBStage2 {
     AsStage1 = 0b0000,
     No = 0b0001,
     Yes = 0b0010,
     Yes_52bit = 0b0011,
 }
 
-impl From<u64> for MmufTGran16KBStage2 {
+impl From<u64> for MmfTGran16KBStage2 {
     fn from(value: u64) -> Self {
         match value {
-            0b0000 => MmufTGran16KBStage2::AsStage1,
-            0b0001 => MmufTGran16KBStage2::No,
-            0b0010 => MmufTGran16KBStage2::Yes,
-            0b0011 => MmufTGran16KBStage2::Yes_52bit,
+            0b0000 => MmfTGran16KBStage2::AsStage1,
+            0b0001 => MmfTGran16KBStage2::No,
+            0b0010 => MmfTGran16KBStage2::Yes,
+            0b0011 => MmfTGran16KBStage2::Yes_52bit,
             _ => panic!("Invalid 16KB granule stage 2 representation"),
         }
     }
 }
 
-impl From<MmufTGran16KBStage2> for u64 {
-    fn from(value: MmufTGran16KBStage2) -> Self {
+impl From<MmfTGran16KBStage2> for u64 {
+    fn from(value: MmfTGran16KBStage2) -> Self {
         value as u64
     }
 }
@@ -548,25 +566,25 @@ impl From<MmufTGran16KBStage2> for u64 {
 #[repr(u64)]
 #[allow(non_camel_case_types)]
 
-pub enum MmufTGran64KBStage2 {
+pub enum MmfTGran64KBStage2 {
     AsStage1 = 0b0000,
     No = 0b0001,
     Yes = 0b0010,
 }
 
-impl From<u64> for MmufTGran64KBStage2 {
+impl From<u64> for MmfTGran64KBStage2 {
     fn from(value: u64) -> Self {
         match value {
-            0b0000 => MmufTGran64KBStage2::AsStage1,
-            0b0001 => MmufTGran64KBStage2::No,
-            0b0010 => MmufTGran64KBStage2::Yes,
+            0b0000 => MmfTGran64KBStage2::AsStage1,
+            0b0001 => MmfTGran64KBStage2::No,
+            0b0010 => MmfTGran64KBStage2::Yes,
             _ => panic!("Invalid 16KB granule stage 2 representation"),
         }
     }
 }
 
-impl From<MmufTGran64KBStage2> for u64 {
-    fn from(value: MmufTGran64KBStage2) -> Self {
+impl From<MmfTGran64KBStage2> for u64 {
+    fn from(value: MmfTGran64KBStage2) -> Self {
         value as u64
     }
 }
@@ -575,25 +593,25 @@ impl From<MmufTGran64KBStage2> for u64 {
 #[repr(u64)]
 #[allow(non_camel_case_types)]
 
-pub enum MmufTGran4KB {
+pub enum MmfTGran4KB {
     Yes = 0b0000,
     Yes_52bit = 0b0001,
     No = 0b1111,
 }
 
-impl From<u64> for MmufTGran4KB {
+impl From<u64> for MmfTGran4KB {
     fn from(value: u64) -> Self {
         match value {
-            0b0000 => MmufTGran4KB::Yes,
-            0b0001 => MmufTGran4KB::Yes_52bit,
-            0b1111 => MmufTGran4KB::No,
+            0b0000 => MmfTGran4KB::Yes,
+            0b0001 => MmfTGran4KB::Yes_52bit,
+            0b1111 => MmfTGran4KB::No,
             _ => panic!("Invalid 4KB granule representation"),
         }
     }
 }
 
-impl From<MmufTGran4KB> for u64 {
-    fn from(value: MmufTGran4KB) -> Self {
+impl From<MmfTGran4KB> for u64 {
+    fn from(value: MmfTGran4KB) -> Self {
         value as u64
     }
 }
@@ -602,25 +620,25 @@ impl From<MmufTGran4KB> for u64 {
 #[repr(u64)]
 #[allow(non_camel_case_types)]
 
-pub enum MmufTGran16KB {
+pub enum MmfTGran16KB {
     No = 0b0000,
     Yes = 0b0001,
     Yes_52bit = 0b0010,
 }
 
-impl From<u64> for MmufTGran16KB {
+impl From<u64> for MmfTGran16KB {
     fn from(value: u64) -> Self {
         match value {
-            0b0000 => MmufTGran16KB::No,
-            0b0001 => MmufTGran16KB::Yes,
-            0b0010 => MmufTGran16KB::Yes_52bit,
+            0b0000 => MmfTGran16KB::No,
+            0b0001 => MmfTGran16KB::Yes,
+            0b0010 => MmfTGran16KB::Yes_52bit,
             _ => panic!("Invalid 16KB granule representation"),
         }
     }
 }
 
-impl From<MmufTGran16KB> for u64 {
-    fn from(value: MmufTGran16KB) -> Self {
+impl From<MmfTGran16KB> for u64 {
+    fn from(value: MmfTGran16KB) -> Self {
         value as u64
     }
 }
@@ -629,33 +647,33 @@ impl From<MmufTGran16KB> for u64 {
 #[repr(u64)]
 #[allow(non_camel_case_types)]
 
-pub enum MmufTGran64KB {
+pub enum MmfTGran64KB {
     Yes = 0b0000,
     No = 0b1111,
 }
 
-impl From<u64> for MmufTGran64KB {
+impl From<u64> for MmfTGran64KB {
     fn from(value: u64) -> Self {
         match value {
-            0b0000 => MmufTGran64KB::Yes,
-            0b1111 => MmufTGran64KB::No,
+            0b0000 => MmfTGran64KB::Yes,
+            0b1111 => MmfTGran64KB::No,
             _ => panic!("Invalid 64KB granule representation"),
         }
     }
 }
 
-impl From<MmufTGran64KB> for u64 {
-    fn from(value: MmufTGran64KB) -> Self {
+impl From<MmfTGran64KB> for u64 {
+    fn from(value: MmfTGran64KB) -> Self {
         value as u64
     }
 }
 
 #[bitfield(u64)]
-pub struct MmuFeatures0El1 {
+pub struct MmFeatures0El1 {
     #[bits(4)]
-    pub pa_range: MmufPaRange,
+    pub pa_range: MmfPaRange,
     #[bits(4)]
-    pub asid_bits: MmufAsidBits,
+    pub asid_bits: MmfAsidBits,
     #[bits(4)]
     pub big_end: u64,
     #[bits(4)]
@@ -663,17 +681,17 @@ pub struct MmuFeatures0El1 {
     #[bits(4)]
     pub big_end_el0: u64,
     #[bits(4)]
-    pub t_gran16: MmufTGran16KB,
+    pub t_gran16: MmfTGran16KB,
     #[bits(4)]
-    pub t_gran64: MmufTGran64KB,
+    pub t_gran64: MmfTGran64KB,
     #[bits(4)]
-    pub t_gran4: MmufTGran4KB,
+    pub t_gran4: MmfTGran4KB,
     #[bits(4)]
-    pub t_gran16_2: MmufTGran16KBStage2,
+    pub t_gran16_2: MmfTGran16KBStage2,
     #[bits(4)]
-    pub t_gran64_2: MmufTGran64KBStage2,
+    pub t_gran64_2: MmfTGran64KBStage2,
     #[bits(4)]
-    pub t_gran4_2: MmufTGran4KBStage2,
+    pub t_gran4_2: MmfTGran4KBStage2,
     #[bits(4)]
     pub ex_s: u64,
     #[bits(8)]
@@ -682,6 +700,78 @@ pub struct MmuFeatures0El1 {
     pub fgt: u64,
     #[bits(4)]
     pub ecv: u64,
+}
+
+#[bitfield(u64)]
+pub struct MmFeatures1El1 {
+    #[bits(4)]
+    pub hafdbs: u64,
+    #[bits(4)]
+    pub vmid_bits: u64,
+    #[bits(4)]
+    pub vh: u64,
+    #[bits(4)]
+    pub hpds: u64,
+    #[bits(4)]
+    pub lo: u64,
+    #[bits(4)]
+    pub pan: u64,
+    #[bits(4)]
+    pub spec_sei: u64,
+    #[bits(4)]
+    pub twed: u64,
+    #[bits(4)]
+    pub xnx: u64,
+    #[bits(4)]
+    pub ets: u64,
+    #[bits(4)]
+    pub hcx: u64,
+    #[bits(4)]
+    pub afp: u64,
+    #[bits(4)]
+    pub n_tlbpa: u64,
+    #[bits(4)]
+    pub tidcp1: u64,
+    #[bits(4)]
+    pub cmow: u64,
+    #[bits(4)]
+    pub ecbhb: u64,
+}
+
+#[bitfield(u64)]
+pub struct MmFeatures2El1 {
+    #[bits(4)]
+    pub cn_p: u64,
+    #[bits(4)]
+    pub uao: u64,
+    #[bits(4)]
+    pub lsm: u64,
+    #[bits(4)]
+    pub iesb: u64,
+    #[bits(4)]
+    pub va_range: u64,
+    #[bits(4)]
+    pub ccidx: u64,
+    #[bits(4)]
+    pub nv: u64,
+    #[bits(4)]
+    pub st: u64,
+    #[bits(4)]
+    pub at: u64,
+    #[bits(4)]
+    pub ids: u64,
+    #[bits(4)]
+    pub fwb: u64,
+    #[bits(4)]
+    pub res0: u64,
+    #[bits(4)]
+    pub ttl: u64,
+    #[bits(4)]
+    pub bbm: u64,
+    #[bits(4)]
+    pub evt: u64,
+    #[bits(4)]
+    pub e0pd: u64,
 }
 
 #[cfg(target_arch = "aarch64")]
@@ -710,13 +800,24 @@ pub mod access {
         }};
     }
 
+    pub trait Aarch64Register {
+        fn get() -> Self;
+        fn name() -> &'static str;
+    }
+
     macro_rules! impl_register_access {
         ($register_type:ident, $register:ident) => {
-            impl $register_type {
-                pub fn get() -> Self {
+            impl Aarch64Register for $register_type {
+                fn get() -> Self {
                     get_sys_reg!($register).into()
                 }
 
+                fn name() -> &'static str {
+                    stringify!($register)
+                }
+            }
+
+            impl $register_type {
                 pub fn set(&self) {
                     let val: u64 = (*self).into();
                     set_sys_reg!($register, val)
@@ -727,18 +828,29 @@ pub mod access {
 
     macro_rules! impl_register_access_ro {
         ($register_type:ident, $register:ident) => {
-            impl $register_type {
-                pub fn get() -> Self {
+            impl Aarch64Register for $register_type {
+                fn get() -> Self {
                     get_sys_reg!($register).into()
+                }
+
+                fn name() -> &'static str {
+                    stringify!($register)
                 }
             }
         };
     }
 
-    impl_register_access_ro!(MmuFeatures0El1, ID_AA64MMFR0_EL1);
+    impl_register_access_ro!(MmFeatures0El1, ID_AA64MMFR0_EL1);
+    impl_register_access_ro!(MmFeatures1El1, ID_AA64MMFR1_EL1);
+    impl_register_access_ro!(MmFeatures2El1, ID_AA64MMFR1_EL1);
     impl_register_access_ro!(CurrentEl, CurrentEL);
+
     impl_register_access!(SystemControlEl1, SCTLR_EL1);
     impl_register_access!(VectorBaseEl1, VBAR_EL1);
+
+    impl_register_access!(ExceptionLinkEl1, ELR_EL1);
+    impl_register_access!(ExceptionSyndromeEl1, ESR_EL1);
+    impl_register_access!(SavedProgramStateEl1, SPSR_EL1);
     impl_register_access!(TranslationControlEl1, TCR_EL1);
     impl_register_access!(TranslationBase0El1, TTBR0_EL1);
     impl_register_access!(TranslationBase1El1, TTBR1_EL1);

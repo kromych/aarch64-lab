@@ -1,8 +1,6 @@
 #![no_std]
 #![no_main]
 
-use core::arch::asm;
-
 core::arch::global_asm!(include_str!("start.S"));
 
 mod page_table_space {
@@ -53,6 +51,7 @@ use aarch64::mmu;
 use aarch64::mmu::PageTableSpace;
 use aarch64::pl011;
 use aarch64::pl011::PL011_BASE;
+use aarch64::regs::access::Aarch64Register;
 use aarch64::regs::*;
 use aarch64::semihosting;
 
@@ -64,10 +63,11 @@ fn print_registers(out: &mut dyn core::fmt::Write) {
     let tcr_el1 = TranslationControlEl1::get();
     let ttbr0_el1 = TranslationBase0El1::get();
     let ttbr1_el1 = TranslationBase1El1::get();
-    let id_aa64mmfr0_el1 = MmuFeatures0El1::get();
-    let elr_el1 = aarch64::get_sys_reg!(ELR_EL1);
-    let esr_el1 = aarch64::get_sys_reg!(ESR_EL1);
-    let spsr_el1 = aarch64::get_sys_reg!(SPSR_EL1);
+    let id_aa64mmfr0_el1 = MmFeatures0El1::get();
+    let id_aa64mmfr1_el1 = MmFeatures1El1::get();
+    let elr_el1 = ExceptionLinkEl1::get();
+    let esr_el1 = ExceptionSyndromeEl1::get();
+    let spsr_el1 = SavedProgramStateEl1::get();
 
     let current_el_raw: u64 = current_el.into();
     let sctlr_el1_raw: u64 = sctlr_el1.into();
@@ -77,9 +77,10 @@ fn print_registers(out: &mut dyn core::fmt::Write) {
     let ttbr0_el1_raw: u64 = ttbr0_el1.into();
     let ttbr1_el1_raw: u64 = ttbr1_el1.into();
     let id_aa64mmfr0_el1_raw: u64 = id_aa64mmfr0_el1.into();
-    let elr_el1_raw: u64 = elr_el1;
-    let esr_el1_raw: u64 = esr_el1;
-    let spsr_el1_raw: u64 = spsr_el1;
+    let id_aa64mmfr1_el1_raw: u64 = id_aa64mmfr1_el1.into();
+    let elr_el1_raw: u64 = elr_el1.into();
+    let esr_el1_raw: u64 = esr_el1.into();
+    let spsr_el1_raw: u64 = spsr_el1.into();
 
     writeln!(out, "CurrentEL\t{current_el_raw:#016x?}: {current_el:?}").ok();
     writeln!(out, "SCTLR_EL1\t{sctlr_el1_raw:#016x?}: {sctlr_el1:?}").ok();
@@ -98,6 +99,11 @@ fn print_registers(out: &mut dyn core::fmt::Write) {
     writeln!(
         out,
         "AA64MMFR0_EL1\t{id_aa64mmfr0_el1_raw:#016x?}: {id_aa64mmfr0_el1:?}"
+    )
+    .ok();
+    writeln!(
+        out,
+        "AA64MMFR1_EL1\t{id_aa64mmfr1_el1_raw:#016x?}: {id_aa64mmfr1_el1:?}"
     )
     .ok();
     writeln!(out, "ELR_EL1\t{elr_el1_raw:#016x?}").ok();
@@ -161,8 +167,8 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
         .with_epd1(1)
         .with_tg1(TranslationGranule1::_4KB)
         .with_ips(IntermPhysAddrSize::_48_bits_256TB)
-        .with_ha(1) // Should checked againdt the MMU feature reg #1
-        .with_hd(1) // Should checked againdt the MMU feature reg #1
+        // .with_ha(1) // Should checked against the MMU feature reg #1
+        // .with_hd(1) // Should checked against the MMU feature reg #1
         .set();
 
     writeln!(out, "Page tables use {:#x} bytes", page_tables.used_space()).ok();
