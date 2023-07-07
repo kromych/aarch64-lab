@@ -1,0 +1,8 @@
+[package]
+name = "aarch64-lab"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+aarch64.workspace = true
+bitfield-struct.workspace = true

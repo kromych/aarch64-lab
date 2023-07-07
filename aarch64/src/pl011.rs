@@ -185,7 +185,7 @@ fn poll_not_busy(base: u64) {
     }
 }
 
-const PL011_BASE: u64 = 0x9000000;
+pub const PL011_BASE: u64 = 0x9000000;
 
 impl Pl011 {
     pub fn reset_and_init(&self) -> u64 {

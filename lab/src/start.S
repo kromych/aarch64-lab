@@ -1,6 +1,6 @@
 	.arch armv8-a
 	.file	"start.S"
-    .extern main, _stack_bot, _image_size, relocate
+    .extern start, _stack_bot, _image_size, relocate
 	.weak _DYNAMIC
 	.hidden _DYNAMIC
 
@@ -89,7 +89,7 @@ _start:
 
 	// Run the Rust main
 
-	bl      main
+	bl      start
 	b       .
 
 	.section ".bss.page_tables", "aw", @nobits
