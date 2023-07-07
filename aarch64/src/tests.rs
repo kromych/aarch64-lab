@@ -1,5 +1,6 @@
 #![cfg(test)]
 
+use crate::mmu::PageMapError;
 use crate::mmu::PageSize;
 use crate::mmu::PageTableSpace;
 use crate::mmu::VirtualAddress;
@@ -85,6 +86,15 @@ fn test_mmu_large_pages() {
     );
     assert_eq!(res, Ok(()));
 
+    let res = page_tables.map_pages(
+        0x4000,
+        VirtualAddress::from(0x4000),
+        4,
+        PageSize::Small,
+        wb_index,
+    );
+    assert_eq!(res, Err(PageMapError::AlreadyMapped));
+
     std::fs::write("page_tables_large.bin", space).expect("can dump the page tables");
 }
 
@@ -101,6 +111,15 @@ fn test_mmu_huge_pages() {
 
     let res = page_tables.map_pages(0, VirtualAddress::from(0), 4, PageSize::Huge, wb_index);
     assert_eq!(res, Ok(()));
+
+    let res = page_tables.map_pages(
+        1 << 30,
+        VirtualAddress::from(0x4000_0000),
+        4,
+        PageSize::Small,
+        wb_index,
+    );
+    assert_eq!(res, Err(PageMapError::AlreadyMapped));
 
     std::fs::write("page_tables_huge.bin", space).expect("can dump the page tables");
 }
