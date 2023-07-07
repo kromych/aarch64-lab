@@ -31,14 +31,13 @@ mod reloc;
 
 use aarch64::mmu;
 use aarch64::mmu::PageTableSpace;
-//use aarch64::pl011;
+use aarch64::pl011;
+use aarch64::pl011::PL011_BASE;
 use aarch64::regs::*;
 use aarch64::semihosting;
 use core::fmt::Write;
 
-fn print_registers() {
-    let mut semi: semihosting::Semihosting = semihosting::Semihosting;
-
+fn print_registers(out: &mut dyn core::fmt::Write) {
     let current_el = CurrentEl::get();
     let sctlr_el1 = SystemControlEl1::get();
     let vbar_el1 = VectorBaseEl1::get();
@@ -63,45 +62,46 @@ fn print_registers() {
     let esr_el1_raw: u64 = esr_el1;
     let spsr_el1_raw: u64 = spsr_el1;
 
-    writeln!(semi, "CurrentEL\t{current_el_raw:#016x?}: {current_el:?}").ok();
-    writeln!(semi, "SCTLR_EL1\t{sctlr_el1_raw:#016x?}: {sctlr_el1:?}").ok();
+    writeln!(out, "CurrentEL\t{current_el_raw:#016x?}: {current_el:?}").ok();
+    writeln!(out, "SCTLR_EL1\t{sctlr_el1_raw:#016x?}: {sctlr_el1:?}").ok();
     writeln!(
-        semi,
+        out,
         "Default SCTLR_EL1\t{:#016x?}: {:?}",
         u64::from(SystemControlEl1::default()),
         SystemControlEl1::default()
     )
     .ok();
-    writeln!(semi, "VBAR_EL1\t{vbar_el1_raw:#016x?}: {vbar_el1:x?}").ok();
-    writeln!(semi, "MAIR_EL1\t{mair_el1_raw:#016x?}: {mair_el1:x?}").ok();
-    writeln!(semi, "TCR_EL1\t{tcr_el1_raw:#016x?}: {tcr_el1:?}").ok();
-    writeln!(semi, "TTBR0_EL1\t{ttbr0_el1_raw:#016x?}: {ttbr0_el1:x?}").ok();
-    writeln!(semi, "TTBR1_EL1\t{ttbr1_el1_raw:#016x?}: {ttbr1_el1:x?}").ok();
+    writeln!(out, "VBAR_EL1\t{vbar_el1_raw:#016x?}: {vbar_el1:x?}").ok();
+    writeln!(out, "MAIR_EL1\t{mair_el1_raw:#016x?}: {mair_el1:x?}").ok();
+    writeln!(out, "TCR_EL1\t{tcr_el1_raw:#016x?}: {tcr_el1:?}").ok();
+    writeln!(out, "TTBR0_EL1\t{ttbr0_el1_raw:#016x?}: {ttbr0_el1:x?}").ok();
+    writeln!(out, "TTBR1_EL1\t{ttbr1_el1_raw:#016x?}: {ttbr1_el1:x?}").ok();
     writeln!(
-        semi,
+        out,
         "AA64MMFR0_EL1\t{id_aa64mmfr0_el1_raw:#016x?}: {id_aa64mmfr0_el1:?}"
     )
     .ok();
-    writeln!(semi, "ELR_EL1\t{elr_el1_raw:#016x?}").ok();
-    writeln!(semi, "ESR_EL1\t{esr_el1_raw:#016x?}").ok();
-    writeln!(semi, "SPSR_EL1\t{spsr_el1_raw:#016x?}").ok();
+    writeln!(out, "ELR_EL1\t{elr_el1_raw:#016x?}").ok();
+    writeln!(out, "ESR_EL1\t{esr_el1_raw:#016x?}").ok();
+    writeln!(out, "SPSR_EL1\t{spsr_el1_raw:#016x?}").ok();
 }
 
-fn setup_mmu() {
-    let mut semi: semihosting::Semihosting = semihosting::Semihosting;
-
+fn setup_mmu(out: &mut dyn core::fmt::Write) {
     let mut page_tables = PageTableSpace::new(
         page_table_space::page_tables_phys_start(),
         page_table_space::page_tables_area(),
     )
     .unwrap();
     writeln!(
-        semi,
+        out,
         "Page tables are located at\t[{:#016x};{:#016x}]",
         page_table_space::page_tables_phys_start(),
         page_table_space::page_tables_phys_end()
     )
     .ok();
+
+    let mair_el1 = MemoryAttributeIndirectionEl1::default();
+    mair_el1.set();
 
     page_tables
         .map_pages(
@@ -109,10 +109,24 @@ fn setup_mmu() {
             mmu::VirtualAddress::from(0x4000_0000),
             0x200_0000,
             mmu::PageSize::Small,
+            mair_el1
+                .get_index(MemoryAttributeEl1::Normal_WriteBack)
+                .expect("must be some WB memory available"),
         )
         .unwrap();
 
-    MemoryAttributeIndirectionEl1::default().set();
+    page_tables
+        .map_pages(
+            PL011_BASE,
+            mmu::VirtualAddress::from(PL011_BASE),
+            0x1000,
+            mmu::PageSize::Small,
+            mair_el1
+                .get_index(MemoryAttributeEl1::Device_nGnRnE)
+                .expect("must be some strongly ordered non-cacheable memory available"),
+        )
+        .unwrap();
+
     TranslationBase0El1::new()
         .with_asid(0)
         .with_baddr(page_table_space::page_tables_phys_start() as u64)
@@ -131,39 +145,35 @@ fn setup_mmu() {
         .with_hd(1) // Should checked againdt the MMU feature reg #1
         .set();
 
-    writeln!(semi, "Enabling MMU").ok();
+    writeln!(out, "Enabling MMU").ok();
 
     let sctlr_el1 = SystemControlEl1::get();
     sctlr_el1.with_m(1).with_a(1).with_c(1).with_i(1).set();
 
-    writeln!(semi, "MMU enabled").ok();
+    writeln!(out, "MMU enabled").ok();
 }
 
-fn use_pl011() {
-    // let mut semi: semihosting::Semihosting = semihosting::Semihosting;
-    // let mut pl011: pl011::Pl011 = pl011::Pl011;
-    // let id = pl011.reset_and_init();
-
-    // semi.write_char('H');
-    // pl011.write_str("ello ").ok();
-    // semi.write_hex(id);
-    // semi.write_char('\n');
-
-    // writeln!(semi, "Semihosting {id:#x}").ok();
-    // writeln!(pl011, "PL011 {id:#x}").ok();
-}
+const USE_SEMIHOSTING: bool = false;
 
 #[no_mangle]
-fn start() -> ! {
+fn start() {
     let mut semi: semihosting::Semihosting = semihosting::Semihosting;
+    let mut pl011: pl011::Pl011 = pl011::Pl011;
+    let id = pl011.reset_and_init();
 
-    use_pl011();
-    print_registers();
-    setup_mmu();
-    print_registers();
+    if USE_SEMIHOSTING {
+        writeln!(semi, "Semihosting {id:#x}").ok();
+    }
+    writeln!(pl011, "PL011 {id:#x}").ok();
 
-    writeln!(semi, "Exiting").ok();
-    semi.exit(0)
+    print_registers(&mut pl011);
+    setup_mmu(&mut pl011);
+    print_registers(&mut pl011);
+
+    if USE_SEMIHOSTING {
+        writeln!(semi, "Exiting").ok();
+        semi.exit(0)
+    }
 }
 
 #[panic_handler]
@@ -182,5 +192,9 @@ fn panic(info: &core::panic::PanicInfo) -> ! {
         writeln!(semi, "\nPanic").ok();
     }
 
-    semi.exit(!0)
+    if USE_SEMIHOSTING {
+        semi.exit(!0)
+    } else {
+        loop {}
+    }
 }

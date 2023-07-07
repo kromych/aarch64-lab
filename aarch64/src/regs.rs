@@ -183,7 +183,7 @@ pub struct VectorBaseEl1 {
     pub vbar_shift_11: u64,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[allow(non_camel_case_types)]
 #[repr(u8)]
 pub enum MemoryAttributeEl1 {
@@ -195,6 +195,12 @@ pub enum MemoryAttributeEl1 {
 
 #[derive(Debug, Clone, Copy)]
 pub struct MemoryAttributeIndirectionEl1([u8; 8]);
+
+impl MemoryAttributeIndirectionEl1 {
+    pub fn get_index(&self, a: MemoryAttributeEl1) -> Option<usize> {
+        self.0.iter().position(|&x| x == a as u8)
+    }
+}
 
 impl Default for MemoryAttributeIndirectionEl1 {
     fn default() -> Self {

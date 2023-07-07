@@ -28,7 +28,7 @@ pub struct PageBlockEntry {
     pub valid: bool,
     pub page: bool,
     #[bits(3)]
-    pub mair_idx: u64,
+    pub mair_idx: usize,
     #[bits(1)]
     _mbz0: u64,
     // PrivOnly = 0b00,
@@ -202,6 +202,7 @@ impl<'a> PageTableSpace<'a> {
         &mut self,
         phys_addr: u64,
         virt_addr: VirtualAddress,
+        _memory_attribute_index: usize,
     ) -> Result<(), PageMapError> {
         if phys_addr & (PAGE_SIZE_1G - 1) != 0 {
             return Err(PageMapError::MisalignedPhysAddress);
@@ -220,6 +221,7 @@ impl<'a> PageTableSpace<'a> {
         &mut self,
         phys_addr: u64,
         virt_addr: VirtualAddress,
+        _memory_attribute_index: usize,
     ) -> Result<(), PageMapError> {
         if phys_addr & (PAGE_SIZE_2M - 1) != 0 {
             return Err(PageMapError::MisalignedPhysAddress);
@@ -238,6 +240,7 @@ impl<'a> PageTableSpace<'a> {
         &mut self,
         phys_addr: u64,
         virt_addr: VirtualAddress,
+        memory_attribute_index: usize,
     ) -> Result<(), PageMapError> {
         if phys_addr & (PAGE_SIZE_4K - 1) != 0 {
             return Err(PageMapError::MisalignedPhysAddress);
@@ -290,7 +293,7 @@ impl<'a> PageTableSpace<'a> {
             .with_accessed(true)
             .with_access_perm(1)
             .with_share_perm(3)
-            .with_mair_idx(3)
+            .with_mair_idx(memory_attribute_index)
             .with_address_pfn(phys_addr >> PAGE_SHIFT_4K);
 
         self.write_entry(
@@ -308,6 +311,7 @@ impl<'a> PageTableSpace<'a> {
         virt_addr: VirtualAddress,
         map_size: u64,
         page_size: PageSize,
+        memory_attribute_index: usize,
     ) -> Result<(), PageMapError> {
         let pages_to_map = map_size / (page_size as u64);
         let mut pages_mapped = 0;
@@ -315,9 +319,21 @@ impl<'a> PageTableSpace<'a> {
         let mut virt_addr = virt_addr.0;
         while pages_mapped < pages_to_map {
             match page_size {
-                PageSize::Small => self.map_small_page(phys_addr, VirtualAddress(virt_addr))?,
-                PageSize::Large => self.map_large_page(phys_addr, VirtualAddress(virt_addr))?,
-                PageSize::Huge => self.map_huge_page(phys_addr, VirtualAddress(virt_addr))?,
+                PageSize::Small => self.map_small_page(
+                    phys_addr,
+                    VirtualAddress(virt_addr),
+                    memory_attribute_index,
+                )?,
+                PageSize::Large => self.map_large_page(
+                    phys_addr,
+                    VirtualAddress(virt_addr),
+                    memory_attribute_index,
+                )?,
+                PageSize::Huge => self.map_huge_page(
+                    phys_addr,
+                    VirtualAddress(virt_addr),
+                    memory_attribute_index,
+                )?,
             }
 
             pages_mapped += 1;
@@ -333,6 +349,7 @@ impl<'a> PageTableSpace<'a> {
         phys_addr: u64,
         virt_addr: VirtualAddress,
         map_size: u64,
+        memory_attribute_index: usize,
     ) -> Result<(), PageMapError> {
         if phys_addr & (PAGE_SIZE_4K - 1) != 0 {
             return Err(PageMapError::MisalignedPhysAddress);
@@ -367,6 +384,7 @@ impl<'a> PageTableSpace<'a> {
                     VirtualAddress(virt_addr),
                     map_size,
                     PageSize::Huge,
+                    memory_attribute_index,
                 )?;
 
                 map_size
@@ -380,6 +398,7 @@ impl<'a> PageTableSpace<'a> {
                     VirtualAddress(virt_addr),
                     map_size,
                     PageSize::Large,
+                    memory_attribute_index,
                 )?;
 
                 map_size
@@ -393,6 +412,7 @@ impl<'a> PageTableSpace<'a> {
                     VirtualAddress(virt_addr),
                     map_size,
                     PageSize::Small,
+                    memory_attribute_index,
                 )?;
 
                 map_size
