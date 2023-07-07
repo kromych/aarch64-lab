@@ -4,10 +4,8 @@ use bitfield_struct::bitfield;
 pub struct PageTableEntry {
     pub valid: bool,
     pub table: bool, // Use PageBlockEntry if `false`
-    #[bits(8)]
+    #[bits(10)]
     _mbz0: u64,
-    pub accessed: bool,
-    pub not_global: bool,
     #[bits(35)]
     pub next_table_pfn: u64,
     #[bits(12)]
@@ -163,6 +161,10 @@ impl<'a> PageTableSpace<'a> {
         Ok(page_table_phys_addr as u64)
     }
 
+    pub fn used_space(&self) -> usize {
+        self.brk - self.phys_page_table_root
+    }
+
     fn read_entry(&self, phys_table_start: u64, index: usize) -> u64 {
         debug_assert!(
             (phys_table_start as usize) < self.phys_page_table_root + self.space.len()
@@ -198,53 +200,12 @@ impl<'a> PageTableSpace<'a> {
         self.space[pos..pos + 8].copy_from_slice(&entry.to_le_bytes());
     }
 
-    pub fn map_huge_page(
-        &mut self,
+    fn check_addresses_and_map_size(
+        &self,
         phys_addr: u64,
         virt_addr: VirtualAddress,
-        _memory_attribute_index: usize,
+        page_size: PageSize,
     ) -> Result<(), PageMapError> {
-        if phys_addr & (PAGE_SIZE_1G - 1) != 0 {
-            return Err(PageMapError::MisalignedPhysAddress);
-        }
-        if virt_addr.offset() != 0 || virt_addr.lvl3() != 0 || virt_addr.lvl2() != 0 {
-            return Err(PageMapError::MisalignedVirtAddress);
-        }
-        if !virt_addr.is_canonical() {
-            return Err(PageMapError::NonCanonicalVirtAddress);
-        }
-
-        Ok(())
-    }
-
-    pub fn map_large_page(
-        &mut self,
-        phys_addr: u64,
-        virt_addr: VirtualAddress,
-        _memory_attribute_index: usize,
-    ) -> Result<(), PageMapError> {
-        if phys_addr & (PAGE_SIZE_2M - 1) != 0 {
-            return Err(PageMapError::MisalignedPhysAddress);
-        }
-        if virt_addr.offset() != 0 || virt_addr.lvl3() != 0 {
-            return Err(PageMapError::MisalignedVirtAddress);
-        }
-        if !virt_addr.is_canonical() {
-            return Err(PageMapError::NonCanonicalVirtAddress);
-        }
-
-        Ok(())
-    }
-
-    pub fn map_small_page(
-        &mut self,
-        phys_addr: u64,
-        virt_addr: VirtualAddress,
-        memory_attribute_index: usize,
-    ) -> Result<(), PageMapError> {
-        if phys_addr & (PAGE_SIZE_4K - 1) != 0 {
-            return Err(PageMapError::MisalignedPhysAddress);
-        }
         if virt_addr.offset() != 0 {
             return Err(PageMapError::MisalignedVirtAddress);
         }
@@ -252,22 +213,40 @@ impl<'a> PageTableSpace<'a> {
             return Err(PageMapError::NonCanonicalVirtAddress);
         }
 
+        if phys_addr & ((page_size as u64) - 1) != 0 {
+            return Err(PageMapError::MisalignedPhysAddress);
+        }
+        if virt_addr.0 & ((page_size as u64) - 1) != 0 {
+            return Err(PageMapError::MisalignedVirtAddress);
+        }
+
+        Ok(())
+    }
+
+    fn map_page(
+        &mut self,
+        phys_addr: u64,
+        virt_addr: VirtualAddress,
+        memory_attribute_index: usize,
+        page_size: PageSize,
+    ) -> Result<(), PageMapError> {
         let mut table_phys_addr = self.phys_page_table_root as u64;
         let mut level = 0;
-        while level < 3 {
+        let leaf_level = match page_size {
+            PageSize::Small => 3,
+            PageSize::Large => 2,
+            PageSize::Huge => 1,
+        };
+        while level < leaf_level {
             let mut table_entry =
                 PageTableEntry::from(self.read_entry(table_phys_addr, virt_addr.lvl_index(level)));
             if !table_entry.valid() {
                 let next_table_phys_addr = self.allocate_page_table()?;
 
-                // Without setting the `accessed` flag, qemu fails translation
-                // if the HA flag is not enabled in the TCR register. Support for
-                // HA in indicated in the MMU features register #1.
-
                 table_entry = PageTableEntry::new()
                     .with_valid(true)
-                    .with_table(false)
-                    .with_accessed(true)
+                    .with_table(true)
+                    .with_access_perm(1)
                     .with_next_table_pfn(next_table_phys_addr >> PAGE_SHIFT_4K);
 
                 self.write_entry(
@@ -287,9 +266,13 @@ impl<'a> PageTableSpace<'a> {
             return Err(PageMapError::AlreadyMapped);
         }
 
+        // Without setting the `accessed` flag, qemu fails translation
+        // if the HA flag is not enabled in the TCR register. Support for
+        // HA in indicated in the MMU features register #1.
+
         page_entry = PageBlockEntry::new()
             .with_valid(true)
-            .with_page(true)
+            .with_page(leaf_level == 3)
             .with_accessed(true)
             .with_access_perm(1)
             .with_share_perm(3)
@@ -309,32 +292,27 @@ impl<'a> PageTableSpace<'a> {
         &mut self,
         phys_addr: u64,
         virt_addr: VirtualAddress,
-        map_size: u64,
+        page_count: usize,
         page_size: PageSize,
         memory_attribute_index: usize,
     ) -> Result<(), PageMapError> {
-        let pages_to_map = map_size / (page_size as u64);
+        self.check_addresses_and_map_size(phys_addr, virt_addr, page_size)?;
+
+        if page_count == 0 {
+            return Err(PageMapError::EmptyMapping);
+        }
+
+        let pages_to_map = page_count;
         let mut pages_mapped = 0;
         let mut phys_addr = phys_addr;
         let mut virt_addr = virt_addr.0;
         while pages_mapped < pages_to_map {
-            match page_size {
-                PageSize::Small => self.map_small_page(
-                    phys_addr,
-                    VirtualAddress(virt_addr),
-                    memory_attribute_index,
-                )?,
-                PageSize::Large => self.map_large_page(
-                    phys_addr,
-                    VirtualAddress(virt_addr),
-                    memory_attribute_index,
-                )?,
-                PageSize::Huge => self.map_huge_page(
-                    phys_addr,
-                    VirtualAddress(virt_addr),
-                    memory_attribute_index,
-                )?,
-            }
+            self.map_page(
+                phys_addr,
+                VirtualAddress(virt_addr),
+                memory_attribute_index,
+                page_size,
+            )?;
 
             pages_mapped += 1;
             phys_addr += page_size as u64;
@@ -382,7 +360,7 @@ impl<'a> PageTableSpace<'a> {
                 self.map_pages(
                     phys_addr,
                     VirtualAddress(virt_addr),
-                    map_size,
+                    (map_size / PAGE_SHIFT_1G) as usize,
                     PageSize::Huge,
                     memory_attribute_index,
                 )?;
@@ -396,7 +374,7 @@ impl<'a> PageTableSpace<'a> {
                 self.map_pages(
                     phys_addr,
                     VirtualAddress(virt_addr),
-                    map_size,
+                    (map_size / PAGE_SHIFT_2M) as usize,
                     PageSize::Large,
                     memory_attribute_index,
                 )?;
@@ -410,7 +388,7 @@ impl<'a> PageTableSpace<'a> {
                 self.map_pages(
                     phys_addr,
                     VirtualAddress(virt_addr),
-                    map_size,
+                    (map_size / PAGE_SHIFT_4K) as usize,
                     PageSize::Small,
                     memory_attribute_index,
                 )?;

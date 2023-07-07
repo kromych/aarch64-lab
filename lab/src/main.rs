@@ -106,7 +106,7 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
         .map_pages(
             0x4000_0000,
             mmu::VirtualAddress::from(0x4000_0000),
-            0x200_0000,
+            0x2000,
             mmu::PageSize::Small,
             mair_el1
                 .get_index(MemoryAttributeEl1::Normal_WriteBack)
@@ -118,7 +118,7 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
         .map_pages(
             PL011_BASE,
             mmu::VirtualAddress::from(PL011_BASE),
-            0x1000,
+            1,
             mmu::PageSize::Small,
             mair_el1
                 .get_index(MemoryAttributeEl1::Device_nGnRnE)
@@ -144,6 +144,7 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
         .with_hd(1) // Should checked againdt the MMU feature reg #1
         .set();
 
+    writeln!(out, "Page tables use {:#x} bytes", page_tables.used_space()).ok();
     writeln!(out, "Enabling MMU").ok();
 
     let sctlr_el1 = SystemControlEl1::get();
