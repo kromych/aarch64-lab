@@ -35,7 +35,6 @@ use aarch64::pl011;
 use aarch64::pl011::PL011_BASE;
 use aarch64::regs::*;
 use aarch64::semihosting;
-use core::fmt::Write;
 
 fn print_registers(out: &mut dyn core::fmt::Write) {
     let current_el = CurrentEl::get();
@@ -161,16 +160,19 @@ fn start() {
     let mut pl011: pl011::Pl011 = pl011::Pl011;
     let id = pl011.reset_and_init();
 
-    if USE_SEMIHOSTING {
-        writeln!(semi, "Semihosting {id:#x}").ok();
-    }
-    writeln!(pl011, "PL011 {id:#x}").ok();
+    let out = if USE_SEMIHOSTING {
+        &mut semi as &mut dyn core::fmt::Write
+    } else {
+        &mut pl011 as &mut dyn core::fmt::Write
+    };
 
-    print_registers(&mut pl011);
-    setup_mmu(&mut pl011);
-    print_registers(&mut pl011);
+    writeln!(out, "PL011 {id:#x}").ok();
 
-    writeln!(pl011, "Exiting").ok();
+    print_registers(out);
+    setup_mmu(out);
+    print_registers(out);
+
+    writeln!(out, "Exiting").ok();
     if USE_SEMIHOSTING {
         semi.exit(0)
     }
@@ -179,9 +181,17 @@ fn start() {
 #[panic_handler]
 fn panic(info: &core::panic::PanicInfo) -> ! {
     let mut semi: semihosting::Semihosting = semihosting::Semihosting;
+    let mut pl011: pl011::Pl011 = pl011::Pl011;
+
+    let out = if USE_SEMIHOSTING {
+        &mut semi as &mut dyn core::fmt::Write
+    } else {
+        &mut pl011 as &mut dyn core::fmt::Write
+    };
+
     if let Some(loc) = info.location() {
         writeln!(
-            semi,
+            out,
             "\nPanic at {}:{}:{}",
             loc.file(),
             loc.line(),
@@ -189,7 +199,7 @@ fn panic(info: &core::panic::PanicInfo) -> ! {
         )
         .ok();
     } else {
-        writeln!(semi, "\nPanic").ok();
+        writeln!(out, "\nPanic").ok();
     }
 
     if USE_SEMIHOSTING {
