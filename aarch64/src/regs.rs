@@ -961,7 +961,7 @@ pub mod access {
     use core::arch::asm;
 
     #[macro_export]
-    macro_rules! get_sys_reg {
+    macro_rules! load_sys_reg {
         ($reg:ident) => {{
             let reg_val: u64;
             unsafe {
@@ -972,7 +972,7 @@ pub mod access {
     }
 
     #[macro_export]
-    macro_rules! set_sys_reg {
+    macro_rules! store_sys_reg {
         ($reg:ident, $val:expr) => {{
             let val: u64 = $val;
             unsafe {
@@ -982,7 +982,7 @@ pub mod access {
     }
 
     pub trait Aarch64Register: core::fmt::Debug {
-        fn read(&mut self);
+        fn load(&mut self);
         fn name(&self) -> &'static str;
         fn bits(&self) -> u64;
     }
@@ -990,8 +990,8 @@ pub mod access {
     macro_rules! impl_register_access {
         ($register_type:ident, $register:ident) => {
             impl Aarch64Register for $register_type {
-                fn read(&mut self) {
-                    let val: u64 = get_sys_reg!($register).into();
+                fn load(&mut self) {
+                    let val: u64 = load_sys_reg!($register).into();
                     *self = Self::from(val);
                 }
 
@@ -1005,9 +1005,9 @@ pub mod access {
             }
 
             impl $register_type {
-                pub fn write(&mut self) {
+                pub fn store(&mut self) {
                     let val: u64 = (*self).into();
-                    set_sys_reg!($register, val)
+                    store_sys_reg!($register, val)
                 }
             }
         };
@@ -1016,8 +1016,8 @@ pub mod access {
     macro_rules! impl_register_access_ro {
         ($register_type:ident, $register:ident) => {
             impl Aarch64Register for $register_type {
-                fn read(&mut self) {
-                    let val: u64 = get_sys_reg!($register).into();
+                fn load(&mut self) {
+                    let val: u64 = load_sys_reg!($register).into();
                     *self = Self::from(val);
                 }
 

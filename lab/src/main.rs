@@ -84,7 +84,7 @@ fn print_registers(out: &mut dyn core::fmt::Write) {
     ];
 
     for r in regs {
-        r.read();
+        r.load();
 
         let raw: u64 = r.bits();
         let name = r.name();
@@ -107,7 +107,7 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
     .ok();
 
     let mut mair_el1 = MemoryAttributeIndirectionEl1::default();
-    mair_el1.write();
+    mair_el1.store();
 
     page_tables
         .map_range(
@@ -160,8 +160,8 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
     TranslationBase0El1::new()
         .with_asid(0)
         .with_baddr(page_table_space::page_tables_phys_start() as u64)
-        .write();
-    TranslationBase1El1::new().write();
+        .store();
+    TranslationBase1El1::new().store();
     TranslationControlEl1::new()
         .with_t0sz(16)
         .with_irgn0(1)
@@ -173,7 +173,7 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
         .with_ips(IntermPhysAddrSize::_48_bits_256TB)
         // .with_ha(1) // Should checked against the MMU feature reg #1
         // .with_hd(1) // Should checked against the MMU feature reg #1
-        .write();
+        .store();
 
     writeln!(out, "Page tables use {:#x} bytes", page_tables.used_space()).ok();
     writeln!(
@@ -185,8 +185,8 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
     writeln!(out, "Enabling MMU").ok();
 
     let mut sctlr_el1 = SystemControlEl1::new();
-    sctlr_el1.read();
-    sctlr_el1.with_m(1).with_a(1).with_c(1).with_i(1).write();
+    sctlr_el1.load();
+    sctlr_el1.with_m(1).with_a(1).with_c(1).with_i(1).store();
 
     writeln!(out, "MMU enabled").ok();
 
