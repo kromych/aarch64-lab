@@ -394,13 +394,15 @@ impl<'a> PageTableSpace<'a> {
             (PageSize::Large, page_count)
         } else {
             let before_huge_page = align_up(virt_addr, PageSize::Huge) - virt_addr;
-            let before_large_page = align_up(virt_addr, PageSize::Large) - virt_addr;
             let page_count = if before_huge_page > 0 && before_huge_page < non_mapped {
                 before_huge_page
-            } else if before_large_page > 0 && before_large_page < non_mapped {
-                before_large_page
             } else {
-                non_mapped
+                let before_large_page = align_up(virt_addr, PageSize::Large) - virt_addr;
+                if before_large_page > 0 && before_large_page < non_mapped {
+                    before_large_page
+                } else {
+                    non_mapped
+                }
             } / PageSize::Small as u64;
 
             (PageSize::Small, page_count)

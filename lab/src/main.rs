@@ -109,13 +109,11 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
     let mut mair_el1 = MemoryAttributeIndirectionEl1::default();
     mair_el1.write();
 
-    let page_size = mmu::PageSize::Small;
     page_tables
-        .map_pages(
+        .map_range(
             image_data::base() as u64,
             mmu::VirtualAddress::from(image_data::base() as u64),
-            core::cmp::max(image_data::size() / page_size as usize, 1),
-            page_size,
+            image_data::size() as u64,
             mair_el1
                 .get_index(MemoryAttributeEl1::Normal_WriteBack)
                 .expect("must be some WB memory available"),
@@ -124,11 +122,10 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
 
     let payload_size = 3 * 1024 * 1024;
     page_tables
-        .map_pages(
+        .map_range(
             image_data::payload_start() as u64,
             mmu::VirtualAddress::from(image_data::payload_start() as u64),
-            core::cmp::max(payload_size / page_size as usize, 1),
-            page_size,
+            payload_size,
             mair_el1
                 .get_index(MemoryAttributeEl1::Normal_WriteBack)
                 .expect("must be some WB memory available"),
@@ -144,7 +141,7 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
 
     let dword_count = check_page_stride(
         image_data::payload_start() as u64,
-        (image_data::payload_start() + payload_size) as u64,
+        (image_data::payload_start() + payload_size as usize) as u64,
     );
     writeln!(out, "dword count: {dword_count:#x}").ok();
 
@@ -202,7 +199,7 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
 
     let dword_count = check_page_stride(
         image_data::payload_start() as u64,
-        (image_data::payload_start() + payload_size) as u64,
+        (image_data::payload_start() + payload_size as usize) as u64,
     );
     writeln!(out, "dword count: {dword_count:#x}").ok();
 }
