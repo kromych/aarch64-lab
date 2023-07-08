@@ -260,7 +260,11 @@ fn start() {
     setup_mmu(out);
     print_registers(out);
 
-    writeln!(out, "Exiting").ok();
+    writeln!(
+        out,
+        "Exiting, hit Ctrl+A X if semihosting is not compiled in"
+    )
+    .ok();
     if USE_SEMIHOSTING {
         semi.exit(0)
     }
