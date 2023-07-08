@@ -96,6 +96,9 @@ SECTIONS {
     } : bss
     _end = .;
     _image_size = _end - _base;
+
+    . = ALIGN(4K);
+
     _payload_start = .;
 
     /DISCARD/ : {

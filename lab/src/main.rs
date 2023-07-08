@@ -30,6 +30,7 @@ mod image_data {
         fn _base();
         fn _end();
         fn _image_size();
+        fn _payload_start();
     }
 
     pub fn base() -> usize {
@@ -42,6 +43,10 @@ mod image_data {
 
     pub fn size() -> usize {
         _image_size as usize
+    }
+
+    pub fn payload_start() -> usize {
+        _payload_start as usize
     }
 }
 
@@ -117,6 +122,32 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
         )
         .unwrap();
 
+    let payload_size = 3 * 1024 * 1024;
+    page_tables
+        .map_pages(
+            image_data::payload_start() as u64,
+            mmu::VirtualAddress::from(image_data::payload_start() as u64),
+            core::cmp::max(payload_size / page_size as usize, 1),
+            page_size,
+            mair_el1
+                .get_index(MemoryAttributeEl1::Normal_WriteBack)
+                .expect("must be some WB memory available"),
+        )
+        .unwrap();
+
+    writeln!(
+        out,
+        "running stride test at {:#x}",
+        image_data::payload_start()
+    )
+    .ok();
+
+    let dword_count = check_page_stride(
+        image_data::payload_start() as u64,
+        (image_data::payload_start() + payload_size) as u64,
+    );
+    writeln!(out, "dword count: {dword_count:#x}").ok();
+
     page_tables
         .map_pages(
             PL011_BASE,
@@ -155,6 +186,50 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
     sctlr_el1.with_m(1).with_a(1).with_c(1).with_i(1).write();
 
     writeln!(out, "MMU enabled").ok();
+
+    writeln!(
+        out,
+        "running stride test at {:#x}",
+        image_data::payload_start()
+    )
+    .ok();
+
+    let dword_count = check_page_stride(
+        image_data::payload_start() as u64,
+        (image_data::payload_start() + payload_size) as u64,
+    );
+    writeln!(out, "dword count: {dword_count:#x}").ok();
+}
+
+/// This function "generates" a function that adds 1 to
+/// its first argument several timesand returns the result.
+/// The two building blocks are these two instructions:
+///
+/// ```asm
+///         add x0,x0,1 // 00 04 00 91
+///         ret         // C0 03 5F D6
+/// ```
+fn check_page_stride(start: u64, end: u64) -> usize {
+    let add_x0_x0_1 = 0x9100_0400_u32;
+    let ret = 0xd65f_03c0_u32;
+
+    if start >= end || (end - start) & 3 != 0 {
+        panic!("expected a non-empty region of 32-bit words");
+    }
+
+    let code_space = unsafe {
+        core::slice::from_raw_parts_mut(
+            start as *mut u32,
+            ((end - start) as usize) / core::mem::size_of::<u32>(),
+        )
+    };
+    let code_space_size = code_space.len();
+    code_space[..code_space_size - 1].fill(add_x0_x0_1);
+    code_space[code_space_size - 1] = ret;
+
+    let dword_counter: extern "C" fn(usize) -> usize =
+        unsafe { core::mem::transmute(code_space.as_ptr()) };
+    dword_counter(1)
 }
 
 const USE_SEMIHOSTING: bool = false;
