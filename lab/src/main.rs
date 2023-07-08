@@ -179,6 +179,12 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
         .write();
 
     writeln!(out, "Page tables use {:#x} bytes", page_tables.used_space()).ok();
+    writeln!(
+        out,
+        "Page tables allocated for each level: {:?}",
+        page_tables.lvl_stats()
+    )
+    .ok();
     writeln!(out, "Enabling MMU").ok();
 
     let mut sctlr_el1 = SystemControlEl1::new();

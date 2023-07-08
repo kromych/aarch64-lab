@@ -1,5 +1,20 @@
 use bitfield_struct::bitfield;
 
+const fn align_up(x: u64, page_size: PageSize) -> u64 {
+    let ones_enough = page_size as u64 - 1;
+    (x + ones_enough) & !ones_enough
+}
+
+const fn align_down(x: u64, page_size: PageSize) -> u64 {
+    let ones_enough = page_size as u64 - 1;
+    x & !ones_enough
+}
+
+const fn aligned(x: u64, page_size: PageSize) -> bool {
+    let ones_enough = page_size as u64 - 1;
+    (x & ones_enough) == 0
+}
+
 #[bitfield(u64)]
 pub struct PageTableEntry {
     pub valid: bool,
@@ -114,6 +129,18 @@ pub enum PageSize {
     Huge = PAGE_SIZE_1G,
 }
 
+impl From<PageSize> for u64 {
+    fn from(value: PageSize) -> Self {
+        value as u64
+    }
+}
+
+impl From<PageSize> for usize {
+    fn from(value: PageSize) -> Self {
+        value as usize
+    }
+}
+
 #[derive(Debug)]
 pub struct PageTableSpace<'a> {
     /// Physical address at which the page table area starts.
@@ -125,14 +152,17 @@ pub struct PageTableSpace<'a> {
     /// `space`. This is essentially a bump allocator for the memory
     /// used by the page tables.
     brk: usize,
+    /// Statistics of page tables allocaions for each level.
+    /// `lvl_stats[0]` is going to be always `1`.
+    lvl_stats: [usize; 4],
 }
 
 impl<'a> PageTableSpace<'a> {
     pub fn new(phys_start: usize, space: &'a mut [u8]) -> Result<Self, PageMapError> {
-        if phys_start & (PAGE_SIZE_4K as usize - 1) != 0 {
+        if !aligned(phys_start as u64, PageSize::Small) {
             return Err(PageMapError::MisalignedPhysAddress);
         }
-        if space.len() & (PAGE_SIZE_4K as usize - 1) != 0 {
+        if !aligned(space.len() as u64, PageSize::Small) {
             return Err(PageMapError::InvalidMappingSize);
         }
         if space.is_empty() {
@@ -148,15 +178,17 @@ impl<'a> PageTableSpace<'a> {
             phys_page_table_root: phys_start,
             space,
             brk: phys_start + PAGE_SIZE_4K as usize,
+            lvl_stats: [1, 0, 0, 0],
         })
     }
 
-    fn allocate_page_table(&mut self) -> Result<u64, PageMapError> {
+    fn allocate_page_table(&mut self, level: usize) -> Result<u64, PageMapError> {
         if self.brk >= self.phys_page_table_root + self.space.len() {
             return Err(PageMapError::OutOfMemory);
         }
         let page_table_phys_addr = self.brk;
         self.brk += PAGE_SIZE_4K as usize;
+        self.lvl_stats[level] += 1;
 
         Ok(page_table_phys_addr as u64)
     }
@@ -165,12 +197,16 @@ impl<'a> PageTableSpace<'a> {
         self.brk - self.phys_page_table_root
     }
 
+    pub fn lvl_stats(&self) -> [usize; 4] {
+        self.lvl_stats
+    }
+
     fn read_entry(&self, phys_table_start: u64, index: usize) -> u64 {
         debug_assert!(
             (phys_table_start as usize) < self.phys_page_table_root + self.space.len()
                 && (phys_table_start as usize) >= self.phys_page_table_root
         );
-        debug_assert!(phys_table_start & (PAGE_SIZE_4K - 1) == 0);
+        debug_assert!(aligned(phys_table_start, PageSize::Small));
         debug_assert!(index < PAGE_SIZE_4K as usize / core::mem::size_of::<PageTableEntry>());
 
         let pos = phys_table_start as usize - self.phys_page_table_root
@@ -192,7 +228,7 @@ impl<'a> PageTableSpace<'a> {
             (phys_table_start as usize) < self.phys_page_table_root + self.space.len()
                 && (phys_table_start as usize) >= self.phys_page_table_root
         );
-        debug_assert!(phys_table_start & (PAGE_SIZE_4K - 1) == 0);
+        debug_assert!(aligned(phys_table_start, PageSize::Small));
         debug_assert!(index < PAGE_SIZE_4K as usize / core::mem::size_of::<PageTableEntry>());
 
         let pos = phys_table_start as usize - self.phys_page_table_root
@@ -213,10 +249,10 @@ impl<'a> PageTableSpace<'a> {
             return Err(PageMapError::NonCanonicalVirtAddress);
         }
 
-        if phys_addr & ((page_size as u64) - 1) != 0 {
+        if !aligned(phys_addr, page_size) {
             return Err(PageMapError::MisalignedPhysAddress);
         }
-        if virt_addr.0 & ((page_size as u64) - 1) != 0 {
+        if !aligned(virt_addr.0, page_size) {
             return Err(PageMapError::MisalignedVirtAddress);
         }
 
@@ -246,7 +282,7 @@ impl<'a> PageTableSpace<'a> {
             }
 
             if !table_entry.valid() {
-                let next_table_phys_addr = self.allocate_page_table()?;
+                let next_table_phys_addr = self.allocate_page_table(level + 1)?;
 
                 table_entry = PageTableEntry::new()
                     .with_valid(true)
@@ -327,20 +363,64 @@ impl<'a> PageTableSpace<'a> {
         Ok(())
     }
 
+    fn get_page_size_and_page_count(
+        &self,
+        non_mapped: u64,
+        phys_addr: u64,
+        virt_addr: u64,
+    ) -> (PageSize, u64) {
+        // Try larger pages first, then the next large page.
+        // The goal is to spend as few page tables as possible.
+
+        if aligned(phys_addr, PageSize::Huge)
+            && aligned(virt_addr, PageSize::Huge)
+            && non_mapped >= PAGE_SIZE_1G
+        {
+            (PageSize::Huge, non_mapped / PageSize::Huge as u64)
+        } else if aligned(phys_addr, PageSize::Large)
+            && aligned(virt_addr, PageSize::Large)
+            && non_mapped >= PAGE_SIZE_2M
+        {
+            let before_huge_page = align_up(virt_addr, PageSize::Huge) - virt_addr;
+            let page_count = align_down(
+                if before_huge_page > 0 && before_huge_page < non_mapped {
+                    before_huge_page
+                } else {
+                    non_mapped
+                },
+                PageSize::Large,
+            ) / PageSize::Large as u64;
+
+            (PageSize::Large, page_count)
+        } else {
+            let before_huge_page = align_up(virt_addr, PageSize::Huge) - virt_addr;
+            let before_large_page = align_up(virt_addr, PageSize::Large) - virt_addr;
+            let page_count = if before_huge_page > 0 && before_huge_page < non_mapped {
+                before_huge_page
+            } else if before_large_page > 0 && before_large_page < non_mapped {
+                before_large_page
+            } else {
+                non_mapped
+            } / PageSize::Small as u64;
+
+            (PageSize::Small, page_count)
+        }
+    }
+
     pub fn map_range(
         &mut self,
         phys_addr: u64,
         virt_addr: VirtualAddress,
-        map_size: u64,
+        size: u64,
         memory_attribute_index: usize,
     ) -> Result<(), PageMapError> {
-        if phys_addr & (PAGE_SIZE_4K - 1) != 0 {
+        if !aligned(phys_addr, PageSize::Small) {
             return Err(PageMapError::MisalignedPhysAddress);
         }
-        if map_size & (PAGE_SIZE_4K - 1) != 0 {
+        if !aligned(size, PageSize::Small) {
             return Err(PageMapError::InvalidMappingSize);
         }
-        if map_size == 0 {
+        if size == 0 {
             return Err(PageMapError::EmptyMapping);
         }
         if virt_addr.offset() != 0 {
@@ -350,64 +430,30 @@ impl<'a> PageTableSpace<'a> {
             return Err(PageMapError::NonCanonicalVirtAddress);
         }
 
-        let mut mapped = 0;
-        let mut non_mapped = map_size;
+        let mut non_mapped = size;
         let mut phys_addr = phys_addr;
         let mut virt_addr = virt_addr.into();
 
-        while mapped < map_size {
-            // Try larger pages first, then try to map up to the next large page.
-            let map_size = if phys_addr & (PAGE_SIZE_1G - 1) == 0
-                && virt_addr & (PAGE_SIZE_1G - 1) == 0
-                && non_mapped >= PAGE_SIZE_1G
-            {
-                let map_size = non_mapped & !(PAGE_SIZE_1G - 1);
-                self.map_pages(
-                    phys_addr,
-                    VirtualAddress(virt_addr),
-                    (map_size / PAGE_SHIFT_1G) as usize,
-                    PageSize::Huge,
-                    memory_attribute_index,
-                )?;
+        let mut mapped = 0;
+        while mapped < size {
+            let (page_size, page_count) =
+                self.get_page_size_and_page_count(non_mapped, phys_addr, virt_addr);
+            self.map_pages(
+                phys_addr,
+                VirtualAddress(virt_addr),
+                page_count as usize,
+                page_size,
+                memory_attribute_index,
+            )?;
 
-                map_size
-            } else if phys_addr & (PAGE_SIZE_2M - 1) == 0
-                && virt_addr & (PAGE_SIZE_2M - 1) == 0
-                && non_mapped >= PAGE_SIZE_2M
-            {
-                let map_size = non_mapped & (PAGE_SIZE_1G - 1) & !(PAGE_SIZE_2M - 1);
-                self.map_pages(
-                    phys_addr,
-                    VirtualAddress(virt_addr),
-                    (map_size / PAGE_SHIFT_2M) as usize,
-                    PageSize::Large,
-                    memory_attribute_index,
-                )?;
-
-                map_size
-            } else {
-                let map_size = core::cmp::min(
-                    non_mapped & (PAGE_SIZE_1G - 1),
-                    non_mapped & (PAGE_SIZE_2M - 1),
-                );
-                self.map_pages(
-                    phys_addr,
-                    VirtualAddress(virt_addr),
-                    (map_size / PAGE_SHIFT_4K) as usize,
-                    PageSize::Small,
-                    memory_attribute_index,
-                )?;
-
-                map_size
-            };
-
-            mapped += map_size;
-            non_mapped -= map_size;
-            phys_addr += map_size;
-            virt_addr += map_size;
+            let just_mapped = page_count * page_size as u64;
+            mapped += just_mapped;
+            non_mapped -= just_mapped;
+            phys_addr += just_mapped;
+            virt_addr += just_mapped;
         }
 
-        debug_assert!(mapped == map_size);
+        debug_assert!(mapped == size);
         debug_assert!(non_mapped == 0);
         Ok(())
     }
