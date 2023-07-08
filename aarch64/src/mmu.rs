@@ -1,20 +1,5 @@
 use bitfield_struct::bitfield;
 
-const fn align_up(x: u64, page_size: PageSize) -> u64 {
-    let ones_enough = page_size as u64 - 1;
-    (x + ones_enough) & !ones_enough
-}
-
-const fn align_down(x: u64, page_size: PageSize) -> u64 {
-    let ones_enough = page_size as u64 - 1;
-    x & !ones_enough
-}
-
-const fn aligned(x: u64, page_size: PageSize) -> bool {
-    let ones_enough = page_size as u64 - 1;
-    (x & ones_enough) == 0
-}
-
 #[bitfield(u64)]
 pub struct PageTableEntry {
     pub valid: bool,
@@ -139,6 +124,21 @@ impl From<PageSize> for usize {
     fn from(value: PageSize) -> Self {
         value as usize
     }
+}
+
+const fn align_up(x: u64, page_size: PageSize) -> u64 {
+    let ones_enough = page_size as u64 - 1;
+    (x + ones_enough) & !ones_enough
+}
+
+const fn align_down(x: u64, page_size: PageSize) -> u64 {
+    let ones_enough = page_size as u64 - 1;
+    x & !ones_enough
+}
+
+const fn aligned(x: u64, page_size: PageSize) -> bool {
+    let ones_enough = page_size as u64 - 1;
+    (x & ones_enough) == 0
 }
 
 #[derive(Debug)]
