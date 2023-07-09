@@ -1,8 +1,13 @@
-# Some system registers on Aarch64
+# Aarch64 low-level lab
 
-This repo contains code that can run as a position-independent executable,
-can relocate itself, log the register values to the PL011 port, and can
-enable MMU. There are tests present, and one test that generates code on the fly.
+Here you can find some low-level Aarch64 code that can run on the bare processor
+inside a virtual machine, i.e. prior ro any firmware or an OS.
+
+The repo produces a position-independent executable able to relocate itself, log the
+register values to the PL011 port, and can enable MMU. There are tests present, and,
+in particlular, one test that generates code on the fly.
+
+The code showcases using semihosting on Aarch64, too.
 
 ## Register `ID_AA64MMFR0_EL1`
 
