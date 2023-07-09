@@ -1,11 +1,12 @@
 # Aarch64 low-level lab
 
 Here you can find some low-level Aarch64 code that can run on the bare processor
-inside a virtual machine, i.e. prior ro any firmware or an OS.
+inside a virtual machine, i.e. prior to any firmware or an OS.
 
 The repo produces a position-independent executable able to relocate itself, log the
-register values to the PL011 port, and can enable MMU. There are tests present, and,
-in particlular, one test that generates code on the fly.
+register values to the PL011 port, and can enable the MMU. The 4KiB translation granule size
+is used, and the optimal mix of page sizes is chosen when mapping. There are tests present,
+and, in particlular, one test that generates code on the fly.
 
 The code showcases using semihosting on Aarch64, too.
 
