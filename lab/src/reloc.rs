@@ -102,6 +102,19 @@ fn rel_type(rel: &Elf64Rel) -> u32 {
 }
 
 #[no_mangle]
+#[link_section = ".text._dead_loop"]
+fn dead_loop(msg: &str) -> ! {
+    let mut _msg = msg.as_ptr() as u64;
+    unsafe {
+        core::arch::asm!(
+            "mov x0, {msg}",
+            msg = inout(reg) _msg,
+        )
+    };
+    unreachable!()
+}
+
+#[no_mangle]
 fn apply_rel(load_addr: u64, begin: usize, end: usize) {
     let rel = unsafe {
         core::slice::from_raw_parts_mut(
@@ -111,7 +124,7 @@ fn apply_rel(load_addr: u64, begin: usize, end: usize) {
     };
     for rel in rel {
         if rel_type(rel) != R_AARCH64_RELATIVE {
-            panic!("rel")
+            dead_loop("rel")
         }
 
         unsafe {
@@ -131,7 +144,7 @@ fn apply_rela(load_addr: u64, begin: usize, end: usize) {
     };
     for rel in rela {
         if rela_type(rel) != R_AARCH64_RELATIVE {
-            panic!("rela")
+            dead_loop("rela")
         }
 
         unsafe {
@@ -186,7 +199,7 @@ unsafe extern "C" fn relocate(load_addr: usize, begin: usize) {
     if let Some(rela_offset) = rela_offset {
         const RELA_ENTRY_SIZE: usize = core::mem::size_of::<Elf64Rela>();
         if rela_entry_size != RELA_ENTRY_SIZE {
-            panic!();
+            dead_loop("RELA_ENTRY_SIZE");
         }
 
         let begin = load_addr + rela_offset;
@@ -197,7 +210,7 @@ unsafe extern "C" fn relocate(load_addr: usize, begin: usize) {
     if let Some(rel_offset) = rel_offset {
         const REL_ENTRY_SIZE: usize = core::mem::size_of::<Elf64Rel>();
         if rel_entry_size != REL_ENTRY_SIZE {
-            panic!();
+            dead_loop("REL_ENTRY_SIZE");
         }
 
         let begin = load_addr + rel_offset;
