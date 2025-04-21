@@ -1,17 +1,65 @@
 	.arch armv8-a
 	.file	"start.S"
-    .extern start, _stack_bot, _image_size, relocate
+    .extern start, _stack_bot, _image_size, relocate, exception_handler
 	.weak _DYNAMIC
 	.hidden _DYNAMIC
 
 	.macro EXCEPTION_ENTRY source, kind
 	.align 7
-		mov     x20, \source
-		mov		x21, \kind
-		mrs     x22, FAR_EL1
-		mrs     x23, ESR_EL1
-		mrs     x24, ELR_EL1
-		b		.
+
+		/* Volatile registers in AAPSC64 */
+		ldp x0, x1, [sp]
+		ldp x2, x3, [sp, #(2*8)]
+		ldp x4, x5, [sp, #(4*8)]
+		ldp x6, x7, [sp, #(6*8)]
+		ldp x8, x9, [sp, #(8*8)]
+		ldp x10, x11, [sp, #(10*8)]
+		ldp x12, x13, [sp, #(12*8)]
+		ldp x14, x15, [sp, #(14*8)]
+		ldp x16, x17, [sp, #(16*8)]
+
+		/* The linkage register */
+		ldr x18, [sp, #(17*8)]
+
+		/* Non-volatile registers in AAPSC64 */
+		ldp x19, x20, [sp, #(19*8)]
+		ldp x21, x22, [sp, #(21*8)]
+		ldp x23, x24, [sp, #(23*8)]
+		ldp x25, x26, [sp, #(25*8)]
+		ldp x27, x28, [sp, #(27*8)]
+		ldp x29, x30, [sp, #(29*8)]
+
+		mov     x0, \source
+		mov		x1, \kind
+		/* Load the pointer to the exception frame into x3 */
+		mov 	x3, sp
+		sub 	x3, x3, 31*8
+
+		bl exception_handler
+
+		/* Volatile registers in AAPSC64 */
+		stp x0, x1, [sp]
+		stp x2, x3, [sp, #(2*8)]
+		stp x4, x5, [sp, #(4*8)]
+		stp x6, x7, [sp, #(6*8)]
+		stp x8, x9, [sp, #(8*8)]
+		stp x10, x11, [sp, #(10*8)]
+		stp x12, x13, [sp, #(12*8)]
+		stp x14, x15, [sp, #(14*8)]
+		stp x16, x17, [sp, #(16*8)]
+
+		/* The linkage register */
+		str x18, [sp, #(17*8)]
+
+		/* Non-volatile registers in AAPSC64 */
+		stp x19, x20, [sp, #(19*8)]
+		stp x21, x22, [sp, #(21*8)]
+		stp x23, x24, [sp, #(23*8)]
+		stp x25, x26, [sp, #(25*8)]
+		stp x27, x28, [sp, #(27*8)]
+		stp x29, x30, [sp, #(29*8)]
+
+		eret
 	.endm
 
 	.global	_start
@@ -23,7 +71,7 @@
 
 	// This resembles the Linux kernel Image header
 
-	add     x13, x18, #0x16  // code0: UEFI "MZ" signature magic instruction
+	add     x13, sp, #0x16  // code0: UEFI "MZ" signature magic instruction
 	bl      _start
 	.quad	0				// Image load offset from start of RAM, little-endian
 	.quad	_image_size		// Kernel size, little-endian

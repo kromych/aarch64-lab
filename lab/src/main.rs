@@ -271,6 +271,18 @@ fn start() {
     setup_mmu(out);
     print_registers(out);
 
+    // Try exception handler
+    // unsafe {
+    //     core::arch::asm!(".byte 0xff, 0xff, 0xff, 0xff");
+    // }
+    // unsafe {
+    //     let oops: *mut u64 = !0u64 as *mut u64;
+    //     *oops = 0xdeadbeef;
+    // }
+
+    // TODO: Map the GICD and GICR regions to the virtual address space
+    // if MMU is enabled
+
     writeln!(out, "Initialing GICv3").ok();
 
     let mut gic = Gicv3::new(
@@ -289,6 +301,46 @@ fn start() {
     if USE_SEMIHOSTING {
         semi.exit(0)
     }
+}
+
+#[no_mangle]
+unsafe extern "C" fn exception_handler(source: u64, kind: u64, _exception_frame: *const ()) {
+    let mut semi: semihosting::Semihosting = semihosting::Semihosting;
+    let mut pl011: pl011::Pl011 = pl011::Pl011;
+
+    let out = if USE_SEMIHOSTING {
+        &mut semi as &mut dyn core::fmt::Write
+    } else {
+        &mut pl011 as &mut dyn core::fmt::Write
+    };
+
+    writeln!(out, "**************************************************").ok();
+    writeln!(out, "EXCEPTION source {source:#x} kind {kind:#x}").ok();
+    // Get the interesting registers
+    let regs = [
+        register!(CurrentEl),
+        register!(ExceptionLinkEl1),
+        register!(ExceptionSyndromeEl1),
+    ];
+    for r in regs {
+        r.load();
+
+        let raw: u64 = r.bits();
+        let name = r.name();
+        writeln!(out, "{name}\t{raw:#016x?}: {r:x?}").ok();
+    }
+    writeln!(out, "**************************************************").ok();
+
+    writeln!(
+        out,
+        "Exiting, hit Ctrl+A X if semihosting is not compiled in"
+    )
+    .ok();
+    if USE_SEMIHOSTING {
+        semi.exit(0)
+    }
+
+    unsafe { core::arch::asm!("b .") };
 }
 
 #[panic_handler]
