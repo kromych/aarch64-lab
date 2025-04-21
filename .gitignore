@@ -7,3 +7,5 @@
 .DS_Store
 *.dtb
 *.dts
+*.S
+*.s
