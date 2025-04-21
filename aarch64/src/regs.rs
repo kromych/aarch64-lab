@@ -942,7 +942,6 @@ pub struct MmFeatures4El1 {
     _mbz1: u64,
 }
 
-#[cfg(target_arch = "aarch64")]
 pub mod access {
     use super::*;
     use core::arch::asm;
