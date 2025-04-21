@@ -1,3 +1,5 @@
+#![allow(non_camel_case_types)]
+
 use bitfield_struct::bitfield;
 
 #[derive(Debug)]
@@ -333,7 +335,6 @@ pub struct ProcessorFeatures1El1 {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-#[allow(non_camel_case_types)]
 #[repr(u8)]
 pub enum MemoryAttributeEl1 {
     Device_nGnRnE = 0,
@@ -436,7 +437,6 @@ impl From<TranslationGranule1> for u64 {
 
 #[derive(Debug)]
 #[repr(u64)]
-#[allow(non_camel_case_types)]
 pub enum IntermPhysAddrSize {
     _32_bits_4GB = 0b000,
     _36_bits_64GB = 0b001,
@@ -582,7 +582,6 @@ pub struct TranslationBase1El1 {
 
 #[derive(Debug)]
 #[repr(u64)]
-#[allow(non_camel_case_types)]
 pub enum MmfPaRange {
     _32_bits_4GB = 0b0000,
     _36_bits_64GB = 0b0001,
@@ -618,7 +617,6 @@ impl From<MmfPaRange> for u64 {
 
 #[derive(Debug)]
 #[repr(u64)]
-#[allow(non_camel_case_types)]
 pub enum MmfAsidBits {
     _8_bits_ASID = 0b0000,
     _16_bits_ASID = 0b0010,
@@ -642,7 +640,6 @@ impl From<MmfAsidBits> for u64 {
 
 #[derive(Debug)]
 #[repr(u64)]
-#[allow(non_camel_case_types)]
 pub enum MmfTGran4KBStage2 {
     AsStage1 = 0b0000,
     No = 0b0001,
@@ -670,8 +667,6 @@ impl From<MmfTGran4KBStage2> for u64 {
 
 #[derive(Debug)]
 #[repr(u64)]
-#[allow(non_camel_case_types)]
-
 pub enum MmfTGran16KBStage2 {
     AsStage1 = 0b0000,
     No = 0b0001,
@@ -699,8 +694,6 @@ impl From<MmfTGran16KBStage2> for u64 {
 
 #[derive(Debug)]
 #[repr(u64)]
-#[allow(non_camel_case_types)]
-
 pub enum MmfTGran64KBStage2 {
     AsStage1 = 0b0000,
     No = 0b0001,
@@ -726,8 +719,6 @@ impl From<MmfTGran64KBStage2> for u64 {
 
 #[derive(Debug)]
 #[repr(u64)]
-#[allow(non_camel_case_types)]
-
 pub enum MmfTGran4KB {
     Yes = 0b0000,
     Yes_52bit = 0b0001,
@@ -753,8 +744,6 @@ impl From<MmfTGran4KB> for u64 {
 
 #[derive(Debug)]
 #[repr(u64)]
-#[allow(non_camel_case_types)]
-
 pub enum MmfTGran16KB {
     No = 0b0000,
     Yes = 0b0001,
@@ -780,8 +769,6 @@ impl From<MmfTGran16KB> for u64 {
 
 #[derive(Debug)]
 #[repr(u64)]
-#[allow(non_camel_case_types)]
-
 pub enum MmfTGran64KB {
     Yes = 0b0000,
     No = 0b1111,
