@@ -5,12 +5,18 @@ TARGET="lab"
 FLAVOR="debug"
 KERNEL="target/${TARGET}/${FLAVOR}/aarch64-lab.Image"
 
+MACHINE="virt-9.2,gic-version=3,highmem=on,virtualization=on"
+CPU="cortex-a57" # max # host
+
+qemu-system-aarch64 -machine ${MACHINE} -machine dumpdtb=./dump.dtb
+dtc -I dtb -O dts -o ./dump.dts ./dump.dtb
+
 qemu-system-aarch64 \
     -nodefaults \
     -kernel ${KERNEL} \
-    -machine virt,highmem=off -nographic -accel tcg -cpu max \
+    -machine ${MACHINE} -nographic -accel tcg -cpu ${CPU} \
     -smp 1 \
-    -m 256M \
+    -m 64M \
     --semihosting \
     -chardev stdio,id=char0,mux=on,logfile=serial1.log,signal=off \
     -serial chardev:char0 \

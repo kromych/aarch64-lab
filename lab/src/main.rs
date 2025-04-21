@@ -52,6 +52,7 @@ mod image_data {
 
 mod reloc;
 
+use aarch64::gicv3::Gicv3;
 use aarch64::mmu;
 use aarch64::mmu::PageTableSpace;
 use aarch64::pl011;
@@ -60,6 +61,7 @@ use aarch64::register;
 use aarch64::regs::access::Aarch64Register;
 use aarch64::regs::*;
 use aarch64::semihosting;
+use core::sync::atomic::AtomicU32;
 
 fn print_registers(out: &mut dyn core::fmt::Write) {
     let regs = [
@@ -235,7 +237,13 @@ fn check_page_stride(start: u64, end: u64) -> usize {
     dword_counter(1)
 }
 
-const USE_SEMIHOSTING: bool = false;
+const USE_SEMIHOSTING: bool = true;
+
+// TODO: qemu virt-9.2 specific
+const GICD_BASE: u64 = 0x08000000;
+const GICD_SIZE: usize = 0x10000;
+const GICR_BASE: u64 = 0x080a0000;
+const GICR_SIZE: usize = 0x20000;
 
 #[no_mangle]
 fn start() {
@@ -262,6 +270,16 @@ fn start() {
     print_registers(out);
     setup_mmu(out);
     print_registers(out);
+
+    writeln!(out, "Initialing GICv3").ok();
+
+    let mut gic = Gicv3::new(
+        unsafe { core::slice::from_raw_parts_mut(GICD_BASE as *mut AtomicU32, GICD_SIZE) },
+        unsafe { core::slice::from_raw_parts_mut(GICR_BASE as *mut AtomicU32, GICR_SIZE) },
+    );
+    gic.init();
+
+    writeln!(out, "Initialized GICv3").ok();
 
     writeln!(
         out,
