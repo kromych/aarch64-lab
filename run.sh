@@ -5,7 +5,7 @@ TARGET="lab"
 FLAVOR="debug"
 KERNEL="target/${TARGET}/${FLAVOR}/aarch64-lab.Image"
 
-MACHINE="virt-9.2,gic-version=3,highmem=on,virtualization=on"
+MACHINE="virt-9.2,gic-version=3,highmem=on,virtualization=off"
 CPU="cortex-a57" # max # host
 
 qemu-system-aarch64 -machine ${MACHINE} -machine dumpdtb=./dump.dtb
@@ -24,5 +24,5 @@ qemu-system-aarch64 \
     -chardev file,path=serial2.log,id=char1 \
     -serial chardev:char1 \
     -nographic \
-#    -s -S \
-#    -d guest_errors -d cpu_reset -d int -D qemu.log
+    -s # -S \
+    # -d guest_errors -d cpu_reset -d int -D qemu.log \
