@@ -1,6 +1,14 @@
 #![no_std]
 #![no_main]
 
+const USE_SEMIHOSTING: bool = false;
+
+// TODO: qemu virt-9.2 specific
+const GICD_BASE: u64 = 0x08000000;
+const GICD_SIZE: usize = 0x10000;
+const GICR_BASE: u64 = 0x080a0000;
+const GICR_SIZE: usize = 0xf60000;
+
 core::arch::global_asm!(include_str!("start.S"));
 
 mod page_table_space {
@@ -134,6 +142,28 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
         )
         .unwrap();
 
+    page_tables
+        .map_range(
+            GICD_BASE,
+            mmu::VirtualAddress::from(GICD_BASE),
+            GICD_SIZE as u64,
+            mair_el1
+                .get_index(MemoryAttributeEl1::Device_nGnRnE)
+                .expect("must be some device attrs available"),
+        )
+        .unwrap();
+
+    page_tables
+        .map_range(
+            GICR_BASE,
+            mmu::VirtualAddress::from(GICR_BASE),
+            GICR_SIZE as u64,
+            mair_el1
+                .get_index(MemoryAttributeEl1::Device_nGnRnE)
+                .expect("must be some device attrs available"),
+        )
+        .unwrap();
+
     writeln!(
         out,
         "running stride test at {:#x}",
@@ -237,14 +267,6 @@ fn check_page_stride(start: u64, end: u64) -> usize {
     dword_counter(1)
 }
 
-const USE_SEMIHOSTING: bool = true;
-
-// TODO: qemu virt-9.2 specific
-const GICD_BASE: u64 = 0x08000000;
-const GICD_SIZE: usize = 0x10000;
-const GICR_BASE: u64 = 0x080a0000;
-const GICR_SIZE: usize = 0x20000;
-
 #[no_mangle]
 fn start() {
     let mut semi: semihosting::Semihosting = semihosting::Semihosting;
@@ -304,7 +326,11 @@ fn start() {
 }
 
 #[no_mangle]
-unsafe extern "C" fn exception_handler(source: u64, kind: u64, _exception_frame: *const ()) {
+unsafe extern "C" fn exception_handler(
+    source: ExceptionSource,
+    kind: ExceptionKind,
+    exception_frame: *const ExceptionFrame,
+) {
     let mut semi: semihosting::Semihosting = semihosting::Semihosting;
     let mut pl011: pl011::Pl011 = pl011::Pl011;
 
@@ -315,7 +341,11 @@ unsafe extern "C" fn exception_handler(source: u64, kind: u64, _exception_frame:
     };
 
     writeln!(out, "**************************************************").ok();
-    writeln!(out, "EXCEPTION source {source:#x} kind {kind:#x}").ok();
+    writeln!(out, "EXCEPTION source {source:?} kind {kind:?}").ok();
+
+    let frame = unsafe { core::slice::from_raw_parts(exception_frame, 1) };
+    writeln!(out, "Exception frame {frame:x?}").ok();
+
     // Get the interesting registers
     let regs = [
         register!(CurrentEl),
@@ -357,15 +387,16 @@ fn panic(info: &core::panic::PanicInfo) -> ! {
     if let Some(loc) = info.location() {
         writeln!(
             out,
-            "\nPanic at {}:{}:{}",
+            "\nPANIC at {}:{}:{}",
             loc.file(),
             loc.line(),
             loc.column()
         )
         .ok();
-    } else {
-        writeln!(out, "\nPanic").ok();
     }
+
+    let msg = info.message();
+    writeln!(out, "PANIC: {}\n", msg).ok();
 
     if USE_SEMIHOSTING {
         semi.exit(!0)
