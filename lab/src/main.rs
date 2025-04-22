@@ -315,6 +315,18 @@ fn start() {
 
     writeln!(out, "Initialized GICv3").ok();
 
+    const TEST_SGI: u32 = 10;
+
+    gic.enable_interrupt(TEST_SGI);
+    gic.enable_local_interrupts();
+
+    // Enable interrupts at CPU level
+    unsafe { core::arch::asm!("msr daifclr, #2") };
+
+    gic.send_sgi(TEST_SGI, 1 << 0); // Target CPU 0
+
+    unsafe { core::arch::asm!("1: wfi; b 1b") };
+
     writeln!(
         out,
         "Exiting, hit Ctrl+A X if semihosting is not compiled in"
@@ -322,6 +334,8 @@ fn start() {
     .ok();
     if USE_SEMIHOSTING {
         semi.exit(0)
+    } else {
+        unsafe { core::arch::asm!("1: wfe; b 1b") };
     }
 }
 
