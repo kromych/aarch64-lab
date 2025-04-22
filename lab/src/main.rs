@@ -2,6 +2,7 @@
 #![no_main]
 
 const USE_SEMIHOSTING: bool = false;
+const SETUP_MMU: bool = true;
 
 // TODO: qemu virt-9.2 specific
 const GICD_BASE: u64 = 0x08000000;
@@ -290,8 +291,10 @@ fn start() {
     .ok();
 
     print_registers(out);
-    setup_mmu(out);
-    print_registers(out);
+    if SETUP_MMU {
+        setup_mmu(out);
+        print_registers(out);
+    }
 
     // Try exception handler
     // unsafe {
