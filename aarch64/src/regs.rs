@@ -191,10 +191,193 @@ pub struct ExceptionLinkEl1 {
     pub bits: u64,
 }
 
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+#[repr(u8)]
+pub enum ExceptionClass {
+    Unknown = 0b000000,
+    Wf = 0b000001,
+    McrMrc = 0b000011,
+    McrrMrrc = 0b000100,
+    MccMrc1110 = 0b000101,
+    LdcStc = 0b000110,
+    SveAsmindFp = 0b000111,
+    Ld64St64 = 0b001010,
+    Mrrc1110 = 0b001100,
+    BranchTarget = 0b001101,
+    IllegalExecutionState = 0b001110,
+    Svc32bit = 0b010001,
+    Svc64bit = 0b010101,
+    MsrMrs64bit = 0b011000,
+    Sve = 0b011001,
+    PointerAuth = 0b011100,
+    InstructionAbortLowerEl = 0b100000,
+    InstructionAbortSameEl = 0b100001,
+    PcAlignment = 0b100010,
+    DataAbortLowerEl = 0b100100,
+    DataAbortSameEl = 0b100101,
+    SpAlignment = 0b100110,
+    Fp32bit = 0b101000,
+    Fp64bit = 0b101100,
+    SError = 0b101111,
+    BreakpointLowerEl = 0b110000,
+    BreakpointSameEl = 0b110001,
+    StepLowerEl = 0b110010,
+    StepSameEl = 0b110011,
+    WatchpointLowerEl = 0b110100,
+    WatchpointSameEl = 0b110101,
+    Bkpt32bit = 0b111000,
+    Brk64bit = 0b111100,
+    Invalid = 0b110110,
+}
+
+impl From<ExceptionClass> for u64 {
+    fn from(value: ExceptionClass) -> Self {
+        match value {
+            ExceptionClass::Unknown => 0b000000,
+            ExceptionClass::Wf => 0b000001,
+            ExceptionClass::McrMrc => 0b000011,
+            ExceptionClass::McrrMrrc => 0b000100,
+            ExceptionClass::MccMrc1110 => 0b000101,
+            ExceptionClass::LdcStc => 0b000110,
+            ExceptionClass::SveAsmindFp => 0b000111,
+            ExceptionClass::Ld64St64 => 0b001010,
+            ExceptionClass::Mrrc1110 => 0b001100,
+            ExceptionClass::BranchTarget => 0b001101,
+            ExceptionClass::IllegalExecutionState => 0b001110,
+            ExceptionClass::Svc32bit => 0b010001,
+            ExceptionClass::Svc64bit => 0b010101,
+            ExceptionClass::MsrMrs64bit => 0b011000,
+            ExceptionClass::Sve => 0b011001,
+            ExceptionClass::PointerAuth => 0b011100,
+            ExceptionClass::InstructionAbortLowerEl => 0b100000,
+            ExceptionClass::InstructionAbortSameEl => 0b100001,
+            ExceptionClass::PcAlignment => 0b100010,
+            ExceptionClass::DataAbortLowerEl => 0b100100,
+            ExceptionClass::DataAbortSameEl => 0b100101,
+            ExceptionClass::SpAlignment => 0b100110,
+            ExceptionClass::Fp32bit => 0b101000,
+            ExceptionClass::Fp64bit => 0b101100,
+            ExceptionClass::SError => 0b101111,
+            ExceptionClass::BreakpointLowerEl => 0b110000,
+            ExceptionClass::BreakpointSameEl => 0b110001,
+            ExceptionClass::StepLowerEl => 0b110010,
+            ExceptionClass::StepSameEl => 0b110011,
+            ExceptionClass::WatchpointLowerEl => 0b110100,
+            ExceptionClass::WatchpointSameEl => 0b110101,
+            ExceptionClass::Bkpt32bit => 0b111000,
+            ExceptionClass::Brk64bit => 0b111100,
+            ExceptionClass::Invalid => 0b110110,
+        }
+    }
+}
+
+impl From<u64> for ExceptionClass {
+    fn from(value: u64) -> Self {
+        match value {
+            0b000000 => ExceptionClass::Unknown,
+            0b000001 => ExceptionClass::Wf,
+            0b000011 => ExceptionClass::McrMrc,
+            0b000100 => ExceptionClass::McrrMrrc,
+            0b000101 => ExceptionClass::MccMrc1110,
+            0b000110 => ExceptionClass::LdcStc,
+            0b000111 => ExceptionClass::SveAsmindFp,
+            0b001010 => ExceptionClass::Ld64St64,
+            0b001100 => ExceptionClass::Mrrc1110,
+            0b001101 => ExceptionClass::BranchTarget,
+            0b001110 => ExceptionClass::IllegalExecutionState,
+            0b010001 => ExceptionClass::Svc32bit,
+            0b010101 => ExceptionClass::Svc64bit,
+            0b011000 => ExceptionClass::MsrMrs64bit,
+            0b011001 => ExceptionClass::Sve,
+            0b011100 => ExceptionClass::PointerAuth,
+            0b100000 => ExceptionClass::InstructionAbortLowerEl,
+            0b100001 => ExceptionClass::InstructionAbortSameEl,
+            0b100010 => ExceptionClass::PcAlignment,
+            0b100100 => ExceptionClass::DataAbortLowerEl,
+            0b100101 => ExceptionClass::DataAbortSameEl,
+            0b100110 => ExceptionClass::SpAlignment,
+            0b101000 => ExceptionClass::Fp32bit,
+            0b101100 => ExceptionClass::Fp64bit,
+            0b101111 => ExceptionClass::SError,
+            0b110000 => ExceptionClass::BreakpointLowerEl,
+            0b110001 => ExceptionClass::BreakpointSameEl,
+            0b110010 => ExceptionClass::StepLowerEl,
+            0b110011 => ExceptionClass::StepSameEl,
+            0b110100 => ExceptionClass::WatchpointLowerEl,
+            0b110101 => ExceptionClass::WatchpointSameEl,
+            0b111000 => ExceptionClass::Bkpt32bit,
+            0b111100 => ExceptionClass::Brk64bit,
+            0b110110 => ExceptionClass::Invalid,
+            _ => panic!("invalid EC {value:#b}"),
+        }
+    }
+}
+
 #[bitfield(u64)]
 pub struct ExceptionSyndromeEl1 {
-    #[bits(64)]
-    pub bits: u64,
+    #[bits(25)]
+    pub iss: u64,
+    #[bits(1)]
+    pub il: u64,
+    #[bits(6)]
+    pub ec: ExceptionClass,
+    #[bits(32)]
+    pub _mbz: u64,
+}
+
+#[repr(u64)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+pub enum ExceptionKind {
+    SameElSpEl0 = 0,
+    SameElSpElx = 1,
+    LowerEl64bit = 2,
+    LowerEl32bit = 3,
+}
+
+#[repr(u64)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+pub enum ExceptionSource {
+    Synchronous = 0,
+    Irq = 1,
+    Fiq = 2,
+    SError = 3,
+}
+
+/// Non-architectural, ad-hoc
+#[repr(C, packed)]
+#[derive(Debug)]
+pub struct ExceptionFrame {
+    pub x0: u64,
+    pub x1: u64,
+    pub x2: u64,
+    pub x3: u64,
+    pub x4: u64,
+    pub x5: u64,
+    pub x6: u64,
+    pub x7: u64,
+    pub x8: u64,
+    pub x9: u64,
+    pub x10: u64,
+    pub x11: u64,
+    pub x12: u64,
+    pub x13: u64,
+    pub x14: u64,
+    pub x15: u64,
+    pub x16: u64,
+    pub x17: u64,
+    // No x18
+    pub x19: u64,
+    pub x20: u64,
+    pub x21: u64,
+    pub x22: u64,
+    pub x23: u64,
+    pub x24: u64,
+    pub x25: u64,
+    pub x26: u64,
+    pub x27: u64,
+    pub x28: u64,
+    pub x29: u64,
+    pub x30: u64,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
