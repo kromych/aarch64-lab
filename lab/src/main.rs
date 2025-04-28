@@ -299,7 +299,7 @@ fn start() {
 
     // Try exception handler
     // unsafe {
-    //     core::arch::asm!(".byte 0xff, 0xff, 0xff, 0xff");
+    //     core::arch::asm!("brk #00");
     // }
     // unsafe {
     //     let oops: *mut u64 = !0u64 as *mut u64;
@@ -348,7 +348,7 @@ fn start() {
 }
 
 #[no_mangle]
-unsafe extern "C" fn exception_handler(exception_frame: *const ExceptionFrame) {
+unsafe extern "C" fn exception_handler(exception_frame: *mut ExceptionFrame) {
     let mut semi: semihosting::Semihosting = semihosting::Semihosting;
     let mut pl011: pl011::Pl011 = pl011::Pl011;
 
@@ -358,17 +358,16 @@ unsafe extern "C" fn exception_handler(exception_frame: *const ExceptionFrame) {
         &mut pl011 as &mut dyn core::fmt::Write
     };
 
-    writeln!(out, "**************************************************").ok();
+    writeln!(out, "!!!!!!!!!!!! EXCEPTION !!!!!!!!!!!!!!").ok();
 
-    let frame = unsafe { core::slice::from_raw_parts(exception_frame, 1) };
+    let frame = unsafe { exception_frame.as_mut().expect("valid exception frame") };
     writeln!(out, "Exception frame {frame:x?}").ok();
 
     // Get the interesting registers
-    let regs = [
-        register!(CurrentEl),
-        register!(ExceptionLinkEl1),
-        register!(ExceptionSyndromeEl1),
-    ];
+    let el = register!(CurrentEl);
+    let elr = register!(ExceptionLinkEl1);
+    let esr = register!(ExceptionSyndromeEl1);
+    let regs = [el, elr, esr];
     for r in regs {
         r.load();
 
@@ -376,7 +375,9 @@ unsafe extern "C" fn exception_handler(exception_frame: *const ExceptionFrame) {
         let name = r.name();
         writeln!(out, "{name}\t{raw:#016x?}: {r:x?}").ok();
     }
-    writeln!(out, "**************************************************").ok();
+    writeln!(out, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!").ok();
+
+    // Hang for now
 
     writeln!(
         out,
@@ -385,9 +386,14 @@ unsafe extern "C" fn exception_handler(exception_frame: *const ExceptionFrame) {
     .ok();
     if USE_SEMIHOSTING {
         semi.exit(0)
+    } else {
+        unsafe { core::arch::asm!("1: wfe; b 1b") };
     }
 
-    unsafe { core::arch::asm!("b .") };
+    // let esr = ExceptionSyndromeEl1::from(esr.bits());
+    // if esr.ec() == ExceptionClass::Brk64bit {
+    //     frame.elr += 4;
+    // }
 }
 
 #[cfg(target_os = "none")]
