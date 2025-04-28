@@ -5,6 +5,7 @@ members = ["aarch64", "lab"]
 [workspace.dependencies]
 aarch64 = { path = "aarch64" }
 bitfield-struct = { version = "0.4", default-features = false }
+static_assertions = "1"
 
 [profile.dev]
 panic = "abort"

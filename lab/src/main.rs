@@ -71,7 +71,6 @@ use aarch64::register;
 use aarch64::regs::access::Aarch64Register;
 use aarch64::regs::*;
 use aarch64::semihosting;
-use core::sync::atomic::AtomicU32;
 
 fn print_registers(out: &mut dyn core::fmt::Write) {
     let regs = [
@@ -306,32 +305,23 @@ fn start() {
     //     *oops = 0xdeadbeef;
     // }
 
-    // TODO: Map the GICD and GICR regions to the virtual address space
-    // if MMU is enabled
+    let gic = unsafe {
+        Gicv3::new(
+            GICD_BASE as *mut GicDistributor,
+            GICR_BASE as *mut GicRedistributor,
+            NUM_CPUS,
+        )
+    };
 
-    {
-        let gic = unsafe {
-            Gicv3::new(
-                GICD_BASE as *mut GicDistributor,
-                GICR_BASE as *mut GicRedistributor,
-                NUM_CPUS,
-            )
-        };
-        let _ = gic;
-    }
-
-
-    writeln!(out, "Initialized GICv3").ok();
-
-    const TEST_SGI: u32 = 10;
-
-    gic.enable_interrupt(TEST_SGI);
-    gic.enable_local_interrupts();
-
-    // Enable interrupts at CPU level
-    unsafe { core::arch::asm!("msr daifclr, #2") };
-
-    gic.send_sgi(TEST_SGI, 1 << 0); // Target CPU 0
+    writeln!(
+        out,
+        "Initialized GICv3, SPIs {}, LPIs {}, typer {:x?}, iidr {:x?}",
+        gic.spi_lines(),
+        gic.lpi_lines(),
+        gic.gicd().typer,
+        gic.gicd().iidr
+    )
+    .ok();
 
     unsafe { core::arch::asm!("1: wfi; b 1b") };
 

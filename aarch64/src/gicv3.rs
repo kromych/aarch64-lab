@@ -36,15 +36,106 @@ use static_assertions::const_assert;
 
 pub const GICD_SIZE: usize = 0x10000;
 
+// GIC registers, "12.9 The GIC Distributor register descriptions"
+
+/// Disributor control
+#[bitfield(u32)]
+pub struct GicdCtrl {
+    #[bits(1)]
+    pub enable_grp0: u32,
+    #[bits(1)]
+    pub enable_grp1_ns: u32,
+    #[bits(1)]
+    pub enable_grp1_s: u32,
+    #[bits(1)]
+    pub _res0: u32,
+    #[bits(1)]
+    pub are_s: u32,
+    #[bits(1)]
+    pub are_ns: u32,
+    #[bits(1)]
+    pub disable_secure: u32,
+    #[bits(1)]
+    pub e1_nwf: u32,
+    #[bits(23)]
+    pub _res1: u32,
+    #[bits(1)]
+    pub reg_write_pending: u32,
+}
+
+impl GicdCtrl {
+    fn reset(&mut self) {
+        self.0 = 0;
+    }
+
+    fn wait_pending_write(&self) {
+        let mut count = 0x100_0000_i32;
+        while self.reg_write_pending() != 0 {
+            count -= 1;
+            if count.is_negative() {
+                panic!("arm_gicv3: rwp timeout");
+            }
+        }
+    }
+}
+
+/// Identification register
+#[bitfield(u32)]
+pub struct GicdIidr {
+    #[bits(12)]
+    pub implementer: u32,
+    #[bits(4)]
+    pub revision: u32,
+    #[bits(4)]
+    pub variant: u32,
+    #[bits(4)]
+    pub _res0: u32,
+    #[bits(8)]
+    pub product_id: u32,
+}
+
+/// Distributor information
+#[bitfield(u32)]
+pub struct GicdTyper {
+    #[bits(5)]
+    pub it_lines: u32,
+    #[bits(3)]
+    pub cpu_number: u32,
+    #[bits(1)]
+    pub espi: u32,
+    #[bits(1)]
+    pub nmi: u32,
+    #[bits(1)]
+    pub security_extn: u32,
+    #[bits(5)]
+    pub lpi_lines: u32,
+    #[bits(1)]
+    pub mbis: u32,
+    #[bits(1)]
+    pub lpis: u32,
+    #[bits(1)]
+    pub dvis: u32,
+    #[bits(5)]
+    pub id_bits: u32,
+    #[bits(1)]
+    pub a3v: u32,
+    #[bits(1)]
+    pub no1n: u32,
+    #[bits(1)]
+    pub rss: u32,
+    #[bits(5)]
+    pub espi_range: u32,
+}
+
 #[bitfield(u32)]
 /// Peripheral ID2 Register
 pub struct GicPidr2 {
     #[bits(4)]
-    _impl_def0: u32,
+    pub _impl_def0: u32,
     #[bits(4)]
     pub gic_version: u32,
     #[bits(24)]
-    _impl_def1: u32,
+    pub _impl_def1: u32,
 }
 
 /// GIC Distributor register map
@@ -58,17 +149,17 @@ pub struct GicDistributor {
     /// 0x0000 - Distributor Control Register
     ///
     /// Controls overall operation of the Distributor. The reset value is implementation defined.
-    pub ctlr: u32, // GICD_CTLR
+    pub ctlr: GicdCtrl, // GICD_CTLR
 
     /// 0x0004 - Interrupt Controller Type Register
     ///
     /// Provides information about the configuration of the GIC. Read-only, implementation defined.
-    pub typer: u32, // GICD_TYPER
+    pub typer: GicdTyper, // GICD_TYPER
 
     /// 0x0008 - Distributor Implementer Identification Register
     ///
     /// Identifies the implementer of the GIC. Read-only, implementation defined.
-    pub iidr: u32, // GICD_IIDR
+    pub iidr: GicdIidr, // GICD_IIDR
 
     /// 0x000C - Interrupt Controller Type Register 2
     ///
@@ -760,6 +851,10 @@ pub struct Gicv3<'a> {
     gicr: &'a mut [GicRedistributor],
 }
 
+/// GICv3
+///
+/// Initalization and configurations are described in "4. Configuring the GIC" of
+/// [GICv3 and GICv4 Software Overview](https://developer.arm.com/documentation/dai0492/b/)
 impl<'a> Gicv3<'a> {
     /// Initialize the GICv3 interface
     ///
@@ -774,7 +869,7 @@ impl<'a> Gicv3<'a> {
         let gicd = unsafe { gicd_base.as_mut().expect("non NULL GICD") };
         let gicr = unsafe { core::slice::from_raw_parts_mut(gicr_base, num_cpus) };
 
-        let gic = Self { gicd, gicr };
+        let mut gic = Self { gicd, gicr };
 
         let gicd_ver = gic.gicd.pidr2.gic_version();
         assert_eq!(gicd_ver, 3, "Expected GIC v3, got {gicd_ver}");
@@ -784,6 +879,72 @@ impl<'a> Gicv3<'a> {
             assert_eq!(r_ver, 3, "Expected GICR v3, got {r_ver} on CPU {i}");
         }
 
+        gic.init_gicd();
+        gic.init_gicr();
+        gic.init_icc();
+
         gic
     }
+
+    /// Initialize the distributor, route all SPIs to the BSP
+    fn init_gicd(&mut self) {
+        self.gicd.ctlr.reset();
+        self.gicd.ctlr.wait_pending_write();
+
+        // Mask and clear all SPIs
+        let max_spi = self.spi_lines();
+        for i in 1..max_spi / 32 {
+            self.gicd.icenabler[i] = !0;
+            self.gicd.icpendr[i] = !0;
+            self.gicd.igroupr[i] = !0;
+            self.gicd.igrpmodr[i] = !0;
+        }
+        self.gicd.ctlr.wait_pending_write();
+
+        self.gicd.ctlr.set_enable_grp0(1);
+        self.gicd.ctlr.set_enable_grp1_ns(1);
+        self.gicd.ctlr.set_are_ns(1);
+
+        unsafe { core::arch::asm!("isb sy", options(nostack)) };
+
+        // CPU 0, affinity 0.0.0.0
+        for i in 32..max_spi {
+            self.gicd.irouter[i] = 0;
+        }
+        self.gicd.ctlr.wait_pending_write();
+
+        unsafe { core::arch::asm!("isb sy", options(nostack)) };
+    }
+
+    /// Initialize the redistributor
+    fn init_gicr(&mut self) {}
+
+    /// Initialize the control interface to the CPU
+    /// through the ICC_* system registers
+    fn init_icc(&mut self) {}
+
+    pub fn gicd(&self) -> &GicDistributor {
+        self.gicd
+    }
+
+    pub fn gicr(&self) -> &[GicRedistributor] {
+        self.gicr
+    }
+
+    pub fn spi_lines(&self) -> usize {
+        32 * (self.gicd.typer.it_lines() + 1) as usize
+    }
+
+    pub fn lpi_lines(&self) -> usize {
+        let intid = self.gicd.typer.id_bits();
+        if intid <= 14 {
+            return 0;
+        }
+
+        1 << (self.gicd.typer.lpi_lines() + 1)
+    }
+}
+
+pub fn valid_spi_id(id: usize) -> bool {
+    (32..1019).contains(&id)
 }
