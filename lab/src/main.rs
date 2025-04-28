@@ -348,11 +348,7 @@ fn start() {
 }
 
 #[no_mangle]
-unsafe extern "C" fn exception_handler(
-    source: ExceptionSource,
-    kind: ExceptionKind,
-    exception_frame: *const ExceptionFrame,
-) {
+unsafe extern "C" fn exception_handler(exception_frame: *const ExceptionFrame) {
     let mut semi: semihosting::Semihosting = semihosting::Semihosting;
     let mut pl011: pl011::Pl011 = pl011::Pl011;
 
@@ -363,7 +359,6 @@ unsafe extern "C" fn exception_handler(
     };
 
     writeln!(out, "**************************************************").ok();
-    writeln!(out, "EXCEPTION source {source:?} kind {kind:?}").ok();
 
     let frame = unsafe { core::slice::from_raw_parts(exception_frame, 1) };
     writeln!(out, "Exception frame {frame:x?}").ok();

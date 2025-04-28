@@ -4,60 +4,80 @@
 	.weak _DYNAMIC
 	.hidden _DYNAMIC
 
+.section .text
+
+/*
+ * Good only for the EL1.
+ * Refer to AAPSC64 for the details on volatile and non-volatile registers.
+ */
+__exception_common:
+	str     x29, [sp, #-16]!
+	stp     x27, x28, [sp, #-16]!
+	stp     x25, x26, [sp, #-16]!
+	stp     x23, x24, [sp, #-16]!
+	stp     x21, x22, [sp, #-16]!
+	stp     x19, x20, [sp, #-16]!
+	stp     x17, x18, [sp, #-16]!
+	stp     x15, x16, [sp, #-16]!
+	stp     x13, x14, [sp, #-16]!
+	stp     x11, x12, [sp, #-16]!
+	stp     x9, x10, [sp, #-16]!
+	stp     x7, x8, [sp, #-16]!
+	stp     x5, x6, [sp, #-16]!
+	stp     x3, x4, [sp, #-16]!
+	stp     x1, x2, [sp, #-16]!
+
+	add     sp, sp, #-16
+
+	mrs     x2, spsr_el1
+	mrs     x1, elr_el1
+	stp     x1, x2, [sp, #-16]!
+
+	str     x0, [sp, #-16]!
+
+	mrs     x2, tpidr_el1
+	add     x1, sp, #38*8
+	stp     x1, x2, [sp, #32]
+
+	mov     x0, sp
+	bl      exception_handler
+
+	ldr     x1, [sp, #40]
+	msr     tpidr_el1, x1
+
+	add     sp, sp, #16
+
+	ldp     x1, x2, [sp], #16
+	msr     elr_el1, x1
+	msr     spsr_el1, x2
+
+	add     sp, sp, #16
+
+	ldp     x1, x2, [sp], #16
+	ldp     x3, x4, [sp], #16
+	ldp     x5, x6, [sp], #16
+	ldp     x7, x8, [sp], #16
+	ldp     x9, x10, [sp], #16
+	ldp     x11, x12, [sp], #16
+	ldp     x13, x14, [sp], #16
+	ldp     x15, x16, [sp], #16
+	ldp     x17, x18, [sp], #16
+	ldp     x19, x20, [sp], #16
+	ldp     x21, x22, [sp], #16
+	ldp     x23, x24, [sp], #16
+	ldp     x25, x26, [sp], #16
+	ldp     x27, x28, [sp], #16
+	ldr     x29, [sp], #16
+	ldp     lr, x0, [sp], #16
+
+	eret
+
 	.macro EXCEPTION_ENTRY source, kind
 	.align 7
-
-		/* Non-volatile registers in AAPSC64 */
-		stp x29, x30, [sp, #-16]!
-		stp x27, x28, [sp, #-16]!
-		stp x25, x26, [sp, #-16]!
-		stp x23, x24, [sp, #-16]!
-		stp x21, x22, [sp, #-16]!
-		stp x19, x20, [sp, #-16]!
-
-		/* The linkage register x18 ?*/
-
-		/* Volatile registers in AAPSC64 */
-		stp x16, x17, [sp, #-16]!
-		stp x14, x15, [sp, #-16]!
-		stp x12, x13, [sp, #-16]!
-		stp x10, x11, [sp, #-16]!
-		stp x8, x9, [sp, #-16]!
-		stp x6, x7, [sp, #-16]!
-		stp x4, x5, [sp, #-16]!
-		stp x2, x3, [sp, #-16]!
-		stp x0, x1, [sp, #-16]!
-
+		stp     lr, x0, [sp, #-16]!
 		mov     x0, \source
-		mov		x1, \kind
-
-		/* Load the pointer to the exception frame into x3 */
-		mov 	x2, sp
-
-		bl exception_handler
-
-		/* Volatile registers in AAPSC64 */
-		ldp x0, x1, [sp], #16
-		ldp x2, x3, [sp], #16
-		ldp x4, x5, [sp], #16
-		ldp x6, x7, [sp], #16
-		ldp x8, x9, [sp], #16
-		ldp x10, x11, [sp], #16
-		ldp x12, x13, [sp], #16
-		ldp x14, x15, [sp], #16
-		ldp x16, x17, [sp], #16
-
-		/* The linkage register x18? */
-
-		/* Non-volatile registers in AAPSC64 */
-		ldp x19, x20, [sp], #16
-		ldp x21, x22, [sp], #16
-		ldp x23, x24, [sp], #16
-		ldp x25, x26, [sp], #16
-		ldp x27, x28, [sp], #16
-		ldp x29, x30, [sp], #16
-
-		eret
+		movk    x0, \kind, lsl #16
+		b       __exception_common
 	.endm
 
 	.global	_start
