@@ -325,7 +325,7 @@ pub struct ExceptionSyndromeEl1 {
     pub _mbz: u64,
 }
 
-#[repr(u64)]
+#[repr(u16)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub enum ExceptionKind {
     SameElSpEl0 = 0,
@@ -334,7 +334,7 @@ pub enum ExceptionKind {
     LowerEl32bit = 3,
 }
 
-#[repr(u64)]
+#[repr(u16)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub enum ExceptionSource {
     Synchronous = 0,
@@ -347,37 +347,45 @@ pub enum ExceptionSource {
 #[repr(C, packed)]
 #[derive(Debug)]
 pub struct ExceptionFrame {
-    pub x0: u64,
-    pub x1: u64,
-    pub x2: u64,
-    pub x3: u64,
-    pub x4: u64,
-    pub x5: u64,
-    pub x6: u64,
-    pub x7: u64,
-    pub x8: u64,
-    pub x9: u64,
-    pub x10: u64,
-    pub x11: u64,
-    pub x12: u64,
-    pub x13: u64,
-    pub x14: u64,
-    pub x15: u64,
-    pub x16: u64,
-    pub x17: u64,
-    // No x18
-    pub x19: u64,
-    pub x20: u64,
-    pub x21: u64,
-    pub x22: u64,
-    pub x23: u64,
-    pub x24: u64,
-    pub x25: u64,
-    pub x26: u64,
-    pub x27: u64,
-    pub x28: u64,
-    pub x29: u64,
-    pub x30: u64,
+    pub source: ExceptionSource,
+    pub kind: ExceptionKind,
+    pub __pad0: [u8; 4],
+    pub elr: usize,
+    pub spsr: usize,
+    pub sp: usize,
+    pub tpidr: usize,
+    pub x1: usize,
+    pub x2: usize,
+    pub x3: usize,
+    pub x4: usize,
+    pub x5: usize,
+    pub x6: usize,
+    pub x7: usize,
+    pub x8: usize,
+    pub x9: usize,
+    pub x10: usize,
+    pub x11: usize,
+    pub x12: usize,
+    pub x13: usize,
+    pub x14: usize,
+    pub x15: usize,
+    pub x16: usize,
+    pub x17: usize,
+    pub x18: usize,
+    pub x19: usize,
+    pub x20: usize,
+    pub x21: usize,
+    pub x22: usize,
+    pub x23: usize,
+    pub x24: usize,
+    pub x25: usize,
+    pub x26: usize,
+    pub x27: usize,
+    pub x28: usize,
+    pub x29: usize,
+    pub __pad1: usize,
+    pub x30: usize,
+    pub x0: usize,
 }
 
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
