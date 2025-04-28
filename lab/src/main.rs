@@ -3,12 +3,11 @@
 
 const USE_SEMIHOSTING: bool = false;
 const SETUP_MMU: bool = true;
+const NUM_CPUS: usize = 1;
 
 // TODO: qemu virt-9.2 specific
 const GICD_BASE: u64 = 0x08000000;
-const GICD_SIZE: usize = 0x10000;
 const GICR_BASE: u64 = 0x080a0000;
-const GICR_SIZE: usize = 0xf60000;
 
 core::arch::global_asm!(include_str!("start.S"));
 
@@ -61,6 +60,8 @@ mod image_data {
 
 mod reloc;
 
+use aarch64::gicv3::GicDistributor;
+use aarch64::gicv3::GicRedistributor;
 use aarch64::gicv3::Gicv3;
 use aarch64::mmu;
 use aarch64::mmu::PageTableSpace;
@@ -147,7 +148,7 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
         .map_range(
             GICD_BASE,
             mmu::VirtualAddress::from(GICD_BASE),
-            GICD_SIZE as u64,
+            size_of::<aarch64::gicv3::GicDistributor>() as u64,
             mair_el1
                 .get_index(MemoryAttributeEl1::Device_nGnRnE)
                 .expect("must be some device attrs available"),
@@ -158,7 +159,7 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
         .map_range(
             GICR_BASE,
             mmu::VirtualAddress::from(GICR_BASE),
-            GICR_SIZE as u64,
+            size_of::<aarch64::gicv3::GicRedistributor>() as u64,
             mair_el1
                 .get_index(MemoryAttributeEl1::Device_nGnRnE)
                 .expect("must be some device attrs available"),
@@ -308,13 +309,17 @@ fn start() {
     // TODO: Map the GICD and GICR regions to the virtual address space
     // if MMU is enabled
 
-    writeln!(out, "Initialing GICv3").ok();
+    {
+        let gic = unsafe {
+            Gicv3::new(
+                GICD_BASE as *mut GicDistributor,
+                GICR_BASE as *mut GicRedistributor,
+                NUM_CPUS,
+            )
+        };
+        let _ = gic;
+    }
 
-    let mut gic = Gicv3::new(
-        unsafe { core::slice::from_raw_parts_mut(GICD_BASE as *mut AtomicU32, GICD_SIZE) },
-        unsafe { core::slice::from_raw_parts_mut(GICR_BASE as *mut AtomicU32, GICR_SIZE) },
-    );
-    gic.init();
 
     writeln!(out, "Initialized GICv3").ok();
 
@@ -390,6 +395,7 @@ unsafe extern "C" fn exception_handler(
     unsafe { core::arch::asm!("b .") };
 }
 
+#[cfg(target_os = "none")]
 #[panic_handler]
 fn panic(info: &core::panic::PanicInfo) -> ! {
     let mut semi: semihosting::Semihosting = semihosting::Semihosting;
@@ -413,7 +419,7 @@ fn panic(info: &core::panic::PanicInfo) -> ! {
     }
 
     let msg = info.message();
-    writeln!(out, "PANIC: {}\n", msg).ok();
+    writeln!(out, "PANIC: {msg}\n").ok();
 
     if USE_SEMIHOSTING {
         semi.exit(!0)

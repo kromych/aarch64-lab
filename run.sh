@@ -24,5 +24,8 @@ qemu-system-aarch64 \
     -chardev file,path=serial2.log,id=char1 \
     -serial chardev:char1 \
     -nographic \
-    -s # -S \
-    # -d guest_errors -d cpu_reset -d int -D qemu.log \
+    -s \
+    --trace "gicv3_redist*" --trace "gicv3_icc*" --trace "gicv3_dist*" \
+    -D qemu.log \
+    # -S \
+    # -d guest_errors -d cpu_reset -d int

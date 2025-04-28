@@ -1,0 +1,44 @@
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x14 data 0x6 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x14 data 0x4 size 4 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x14 data 0x0 size 4 secure 0
+gicv3_icc_ctlr_write GICv3 ICC_CTLR write cpu 0x0 value 0x0
+gicv3_dist_write GICv3 distributor write: offset 0x0 data 0x12 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10080 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x84 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x88 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x8c data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x90 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x94 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x98 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x9c data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xa0 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xa4 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xa8 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xac data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xb0 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xb4 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xb8 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xbc data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc0 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc4 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc8 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xcc data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xd0 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xd4 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xd8 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xdc data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xe0 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xe4 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xe8 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xec data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xf0 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xf4 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xf8 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xfc data 0xffffffff size 4 secure 0
+gicv3_icc_igrpen_write GICv3 ICC_IGRPEN1 write cpu 0x0 value 0x1
+gicv3_icc_pmr_write GICv3 ICC_PMR write cpu 0x0 value 0xff
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10403 data 0x80 size 1 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x10100 data 0x0 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10100 data 0x8 size 4 secure 0
+gicv3_icc_generate_sgi GICv3 CPU i/f 0x0 generating SGI 3 IRM 0 target affinity 0x0xx targetlist 0x1
+gicv3_redist_send_sgi GICv3 redistributor 0x0 pending SGI 3

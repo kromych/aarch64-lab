@@ -1,0 +1,2362 @@
+gicv3_dist_read GICv3 distributor read: offset 0xffe8 data 0x3b size 4 secure 0
+gicv3_dist_read GICv3 distributor read: offset 0x4 data 0x37a0008 size 4 secure 0
+gicv3_dist_read GICv3 distributor read: offset 0x8 data 0x43b size 4 secure 0
+gicv3_dist_badread GICv3 distributor read: offset 0xc size 4 secure 0: error
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0xffe8 data 0x3b size 4 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x8 data 0x1000011 size 8 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x8 data 0x1000011 size 8 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x0 data 0x2 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x0 data 0x0 size 4 secure 0
+gicv3_dist_read GICv3 distributor read: offset 0x0 data 0x50 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x84 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x88 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x8c data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x90 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x94 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x98 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x9c data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xa0 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc08 data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc0c data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc10 data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc14 data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc18 data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc1c data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc20 data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc24 data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc28 data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc2c data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc30 data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc34 data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc38 data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc3c data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc40 data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0xc44 data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x420 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x424 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x428 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x42c data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x430 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x434 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x438 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x43c data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x440 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x444 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x448 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x44c data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x450 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x454 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x458 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x45c data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x460 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x464 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x468 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x46c data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x470 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x474 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x478 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x47c data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x480 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x484 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x488 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x48c data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x490 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x494 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x498 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x49c data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4a0 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4a4 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4a8 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4ac data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4b0 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4b4 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4b8 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4bc data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4c0 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4c4 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4c8 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4cc data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4d0 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4d4 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4d8 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4dc data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4e0 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4e4 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4e8 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4ec data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4f0 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4f4 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4f8 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x4fc data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x500 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x504 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x508 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x50c data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x510 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x514 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x518 data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x51c data 0xa0a0a0a0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x384 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x184 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x388 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x188 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x38c data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x18c data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x390 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x190 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x394 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x194 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x398 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x198 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x39c data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x19c data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x3a0 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x1a0 data 0xffffffff size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x0 data 0x13 size 4 secure 0
+gicv3_dist_read GICv3 distributor read: offset 0x0 data 0x53 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6100 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6108 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6110 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6118 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6120 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6128 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6130 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6138 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6140 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6148 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6150 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6158 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6160 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6168 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6170 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6178 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6180 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6188 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6190 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6198 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x61a0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x61a8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x61b0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x61b8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x61c0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x61c8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x61d0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x61d8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x61e0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x61e8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x61f0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x61f8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6200 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6208 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6210 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6218 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6220 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6228 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6230 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6238 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6240 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6248 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6250 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6258 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6260 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6268 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6270 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6278 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6280 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6288 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6290 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6298 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x62a0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x62a8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x62b0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x62b8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x62c0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x62c8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x62d0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x62d8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x62e0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x62e8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x62f0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x62f8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6300 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6308 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6310 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6318 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6320 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6328 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6330 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6338 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6340 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6348 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6350 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6358 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6360 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6368 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6370 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6378 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6380 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6388 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6390 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6398 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x63a0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x63a8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x63b0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x63b8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x63c0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x63c8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x63d0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x63d8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x63e0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x63e8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x63f0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x63f8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6400 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6408 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6410 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6418 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6420 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6428 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6430 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6438 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6440 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6448 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6450 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6458 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6460 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6468 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6470 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6478 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6480 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6488 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6490 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6498 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x64a0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x64a8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x64b0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x64b8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x64c0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x64c8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x64d0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x64d8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x64e0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x64e8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x64f0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x64f8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6500 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6508 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6510 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6518 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6520 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6528 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6530 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6538 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6540 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6548 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6550 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6558 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6560 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6568 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6570 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6578 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6580 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6588 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6590 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6598 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x65a0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x65a8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x65b0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x65b8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x65c0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x65c8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x65d0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x65d8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x65e0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x65e8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x65f0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x65f8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6600 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6608 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6610 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6618 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6620 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6628 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6630 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6638 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6640 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6648 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6650 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6658 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6660 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6668 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6670 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6678 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6680 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6688 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6690 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6698 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x66a0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x66a8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x66b0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x66b8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x66c0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x66c8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x66d0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x66d8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x66e0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x66e8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x66f0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x66f8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6700 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6708 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6710 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6718 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6720 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6728 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6730 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6738 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6740 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6748 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6750 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6758 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6760 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6768 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6770 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6778 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6780 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6788 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6790 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6798 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x67a0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x67a8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x67b0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x67b8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x67c0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x67c8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x67d0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x67d8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x67e0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x67e8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x67f0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x67f8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6800 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6808 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6810 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6818 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6820 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6828 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6830 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6838 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6840 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6848 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6850 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6858 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6860 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6868 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6870 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6878 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6880 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6888 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6890 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6898 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x68a0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x68a8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x68b0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x68b8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x68c0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x68c8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x68d0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x68d8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x68e0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x68e8 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x68f0 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x68f8 data 0x0 size 8 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0xffe8 data 0x3b size 4 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x8 data 0x1000011 size 8 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x8 data 0x1000011 size 8 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x14 data 0x6 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x14 data 0x4 size 4 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x14 data 0x0 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10080 data 0xffffffff size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10380 data 0xffffffff size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10180 data 0xffffffff size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10400 data 0xa0a0a0a0 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10404 data 0xa0a0a0a0 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10408 data 0xa0a0a0a0 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x1040c data 0xa0a0a0a0 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10410 data 0xa0a0a0a0 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10414 data 0xa0a0a0a0 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10418 data 0xa0a0a0a0 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x1041c data 0xa0a0a0a0 size 4 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x0 data 0x2 size 4 secure 0
+gicv3_icc_ctlr_read GICv3 ICC_CTLR read cpu 0x0 value 0x8c00
+gicv3_icc_pmr_read GICv3 ICC_PMR read cpu 0x0 value 0x0
+gicv3_icc_ctlr_read GICv3 ICC_CTLR read cpu 0x0 value 0x8c00
+gicv3_icc_pmr_write GICv3 ICC_PMR write cpu 0x0 value 0x8
+gicv3_icc_pmr_read GICv3 ICC_PMR read cpu 0x0 value 0x8
+gicv3_icc_pmr_write GICv3 ICC_PMR write cpu 0x0 value 0x0
+gicv3_icc_pmr_write GICv3 ICC_PMR write cpu 0x0 value 0xf0
+gicv3_icc_bpr_write GICv3 ICC_BPR1 write cpu 0x0 value 0x0
+gicv3_icc_ctlr_write GICv3 ICC_CTLR write cpu 0x0 value 0x0
+gicv3_icc_ap_write GICv3 ICC_AP0R0 write cpu 0x0 value 0x0
+gicv3_icc_ap_write GICv3 ICC_AP1R0 write cpu 0x0 value 0x0
+gicv3_icc_igrpen_write GICv3 ICC_IGRPEN1 write cpu 0x0 value 0x1
+gicv3_icc_ctlr_read GICv3 ICC_CTLR read cpu 0x0 value 0x8c00
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10100 data 0x1 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10100 data 0x2 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10100 data 0x4 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10100 data 0x8 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10100 data 0x10 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10100 data 0x20 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10100 data 0x40 size 4 secure 0
+gicv3_dist_read GICv3 distributor read: offset 0x4 data 0x37a0008 size 4 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x0 data 0x2 size 4 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x8 data 0x1000011 size 8 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x0 data 0x2 size 4 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x0 data 0x2 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x70 data 0x418d078f size 8 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x70 data 0x418d078f size 8 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x78 data 0x418e0780 size 8 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x78 data 0x418e0780 size 8 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x0 data 0x2 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x0 data 0x3 size 4 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x8 data 0x1000011 size 8 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x10c04 data 0x0 size 4 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x10c04 data 0x0 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10100 data 0x8000000 size 4 secure 0
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x10c04 data 0x0 size 4 secure 0
+gicv3_redist_read GICv3 redistributor 0x0 read: offset 0x10c04 data 0x0 size 4 secure 0
+gicv3_redist_write GICv3 redistributor 0x0 write: offset 0x10100 data 0x800000 size 4 secure 0
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_dist_read GICv3 distributor read: offset 0xc08 data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x104 data 0x4 size 4 secure 0
+gicv3_dist_read GICv3 distributor read: offset 0x104 data 0x4 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x184 data 0x4 size 4 secure 0
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_dist_read GICv3 distributor read: offset 0x0 data 0x53 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6110 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x104 data 0x4 size 4 secure 0
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_dist_read GICv3 distributor read: offset 0xc08 data 0x0 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x104 data 0x2 size 4 secure 0
+gicv3_dist_read GICv3 distributor read: offset 0x104 data 0x6 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x184 data 0x2 size 4 secure 0
+gicv3_dist_read GICv3 distributor read: offset 0x0 data 0x53 size 4 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x6108 data 0x0 size 8 secure 0
+gicv3_dist_write GICv3 distributor write: offset 0x104 data 0x2 size 4 secure 0
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 1
+gicv3_icc_iar1_read GICv3 ICC_IAR1 read cpu 0x0 value 0x1b
+gicv3_redist_set_irq GICv3 redistributor 0x0 interrupt 27 level changed to 0
+gicv3_icc_eoir_write GICv3 ICC_EOIR1 write cpu 0x0 value 0x1b
