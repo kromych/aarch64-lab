@@ -315,11 +315,13 @@ fn start() {
 
     writeln!(
         out,
-        "Initialized GICv3, SPIs {}, LPIs {}, typer {:x?}, iidr {:x?}",
+        "Initialized GICv3, SPIs {}, LPIs {}, gicd typer {:x?}, gicd iidr {:x?}, gicr typer {:x?}, gicr iidr {:x?}",
         gic.spi_lines(),
         gic.lpi_lines(),
         gic.gicd().typer,
-        gic.gicd().iidr
+        gic.gicd().iidr,
+        gic.gicr()[0].lpi.typer,
+        gic.gicr()[0].lpi.iidr
     )
     .ok();
 

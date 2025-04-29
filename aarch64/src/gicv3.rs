@@ -69,12 +69,8 @@ impl GicdCtrl {
     }
 
     fn wait_pending_write(&self) {
-        let mut count = 0x100_0000_i32;
         while self.reg_write_pending() != 0 {
-            count -= 1;
-            if count.is_negative() {
-                panic!("arm_gicv3: rwp timeout");
-            }
+            unsafe { core::arch::asm!("yield", options(nostack)) }
         }
     }
 }
@@ -512,6 +508,108 @@ const_assert!(offset_of!(GicDistributor, pidr2) == GICD_PIDR2_OFFSET);
 pub const GICR_SIZE: usize = 0x20000;
 pub const GICR_FRAME_SIZE: usize = 0x10000;
 
+// GIC registers, "12.11 The GIC Redistributor register descriptions"
+
+/// GICR control
+#[bitfield(u32)]
+pub struct GicrCtlr {
+    #[bits(1)]
+    pub enable_lpis: u32,
+    #[bits(1)]
+    pub ces: u32,
+    #[bits(1)]
+    pub ir: u32,
+    #[bits(1)]
+    pub reg_write_pending: u32,
+    #[bits(20)]
+    _res0: u32,
+    #[bits(1)]
+    pub dpg0: u32,
+    #[bits(1)]
+    pub dpg1ns: u32,
+    #[bits(1)]
+    pub dpg1s: u32,
+    #[bits(4)]
+    _res1: u32,
+    #[bits(1)]
+    pub upstream_write_pending: u32,
+}
+
+impl GicrCtlr {
+    fn wait_pending_write(&self) {
+        while self.reg_write_pending() != 0 {
+            unsafe { core::arch::asm!("yield", options(nostack)) }
+        }
+    }
+}
+
+/// GICR Identification register
+#[bitfield(u32)]
+pub struct GicrIidr {
+    #[bits(12)]
+    pub implementer: u32,
+    #[bits(4)]
+    pub revision: u32,
+    #[bits(4)]
+    pub variant: u32,
+    #[bits(4)]
+    pub _res0: u32,
+    #[bits(8)]
+    pub product_id: u32,
+}
+
+/// GICR Type register
+#[bitfield(u64)]
+pub struct GicrTyper {
+    #[bits(1)]
+    pub plpis: u64,
+    #[bits(1)]
+    pub vlpis: u64,
+    #[bits(1)]
+    pub dirty: u64,
+    #[bits(1)]
+    pub direct_lpi: u64,
+    #[bits(1)]
+    pub last: u64,
+    #[bits(1)]
+    pub dpgs: u64,
+    #[bits(1)]
+    pub mpam: u64,
+    #[bits(1)]
+    pub rvpeid: u64,
+    #[bits(16)]
+    pub processor_number: u64,
+    #[bits(2)]
+    pub common_lpi_aff: u64,
+    #[bits(1)]
+    pub vsgi: u64,
+    #[bits(5)]
+    pub ppi_num: u64,
+    #[bits(8)]
+    pub aff0: u64,
+    #[bits(8)]
+    pub aff1: u64,
+    #[bits(8)]
+    pub aff2: u64,
+    #[bits(8)]
+    pub aff3: u64,
+}
+
+/// GICR Wake register
+#[bitfield(u32)]
+pub struct GicrWaker {
+    #[bits(1)]
+    pub _impl_def0: u32,
+    #[bits(1)]
+    pub processor_sleep: u32,
+    #[bits(1)]
+    pub children_asleep: u32,
+    #[bits(28)]
+    _res0: u32,
+    #[bits(1)]
+    pub _impl_def1: u32,
+}
+
 /// GIC physical LPI Redistributor register map
 ///
 /// This struct represents the memory-mapped registers of the ARM GIC Redistributor
@@ -519,22 +617,19 @@ pub const GICR_FRAME_SIZE: usize = 0x10000;
 #[repr(C, align(4))]
 pub struct GicLpiRedistributor {
     /// 0x0000 - Redistributor Control Register
-    pub ctlr: u32, // GICR_CTLR
+    pub ctlr: GicrCtlr, // GICR_CTLR
 
     /// 0x0004 - Implementer Identification Register
-    pub iidr: u32, // GICR_IIDR
+    pub iidr: GicrIidr, // GICR_IIDR
 
     /// 0x0008 - Redistributor Type Register
-    pub typer: u32, // GICR_TYPER
-
-    // 0x000C - Reserved
-    _reserved0: u32,
+    pub typer: GicrTyper, // GICR_TYPER
 
     /// 0x0010 - Error Reporting Status Register (optional)
     pub statusr: u32, // GICR_STATUSR
 
     /// 0x0014 - Redistributor Wake Register
-    pub waker: u32, // GICR_WAKER
+    pub waker: GicrWaker, // GICR_WAKER
 
     /// 0x0018 - Report maximum PARTID and PMG Register
     pub mpamidr: u32, // GICR_MPAMIDR
@@ -832,6 +927,10 @@ const_assert!(offset_of!(GicSgiPpiRedistributor, nsacr) == GICR_NSACR_OFFSET);
 const_assert!(offset_of!(GicSgiPpiRedistributor, inmir0) == GICR_INMIR0_OFFSET);
 const_assert!(offset_of!(GicSgiPpiRedistributor, inmir_e) == GICR_INMIR_E_OFFSET);
 
+/// GIC redistributor aka GICR, every CPU gets one.
+///
+/// This layout is for GICv3, GICv4 adds two more
+/// frames: VLPIs and Reserved.
 #[repr(C, align(0x10000))]
 pub struct GicRedistributor {
     pub lpi: GicLpiRedistributor,
@@ -842,6 +941,105 @@ const_assert!(size_of::<GicRedistributor>() == GICR_SIZE);
 
 const_assert!(offset_of!(GicRedistributor, lpi) == 0);
 const_assert!(offset_of!(GicRedistributor, sgi_ppi) == GICR_FRAME_SIZE);
+
+impl GicRedistributor {
+    pub fn init(&mut self) {
+        // Wake up the CPU
+        self.lpi.waker.set_processor_sleep(0);
+        while self.lpi.waker.children_asleep() != 0 {
+            unsafe { core::arch::asm!("yield", options(nostack)) }
+        }
+
+        // Configure interrupts
+
+        let sgi_ppi = &mut self.sgi_ppi;
+
+        // SGI priorities, implementation defined
+        for i in 0..4 {
+            sgi_ppi.ipriorityr[i] = 0x90909090;
+        }
+
+        // PPI priorities, implementation defined
+        for i in 4..8 {
+            sgi_ppi.ipriorityr[i] = 0xa0a0a0a0;
+        }
+
+        // Disable forwarding all PPI and SGI to the CPU interface
+        sgi_ppi.icenabler0 = 0;
+        sgi_ppi.isenabler0 = 0;
+
+        // Set SGI and PPI as non-secure group 1
+        sgi_ppi.igroupr0 = 0xffff_ffff;
+
+        self.lpi.ctlr.wait_pending_write();
+
+        unsafe { core::arch::asm!("isb sy", options(nostack)) };
+    }
+
+    fn enable_interrupt(&mut self, irq_num: usize, enable: bool) {
+        if enable {
+            self.sgi_ppi.icenabler0 &= !(1 << irq_num);
+            self.sgi_ppi.isenabler0 |= 1 << irq_num;
+        } else {
+            self.sgi_ppi.isenabler0 &= !(1 << irq_num);
+            self.sgi_ppi.icenabler0 |= 1 << irq_num;
+        }
+
+        self.lpi.ctlr.wait_pending_write();
+    }
+
+    fn pend_interrupt(&mut self, irq_num: usize, pend: bool) {
+        if pend {
+            self.sgi_ppi.icpendr0 &= !(1 << irq_num);
+            self.sgi_ppi.ispendr0 |= 1 << irq_num;
+        } else {
+            self.sgi_ppi.ispendr0 &= !(1 << irq_num);
+            self.sgi_ppi.icpendr0 |= 1 << irq_num;
+        }
+
+        self.lpi.ctlr.wait_pending_write();
+    }
+
+    #[must_use]
+    pub fn enable_sgi(&mut self, irq_num: usize, enable: bool) -> bool {
+        if !(0..16).contains(&irq_num) {
+            return false;
+        }
+
+        self.enable_interrupt(irq_num, enable);
+        true
+    }
+
+    #[must_use]
+    pub fn enable_ppi(&mut self, irq_num: usize, enable: bool) -> bool {
+        if !(16..32).contains(&irq_num) {
+            return false;
+        }
+
+        self.enable_interrupt(irq_num, enable);
+        true
+    }
+
+    #[must_use]
+    pub fn pend_sgi(&mut self, irq_num: usize, pend: bool) -> bool {
+        if !(0..16).contains(&irq_num) {
+            return false;
+        }
+
+        self.pend_interrupt(irq_num, pend);
+        true
+    }
+
+    #[must_use]
+    pub fn pend_ppi(&mut self, irq_num: usize, pend: bool) -> bool {
+        if !(16..32).contains(&irq_num) {
+            return false;
+        }
+
+        self.pend_interrupt(irq_num, pend);
+        true
+    }
+}
 
 /// GICv3 intrerface
 pub struct Gicv3<'a> {
@@ -875,12 +1073,19 @@ impl<'a> Gicv3<'a> {
         assert_eq!(gicd_ver, 3, "Expected GIC v3, got {gicd_ver}");
 
         for (i, r) in gic.gicr.iter().enumerate() {
+            // The redistributor in GICv4 has two additional frames,
+            // can't proceed.
             let r_ver = r.lpi.pidr2.gic_version();
             assert_eq!(r_ver, 3, "Expected GICR v3, got {r_ver} on CPU {i}");
+
+            // If VLPIs are available, this must be GICv4, and another frame
+            // is needed in the redistributor.
+            let vlpis = r.lpi.typer.vlpis();
+            assert_eq!(vlpis, 0, "Expected no VLPIs GICR v3 on CPU {i}");
         }
 
         gic.init_gicd();
-        gic.init_gicr();
+        gic.init_all_gicr();
         gic.init_icc();
 
         gic
@@ -917,7 +1122,11 @@ impl<'a> Gicv3<'a> {
     }
 
     /// Initialize the redistributor
-    fn init_gicr(&mut self) {}
+    fn init_all_gicr(&mut self) {
+        for r in self.gicr.iter_mut() {
+            r.init();
+        }
+    }
 
     /// Initialize the control interface to the CPU
     /// through the ICC_* system registers
@@ -943,8 +1152,4 @@ impl<'a> Gicv3<'a> {
 
         1 << (self.gicd.typer.lpi_lines() + 1)
     }
-}
-
-pub fn valid_spi_id(id: usize) -> bool {
-    (32..1019).contains(&id)
 }
