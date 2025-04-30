@@ -91,9 +91,7 @@ impl<S: DeviceRegisterArraySpec> DeviceRegisterArray<S> {
     pub fn index(&self, index: usize) -> DeviceRegister<S> {
         assert!(index < S::COUNT, "Register index out of bounds");
 
-        DeviceRegister::<S>::new(
-            self.base_address + S::OFFSET + index * (S::STRIDE + size_of::<S::Raw>()),
-        )
+        DeviceRegister::<S>::new(self.base_address + index * (S::STRIDE + size_of::<S::Raw>()))
     }
 
     /// Iterate over all registers in the array.
