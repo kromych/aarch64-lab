@@ -60,9 +60,9 @@ mod image_data {
 
 mod reloc;
 
-use aarch64::gicv3::GicDistributor;
-use aarch64::gicv3::GicRedistributor;
-use aarch64::gicv3::Gicv3;
+use aarch64::gicv3;
+use aarch64::gicv3::Gic;
+use aarch64::gicv3::GICR_FRAME_SIZE;
 use aarch64::mmu;
 use aarch64::mmu::PageTableSpace;
 use aarch64::pl011;
@@ -147,7 +147,7 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
         .map_range(
             GICD_BASE,
             mmu::VirtualAddress::from(GICD_BASE),
-            size_of::<aarch64::gicv3::GicDistributor>() as u64,
+            gicv3::GICD_SIZE as u64,
             mair_el1
                 .get_index(MemoryAttributeEl1::Device_nGnRnE)
                 .expect("must be some device attrs available"),
@@ -158,7 +158,7 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
         .map_range(
             GICR_BASE,
             mmu::VirtualAddress::from(GICR_BASE),
-            size_of::<aarch64::gicv3::GicRedistributor>() as u64,
+            4 * GICR_FRAME_SIZE as u64,
             mair_el1
                 .get_index(MemoryAttributeEl1::Device_nGnRnE)
                 .expect("must be some device attrs available"),
@@ -305,25 +305,9 @@ fn start() {
     //     *oops = 0xdeadbeef;
     // }
 
-    let gic = unsafe {
-        Gicv3::new(
-            GICD_BASE as *mut GicDistributor,
-            GICR_BASE as *mut GicRedistributor,
-            NUM_CPUS,
-        )
-    };
+    let _gic = Gic::new(GICD_BASE as usize, GICR_BASE as usize, NUM_CPUS);
 
-    writeln!(
-        out,
-        "Initialized GICv3, SPIs {}, LPIs {}, gicd typer {:x?}, gicd iidr {:x?}, gicr typer {:x?}, gicr iidr {:x?}",
-        gic.spi_lines(),
-        gic.lpi_lines(),
-        gic.gicd().typer,
-        gic.gicd().iidr,
-        gic.gicr()[0].lpi.typer,
-        gic.gicr()[0].lpi.iidr
-    )
-    .ok();
+    writeln!(out, "Initialized GICv3").ok();
 
     unsafe { core::arch::asm!("1: wfi; b 1b") };
 
