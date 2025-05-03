@@ -1,36 +1,99 @@
-//! Simple abstractions for memory-mapped device register(s) access.
+//! Abstractions for memory-mapped device register(s) access.
 //!
-//! These lack RMW implementation and atomic access.
+//! These lack an RMW implementation.
 
 use core::marker::PhantomData;
 use core::ops::Range;
+use core::sync::atomic::AtomicU32;
+use core::sync::atomic::AtomicU64;
+use core::sync::atomic::Ordering;
 
-/// Trait to describe the register access
-pub trait DeviceRegisterSpec {
-    /// The raw type used for memory representation
-    type Raw: Copy + From<Self::Value>;
-    /// The value type used in the API
-    type Value: Copy + From<Self::Raw>;
-    /// The register offset from the base address
-    const OFFSET: usize;
+/// Trait to describe atomic access.
+pub trait AtomicAccess<T: Copy> {
+    /// Loads the data from the address with the spcifies ordering.
+    ///
+    /// # Safety
+    /// The address is valid.
+    unsafe fn load(ptr: *mut T, order: Ordering) -> T;
+
+    /// Stores the data at the address with the spcifies ordering.
+    ///
+    /// # Safety
+    /// The address is valid.
+    unsafe fn store(ptr: *mut T, v: T, order: Ordering);
 }
 
-/// A memory-mapped device register
-///
-/// The user must ensure that the base address and the offset are valid,
-/// and that the memory is mapped as required for the device access.
+impl AtomicAccess<u64> for u64 {
+    /// Loads the data from the address with the spcifies ordering.
+    ///
+    /// # Safety
+    /// The address is valid.
+    unsafe fn load(ptr: *mut u64, order: Ordering) -> u64 {
+        // SAFETY: atomic access, the address is valid.
+        unsafe { AtomicU64::from_ptr(ptr).load(order) }
+    }
+
+    /// Stores the data at the address with the spcifies ordering.
+    ///
+    /// # Safety
+    /// The address is valid.
+    unsafe fn store(ptr: *mut u64, v: u64, order: Ordering) {
+        // SAFETY: atomic access, the address is valid.
+        unsafe { AtomicU64::from_ptr(ptr).store(v, order) };
+    }
+}
+
+impl AtomicAccess<u32> for u32 {
+    /// Loads the data from the address with the spcifies ordering.
+    ///
+    /// # Safety
+    /// The address is valid.
+    unsafe fn load(ptr: *mut u32, order: Ordering) -> u32 {
+        // SAFETY: atomic access, the address is valid.
+
+        unsafe { AtomicU32::from_ptr(ptr).load(order) }
+    }
+
+    /// Stores the data at the address with the spcifies ordering.
+    ///
+    /// # Safety
+    /// The address is valid.
+    unsafe fn store(ptr: *mut u32, v: u32, order: Ordering) {
+        // SAFETY: atomic access, the address is valid.
+        unsafe { AtomicU32::from_ptr(ptr).store(v, order) };
+    }
+}
+
+/// Trait to describe the register access.
+pub trait DeviceRegisterSpec {
+    /// The raw type used for memory representation.
+    type Raw: Copy + From<Self::Value> + AtomicAccess<Self::Raw>;
+    /// The value type used in the API.
+    type Value: Copy + From<Self::Raw>;
+    /// The register offset from the base address.
+    const OFFSET: usize;
+    /// Mmeory ordering when loading, deafults to the
+    /// sequential consistency.
+    const ORDERING_LOAD: Ordering = Ordering::SeqCst;
+    /// Mmeory ordering when loading, deafults to the
+    /// sequential consistency.
+    const ORDERING_STORE: Ordering = Ordering::SeqCst;
+}
+
+/// A memory-mapped device register.
 pub struct DeviceRegister<S: DeviceRegisterSpec> {
     address: *mut S::Raw,
     _spec: PhantomData<S>,
 }
 
 impl<S: DeviceRegisterSpec> DeviceRegister<S> {
-    /// Create a new MMIO register from a base address
+    /// Create a new MMIO register from a base address.
     ///
     /// Caller must ensure:
-    /// - The base address is valid and properly aligned,
-    /// - The resulting address (base + OFFSET) points to valid memory,
-    /// - The memory has the required access permissions and caching set.
+    /// * the base address is valid and properly aligned,
+    /// * the resulting address (base + OFFSET) points to valid memory,
+    /// * the memory has the required access permissions, caching and
+    ///   attributes set.
     pub const fn new(base_address: usize) -> Self {
         Self {
             address: (base_address + S::OFFSET) as *mut S::Raw,
@@ -38,24 +101,40 @@ impl<S: DeviceRegisterSpec> DeviceRegister<S> {
         }
     }
 
-    /// Read the register value
+    /// Read the register value. Might be reorderd by the CPU,
+    /// no compiler reordering.
     pub fn read(&self) -> S::Value {
-        // SAFETY:
-        // - The address was validated during creation,
-        // - Volatile access ensures proper hardware interaction: no accesses
-        //   will be elided or reordered by the compiler,
-        // - The conversion from Raw to Value is guaranteed by the trait bounds
+        // SAFETY: volatile access ensures proper hardware interaction: no
+        // accesses  will be elided or reordered by the compiler, and the
+        // address comes from a trusted place.
         unsafe { core::ptr::read_volatile(self.address).into() }
     }
 
-    /// Write a value to the register
+    /// Write a value to the register. Might be reorderd by the CPU,
+    /// no compiler reordering.
     pub fn write(&mut self, value: S::Value) {
-        // SAFETY:
-        // - The address was validated during creation
-        // - Volatile access ensures proper hardware interaction: no accesses
-        //   will be elided or reordered by the compiler,
-        // - The conversion from Value to Raw is guaranteed by the trait bounds
-        unsafe { core::ptr::write_volatile(self.address, value.into()) }
+        // SAFETY: volatile access ensures proper hardware interaction: no
+        // accesses  will be elided or reordered by the compiler, and the
+        // address comes from a trusted place.
+        unsafe { core::ptr::write_volatile(self.address, value.into()) };
+    }
+
+    /// Atomically load the register value using memory ordering
+    /// from the specification.
+    pub fn load(&self) -> S::Value {
+        // SAFETY: atomic access provides a correct way to interact with the
+        // hardware, and the address comes from the trusted source.
+        unsafe { S::Raw::load(self.address, S::ORDERING_LOAD).into() }
+    }
+
+    /// Atoically store a value to the register using memory ordering
+    /// from the specification.
+    pub fn store(&mut self, value: S::Value) {
+        // SAFETY: atomic access provides a correct way to interact with the
+        // hardware, and the address comes from the trusted source.
+        unsafe {
+            S::Raw::store(self.address, value.into(), S::ORDERING_STORE);
+        }
     }
 }
 
@@ -68,9 +147,6 @@ pub trait DeviceRegisterArraySpec: DeviceRegisterSpec {
 }
 
 /// An array of memory-mapped device registers
-///
-/// The user must ensure that the base address and the offset are valid,
-/// and that the memory is mapped as required for the device access.
 pub struct DeviceRegisterArray<S: DeviceRegisterArraySpec> {
     base_address: usize,
     _spec: PhantomData<S>,
@@ -79,7 +155,8 @@ pub struct DeviceRegisterArray<S: DeviceRegisterArraySpec> {
 impl<S: DeviceRegisterArraySpec> DeviceRegisterArray<S> {
     /// Create a new array of MMIO registers from a base address.
     ///
-    /// The expectations are the same as for the `DeviceRegioster::new()`.
+    /// The user must ensure that the base address and the offset are valid,
+    /// and that the memory is mapped as required for the device access.
     pub const fn new(base_address: usize) -> Self {
         Self {
             base_address,
@@ -104,6 +181,6 @@ impl<S: DeviceRegisterArraySpec> DeviceRegisterArray<S> {
         self.iter()
             .skip(range.start)
             .take(range.len())
-            .for_each(|mut r| r.write(value));
+            .for_each(|mut r| r.store(value));
     }
 }
