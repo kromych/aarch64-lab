@@ -5,8 +5,8 @@ TARGET="lab"
 FLAVOR="debug"
 KERNEL="target/${TARGET}/${FLAVOR}/aarch64-lab.Image"
 
-MACHINE="virt-9.2,gic-version=3,highmem=on,virtualization=off"
-CPU="cortex-a57" # max # host
+MACHINE="virt,gic-version=3,highmem=on,virtualization=off"
+CPU="cortex-a76" # max # host
 
 qemu-system-aarch64 -machine ${MACHINE} -machine dumpdtb=./dump.dtb
 dtc -I dtb -O dts -o ./dump.dts ./dump.dtb
