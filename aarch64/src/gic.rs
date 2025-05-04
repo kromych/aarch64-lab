@@ -548,6 +548,12 @@ pub struct GicrCtlr {
     pub upstream_write_pending: u32,
 }
 
+impl DeviceRegisterSpec for GicrCtlr {
+    type Raw = u32;
+    type Value = GicrCtlr;
+    const OFFSET: usize = GICR_CTLR_OFFSET;
+}
+
 /// GICR Identification register
 #[bitfield(u32)]
 pub struct GicrIidr {
@@ -561,6 +567,12 @@ pub struct GicrIidr {
     pub _res0: u32,
     #[bits(8)]
     pub product_id: u32,
+}
+
+impl DeviceRegisterSpec for GicrIidr {
+    type Raw = u32;
+    type Value = GicrIidr;
+    const OFFSET: usize = GICR_IIDR_OFFSET;
 }
 
 /// GICR Type register
@@ -619,6 +631,12 @@ pub struct GicrWaker {
     _res0: u32,
     #[bits(1)]
     pub _impl_def1: u32,
+}
+
+impl DeviceRegisterSpec for GicrWaker {
+    type Raw = u32;
+    type Value = GicrWaker;
+    const OFFSET: usize = GICR_WAKER_OFFSET;
 }
 
 #[bitfield(u32)]
@@ -713,105 +731,6 @@ pub const GICR_INMIR0_OFFSET: usize = GICR_FRAME_SIZE + 0x0F80; // u32
 /// 0x0F84-0x0FFC - Non-maskable Interrupt Registers for Extended PPIs (GICR_INMIR<n>E)
 pub const GICR_INMIR_E_OFFSET: usize = GICR_FRAME_SIZE + 0x0F84; // [u32; 31]
 
-// impl GicRedistributor {
-//     pub fn init(&mut self) {
-//         // Wake up the CPU
-//         self.lpi.waker.set_processor_sleep(0);
-//         while self.lpi.waker.children_asleep() != 0 {
-//             unsafe { core::arch::asm!("yield", options(nostack)) }
-//         }
-
-//         // Configure interrupts
-
-//         let sgi_ppi = &mut self.sgi_ppi;
-
-//         // SGI priorities, implementation defined
-//         for i in 0..4 {
-//             sgi_ppi.ipriorityr[i] = 0x90909090;
-//         }
-
-//         // PPI priorities, implementation defined
-//         for i in 4..8 {
-//             sgi_ppi.ipriorityr[i] = 0xa0a0a0a0;
-//         }
-
-//         // Disable forwarding all PPI and SGI to the CPU interface
-//         sgi_ppi.icenabler0 = 0;
-//         sgi_ppi.isenabler0 = 0;
-
-//         // Set SGI and PPI as non-secure group 1
-//         sgi_ppi.igroupr0 = 0xffff_ffff;
-
-//         self.lpi.ctlr.wait_pending_store();
-
-//         unsafe { core::arch::asm!("isb sy", options(nostack)) };
-//     }
-
-//     fn enable_interrupt(&mut self, irq_num: usize, enable: bool) {
-//         if enable {
-//             self.sgi_ppi.icenabler0 &= !(1 << irq_num);
-//             self.sgi_ppi.isenabler0 |= 1 << irq_num;
-//         } else {
-//             self.sgi_ppi.isenabler0 &= !(1 << irq_num);
-//             self.sgi_ppi.icenabler0 |= 1 << irq_num;
-//         }
-
-//         self.lpi.ctlr.wait_pending_store();
-//     }
-
-//     fn pend_interrupt(&mut self, irq_num: usize, pend: bool) {
-//         if pend {
-//             self.sgi_ppi.icpendr0 &= !(1 << irq_num);
-//             self.sgi_ppi.ispendr0 |= 1 << irq_num;
-//         } else {
-//             self.sgi_ppi.ispendr0 &= !(1 << irq_num);
-//             self.sgi_ppi.icpendr0 |= 1 << irq_num;
-//         }
-
-//         self.lpi.ctlr.wait_pending_store();
-//     }
-
-//     #[must_use]
-//     pub fn enable_sgi(&mut self, irq_num: usize, enable: bool) -> bool {
-//         if !(0..16).contains(&irq_num) {
-//             return false;
-//         }
-
-//         self.enable_interrupt(irq_num, enable);
-//         true
-//     }
-
-//     #[must_use]
-//     pub fn enable_ppi(&mut self, irq_num: usize, enable: bool) -> bool {
-//         if !(16..32).contains(&irq_num) {
-//             return false;
-//         }
-
-//         self.enable_interrupt(irq_num, enable);
-//         true
-//     }
-
-//     #[must_use]
-//     pub fn pend_sgi(&mut self, irq_num: usize, pend: bool) -> bool {
-//         if !(0..16).contains(&irq_num) {
-//             return false;
-//         }
-
-//         self.pend_interrupt(irq_num, pend);
-//         true
-//     }
-
-//     #[must_use]
-//     pub fn pend_ppi(&mut self, irq_num: usize, pend: bool) -> bool {
-//         if !(16..32).contains(&irq_num) {
-//             return false;
-//         }
-
-//         self.pend_interrupt(irq_num, pend);
-//         true
-//     }
-// }
-
 /// GIC version
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum GicVersion {
@@ -835,6 +754,8 @@ pub struct Gic {
 ///
 /// Initalization and configurations are described in "4. Configuring the GIC" of
 /// [GICv3 and GICv4 Software Overview](https://developer.arm.com/documentation/dai0492/b/)
+///
+/// Might be better to refactor to use type states.
 impl Gic {
     /// Initialize the GIC interface
     pub fn new(gicd_base: usize, gicr_base: usize, num_cpus: usize) -> Self {
@@ -878,26 +799,18 @@ impl Gic {
         let gicd_typer = DeviceRegister::<GicdTyper>::new(gicd_base);
         let max_spi = (32 * gicd_typer.load().it_lines() + 1) as usize;
 
-        let mut gic = Self {
+        Self {
             gicd_base,
             gicr_base,
             version,
             max_spi,
             num_cpus,
             redist_size,
-        };
-
-        // Initialize the interrupt controller
-
-        gic.init_gicd();
-        gic.init_all_gicr();
-        gic.init_icc();
-
-        gic
+        }
     }
 
-    /// Initialize the distributor, route all SPIs to the BSP
-    fn init_gicd(&mut self) {
+    /// Initialize the distributor, route all SPIs to the BSP.
+    pub fn init_gicd(&mut self) {
         let mut gicd_ctrl = DeviceRegister::<GicdCtrl>::new(self.gicd_base);
 
         // Reset
@@ -943,12 +856,111 @@ impl Gic {
         unsafe { core::arch::asm!("isb sy", options(nostack)) };
     }
 
-    /// Initialize the redistributor.
-    fn init_all_gicr(&mut self) {}
+    /// Wake up the CPU and initialize its redistributor.
+    pub fn wakeup_cpu_and_init_gicr(&mut self, cpu: usize) {
+        // Wake up the CPU
+        let mut waker = DeviceRegister::<GicrWaker>::new(self.gicr_base + cpu * self.redist_size);
+        waker.store(waker.load().with_processor_sleep(0));
+        while waker.load().children_asleep() != 0 {
+            unsafe { core::arch::asm!("yield", options(nostack)) }
+        }
+
+        // Configure interrupts
+
+        // let sgi_ppi = &mut self.sgi_ppi;
+
+        // // SGI priorities, implementation defined
+        // for i in 0..4 {
+        //     sgi_ppi.ipriorityr[i] = 0x90909090;
+        // }
+
+        // // PPI priorities, implementation defined
+        // for i in 4..8 {
+        //     sgi_ppi.ipriorityr[i] = 0xa0a0a0a0;
+        // }
+
+        // // Disable forwarding all PPI and SGI to the CPU interface
+        // sgi_ppi.icenabler0 = 0;
+        // sgi_ppi.isenabler0 = 0;
+
+        // // Set SGI and PPI as non-secure group 1
+        // sgi_ppi.igroupr0 = 0xffff_ffff;
+
+        let gicr_ctrl = DeviceRegister::<GicrCtlr>::new(self.gicr_base + cpu * self.gicr_base);
+        while gicr_ctrl.load().reg_write_pending() != 0 {
+            unsafe { core::arch::asm!("yield", options(nostack)) }
+        }
+
+        unsafe { core::arch::asm!("isb sy", options(nostack)) };
+    }
+
+    //     fn enable_interrupt(&mut self, irq_num: usize, enable: bool) {
+    //         if enable {
+    //             self.sgi_ppi.icenabler0 &= !(1 << irq_num);
+    //             self.sgi_ppi.isenabler0 |= 1 << irq_num;
+    //         } else {
+    //             self.sgi_ppi.isenabler0 &= !(1 << irq_num);
+    //             self.sgi_ppi.icenabler0 |= 1 << irq_num;
+    //         }
+
+    //         self.lpi.ctlr.wait_pending_store();
+    //     }
+
+    //     fn pend_interrupt(&mut self, irq_num: usize, pend: bool) {
+    //         if pend {
+    //             self.sgi_ppi.icpendr0 &= !(1 << irq_num);
+    //             self.sgi_ppi.ispendr0 |= 1 << irq_num;
+    //         } else {
+    //             self.sgi_ppi.ispendr0 &= !(1 << irq_num);
+    //             self.sgi_ppi.icpendr0 |= 1 << irq_num;
+    //         }
+
+    //         self.lpi.ctlr.wait_pending_store();
+    //     }
+
+    //     #[must_use]
+    //     pub fn enable_sgi(&mut self, irq_num: usize, enable: bool) -> bool {
+    //         if !(0..16).contains(&irq_num) {
+    //             return false;
+    //         }
+
+    //         self.enable_interrupt(irq_num, enable);
+    //         true
+    //     }
+
+    //     #[must_use]
+    //     pub fn enable_ppi(&mut self, irq_num: usize, enable: bool) -> bool {
+    //         if !(16..32).contains(&irq_num) {
+    //             return false;
+    //         }
+
+    //         self.enable_interrupt(irq_num, enable);
+    //         true
+    //     }
+
+    //     #[must_use]
+    //     pub fn pend_sgi(&mut self, irq_num: usize, pend: bool) -> bool {
+    //         if !(0..16).contains(&irq_num) {
+    //             return false;
+    //         }
+
+    //         self.pend_interrupt(irq_num, pend);
+    //         true
+    //     }
+
+    //     #[must_use]
+    //     pub fn pend_ppi(&mut self, irq_num: usize, pend: bool) -> bool {
+    //         if !(16..32).contains(&irq_num) {
+    //             return false;
+    //         }
+
+    //         self.pend_interrupt(irq_num, pend);
+    //         true
+    //     }
 
     /// Initialize the control interface to the CPU
     /// through the ICC_* system registers.
-    fn init_icc(&mut self) {}
+    pub fn init_icc(&mut self) {}
 
     /// Get the GIC version.
     pub fn version(&self) -> GicVersion {
@@ -958,5 +970,10 @@ impl Gic {
     /// Get the maximum SPI line.
     pub fn max_spi_id(&self) -> usize {
         self.max_spi
+    }
+
+    /// Number of CPUs
+    pub fn num_cpus(&self) -> usize {
+        self.num_cpus
     }
 }

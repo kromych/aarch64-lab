@@ -305,7 +305,10 @@ fn start() {
     //     *oops = 0xdeadbeef;
     // }
 
-    let gic = Gic::new(GICD_BASE as usize, GICR_BASE as usize, NUM_CPUS);
+    let mut gic = Gic::new(GICD_BASE as usize, GICR_BASE as usize, NUM_CPUS);
+    gic.init_gicd();
+    gic.wakeup_cpu_and_init_gicr(0);
+    gic.init_icc();
 
     writeln!(
         out,
