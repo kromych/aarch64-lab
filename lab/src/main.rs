@@ -305,6 +305,12 @@ fn start() {
     //     *oops = 0xdeadbeef;
     // }
 
+    // Enable all exceptions.
+    // SAFETY: not touching memory, inteerupt handler is set up.
+    unsafe {
+        core::arch::asm!("msr DAIFClr, #0xf", options(nomem, nostack));
+    }
+
     let mut gic = Gic::new(GICD_BASE as usize, GICR_BASE as usize, NUM_CPUS);
     gic.init_gicd();
     gic.wakeup_cpu_and_init_gicr(0);
@@ -321,6 +327,7 @@ fn start() {
     let irq_num = 4;
     assert!(gic.enable_sgi(irq_num, true, 0));
     assert!(gic.pend_sgi(irq_num, true, 0));
+    assert!(gic.generate_sgi(irq_num));
 
     unsafe { core::arch::asm!("1: wfi; b 1b") };
 

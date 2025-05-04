@@ -986,7 +986,8 @@ impl Gic {
         unsafe { core::arch::asm!("isb sy", options(nostack)) };
     }
 
-    fn enable_interrupt(&mut self, irq_num: usize, enable: bool, cpu: usize) {
+    /// Enables a local (SGI or PPI interrupt).
+    fn enable_interrupt(&mut self, irq_num: u64, enable: bool, cpu: usize) {
         let gicr_base = self.gicr_base + cpu * self.redist_size;
 
         let mut icenable = DeviceRegister::<GicrIcenabler>::new(gicr_base);
@@ -1007,7 +1008,8 @@ impl Gic {
         }
     }
 
-    fn pend_interrupt(&mut self, irq_num: usize, pend: bool, cpu: usize) {
+    /// Pends a local (SGI or PPI interrupt).
+    fn pend_interrupt(&mut self, irq_num: u64, pend: bool, cpu: usize) {
         let gicr_base = self.gicr_base + cpu * self.redist_size;
 
         let mut icpend = DeviceRegister::<GicrIcpendr>::new(gicr_base);
@@ -1028,8 +1030,9 @@ impl Gic {
         }
     }
 
+    /// Enables an SGI.
     #[must_use]
-    pub fn enable_sgi(&mut self, irq_num: usize, enable: bool, cpu: usize) -> bool {
+    pub fn enable_sgi(&mut self, irq_num: u64, enable: bool, cpu: usize) -> bool {
         if !(0..16).contains(&irq_num) {
             return false;
         }
@@ -1038,8 +1041,9 @@ impl Gic {
         true
     }
 
+    /// Enables a PPI.
     #[must_use]
-    pub fn enable_ppi(&mut self, irq_num: usize, enable: bool, cpu: usize) -> bool {
+    pub fn enable_ppi(&mut self, irq_num: u64, enable: bool, cpu: usize) -> bool {
         if !(16..32).contains(&irq_num) {
             return false;
         }
@@ -1048,8 +1052,9 @@ impl Gic {
         true
     }
 
+    /// Pends an SGI.
     #[must_use]
-    pub fn pend_sgi(&mut self, irq_num: usize, pend: bool, cpu: usize) -> bool {
+    pub fn pend_sgi(&mut self, irq_num: u64, pend: bool, cpu: usize) -> bool {
         if !(0..16).contains(&irq_num) {
             return false;
         }
@@ -1058,8 +1063,9 @@ impl Gic {
         true
     }
 
+    /// Pends a PPI.
     #[must_use]
-    pub fn pend_ppi(&mut self, irq_num: usize, pend: bool, cpu: usize) -> bool {
+    pub fn pend_ppi(&mut self, irq_num: u64, pend: bool, cpu: usize) -> bool {
         if !(16..32).contains(&irq_num) {
             return false;
         }
@@ -1070,7 +1076,54 @@ impl Gic {
 
     /// Initialize the control interface to the CPU
     /// through the ICC_* system registers.
-    pub fn init_icc(&mut self) {}
+    ///
+    /// TODO: not hardcode the mask and the target.
+    pub fn init_icc(&mut self) {
+        // TODO: definitions for the registers
+        let enable = 1u64;
+        let disable = 0u64;
+        let mask: u64 = 0xffu64;
+
+        // SAFETY: not accesiing the memory.
+        unsafe {
+            core::arch::asm!(
+                // Enable access to the system regster interface
+                "msr ICC_SRE_EL1, {enable}",
+                // EOI will deactivate the interrupt so don't need
+                // to flip the bits in GICR separately
+                "msr ICC_CTLR_EL1, {disable}",
+                // Interrupt priority filter mask. Only interrupts with a higher priority than the value in this
+                // register are signaled
+                "msr ICC_PMR_EL1, {mask}",
+                // Enable group 1 (we're in the non-secure world)
+                "msr ICC_IGRPEN1_EL1, {enable}",
+                enable = in(reg) enable, disable = in(reg) disable, mask = in(reg) mask,
+                options(nostack, nomem))
+        };
+    }
+
+    #[must_use]
+    pub fn generate_sgi(&self, int_id: u64) -> bool {
+        if !(0..16).contains(&int_id) {
+            return false;
+        }
+
+        // Send to all (IRM aka Interrupt Routing Mode set to 1).
+        // TODO: define a struct and provide an ability to send to
+        // an individual CPU/PE.
+        let route_sgi = (1u64 << 40) | (int_id << 24);
+
+        // SAFETY: not accesiing the memory.
+        unsafe {
+            core::arch::asm!(
+                // Generates a software interrupt
+                "msr ICC_SGI1R_EL1, {route_sgi}",
+                route_sgi = in(reg) route_sgi,
+                options(nostack, nomem))
+        };
+
+        true
+    }
 
     /// Get the GIC version.
     pub fn version(&self) -> GicVersion {
