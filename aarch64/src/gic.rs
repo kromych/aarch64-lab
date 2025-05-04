@@ -742,7 +742,7 @@ pub const GICR_INMIR_E_OFFSET: usize = GICR_FRAME_SIZE + 0x0F84; // [u32; 31]
 //         // Set SGI and PPI as non-secure group 1
 //         sgi_ppi.igroupr0 = 0xffff_ffff;
 
-//         self.lpi.ctlr.wait_pending_write();
+//         self.lpi.ctlr.wait_pending_store();
 
 //         unsafe { core::arch::asm!("isb sy", options(nostack)) };
 //     }
@@ -756,7 +756,7 @@ pub const GICR_INMIR_E_OFFSET: usize = GICR_FRAME_SIZE + 0x0F84; // [u32; 31]
 //             self.sgi_ppi.icenabler0 |= 1 << irq_num;
 //         }
 
-//         self.lpi.ctlr.wait_pending_write();
+//         self.lpi.ctlr.wait_pending_store();
 //     }
 
 //     fn pend_interrupt(&mut self, irq_num: usize, pend: bool) {
@@ -768,7 +768,7 @@ pub const GICR_INMIR_E_OFFSET: usize = GICR_FRAME_SIZE + 0x0F84; // [u32; 31]
 //             self.sgi_ppi.icpendr0 |= 1 << irq_num;
 //         }
 
-//         self.lpi.ctlr.wait_pending_write();
+//         self.lpi.ctlr.wait_pending_store();
 //     }
 
 //     #[must_use]
@@ -812,10 +812,21 @@ pub const GICR_INMIR_E_OFFSET: usize = GICR_FRAME_SIZE + 0x0F84; // [u32; 31]
 //     }
 // }
 
-/// GICv3 intrerface
+/// GIC version
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum GicVersion {
+    /// Version 3: GICD and GICR with two frames per CPU.
+    GicV3,
+    /// Version 4: GICD and GICR with four frames per CPU.
+    GicV4,
+}
+
+/// GIC intrerface
 pub struct Gic {
     gicd_base: usize,
     gicr_base: usize,
+    version: GicVersion,
+    max_spi: usize,
     num_cpus: usize,
     redist_size: usize,
 }
@@ -830,32 +841,32 @@ impl Gic {
         // Run some basic (in)sanity checks
 
         let gicd_pidr2 = DeviceRegister::<GicdPidr2>::new(gicd_base);
-        let gicd_ver = gicd_pidr2.read().gic_version();
+        let gicd_ver = gicd_pidr2.load().gic_version();
         assert!(
             gicd_ver == 3 || gicd_ver == 4,
             "Expected GIC v3 or GIC v4, got {gicd_ver}"
         );
 
-        let redist_size = if gicd_ver == 3 {
+        let (redist_size, version) = if gicd_ver == 3 {
             // Got LPI and the SGI+PPI frames
-            2 * GICR_FRAME_SIZE
+            (2 * GICR_FRAME_SIZE, GicVersion::GicV3)
         } else if gicd_ver == 4 {
             // The redistributor in GICv4 has two additional frames: VLPI and Reserved
-            4 * GICR_FRAME_SIZE
+            (4 * GICR_FRAME_SIZE, GicVersion::GicV4)
         } else {
             unreachable!();
         };
 
         for i in 0..num_cpus {
             let gicr_pidr2 = DeviceRegister::<GicrPidr2>::new(gicr_base + i * redist_size);
-            let gicr_ver = gicr_pidr2.read().gic_version();
+            let gicr_ver = gicr_pidr2.load().gic_version();
             assert!(
                 gicr_ver == 3 || gicr_ver == 4,
                 "Expected GIC v3 or GIC v4, got {gicr_ver}"
             );
 
             let gicr_typer = DeviceRegister::<GicrTyper>::new(gicr_base + i * redist_size);
-            let vlpis = gicr_typer.read().vlpis();
+            let vlpis = gicr_typer.load().vlpis();
             assert!(
                 vlpis == 0 || (gicr_ver == 4 && gicd_ver == 4),
                 "Expected VLPIs in GIC v4, CPU {i}"
@@ -864,9 +875,14 @@ impl Gic {
 
         // Initialize the instance
 
+        let gicd_typer = DeviceRegister::<GicdTyper>::new(gicd_base);
+        let max_spi = (32 * gicd_typer.load().it_lines() + 1) as usize;
+
         let mut gic = Self {
             gicd_base,
             gicr_base,
+            version,
+            max_spi,
             num_cpus,
             redist_size,
         };
@@ -885,15 +901,13 @@ impl Gic {
         let mut gicd_ctrl = DeviceRegister::<GicdCtrl>::new(self.gicd_base);
 
         // Reset
-        gicd_ctrl.write(GicdCtrl::new());
-        while gicd_ctrl.read().reg_write_pending() != 0 {
+        gicd_ctrl.store(GicdCtrl::new());
+        while gicd_ctrl.load().reg_write_pending() != 0 {
             unsafe { core::arch::asm!("yield", options(nostack)) }
         }
 
         // Mask and clear all SPIs
-
-        let gicd_typer = DeviceRegister::<GicdTyper>::new(self.gicd_base);
-        let max_spi = (32 * gicd_typer.read().it_lines() + 1) as usize;
+        let max_spi = self.max_spi;
 
         DeviceRegisterArray::<GicdIcenabler>::new(self.gicd_base)
             .fill(1..max_spi / 32, GicdIcenabler::from(!0));
@@ -903,17 +917,17 @@ impl Gic {
             .fill(1..max_spi / 32, GicdIgroupr::from(!0));
         DeviceRegisterArray::<GicdIgrpmodr>::new(self.gicd_base)
             .fill(1..max_spi / 32, GicdIgrpmodr::from(!0));
-        while gicd_ctrl.read().reg_write_pending() != 0 {
+        while gicd_ctrl.load().reg_write_pending() != 0 {
             unsafe { core::arch::asm!("yield", options(nostack)) }
         }
 
-        gicd_ctrl.write(
+        gicd_ctrl.store(
             GicdCtrl::new()
                 .with_enable_grp0(1)
                 .with_enable_grp1_ns(1)
                 .with_are_ns(1),
         );
-        while gicd_ctrl.read().reg_write_pending() != 0 {
+        while gicd_ctrl.load().reg_write_pending() != 0 {
             unsafe { core::arch::asm!("yield", options(nostack)) }
         }
 
@@ -922,17 +936,27 @@ impl Gic {
         // CPU 0, affinity 0.0.0.0
         DeviceRegisterArray::<GicdIrouter>::new(self.gicd_base)
             .fill(32..max_spi, GicdIrouter::from(0));
-        while gicd_ctrl.read().reg_write_pending() != 0 {
+        while gicd_ctrl.load().reg_write_pending() != 0 {
             unsafe { core::arch::asm!("yield", options(nostack)) }
         }
 
         unsafe { core::arch::asm!("isb sy", options(nostack)) };
     }
 
-    /// Initialize the redistributor
+    /// Initialize the redistributor.
     fn init_all_gicr(&mut self) {}
 
     /// Initialize the control interface to the CPU
-    /// through the ICC_* system registers
+    /// through the ICC_* system registers.
     fn init_icc(&mut self) {}
+
+    /// Get the GIC version.
+    pub fn version(&self) -> GicVersion {
+        self.version
+    }
+
+    /// Get the maximum SPI line.
+    pub fn max_spi_id(&self) -> usize {
+        self.max_spi
+    }
 }

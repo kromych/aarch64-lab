@@ -60,9 +60,9 @@ mod image_data {
 
 mod reloc;
 
-use aarch64::gicv3;
-use aarch64::gicv3::Gic;
-use aarch64::gicv3::GICR_FRAME_SIZE;
+use aarch64::gic;
+use aarch64::gic::Gic;
+use aarch64::gic::GICR_FRAME_SIZE;
 use aarch64::mmu;
 use aarch64::mmu::PageTableSpace;
 use aarch64::pl011;
@@ -147,7 +147,7 @@ fn setup_mmu(out: &mut dyn core::fmt::Write) {
         .map_range(
             GICD_BASE,
             mmu::VirtualAddress::from(GICD_BASE),
-            gicv3::GICD_SIZE as u64,
+            gic::GICD_SIZE as u64,
             mair_el1
                 .get_index(MemoryAttributeEl1::Device_nGnRnE)
                 .expect("must be some device attrs available"),
@@ -305,9 +305,15 @@ fn start() {
     //     *oops = 0xdeadbeef;
     // }
 
-    let _gic = Gic::new(GICD_BASE as usize, GICR_BASE as usize, NUM_CPUS);
+    let gic = Gic::new(GICD_BASE as usize, GICR_BASE as usize, NUM_CPUS);
 
-    writeln!(out, "Initialized GICv3").ok();
+    writeln!(
+        out,
+        "Initialized GIC, version {:?}, max SPI ID {}",
+        gic.version(),
+        gic.max_spi_id()
+    )
+    .ok();
 
     unsafe { core::arch::asm!("1: wfi; b 1b") };
 
