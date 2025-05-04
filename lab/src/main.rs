@@ -318,6 +318,10 @@ fn start() {
     )
     .ok();
 
+    let irq_num = 4;
+    assert!(gic.enable_sgi(irq_num, true, 0));
+    assert!(gic.pend_sgi(irq_num, true, 0));
+
     unsafe { core::arch::asm!("1: wfi; b 1b") };
 
     writeln!(

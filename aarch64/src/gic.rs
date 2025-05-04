@@ -655,6 +655,8 @@ impl DeviceRegisterSpec for GicrPidr2 {
 // See "12.10 The GIC Redistributor register map"
 
 /// 0x0080 - Interrupt Group Register 0 (GICR_IGROUPR0)
+///
+/// `1` means Group0, `0` means Secure if `GICD_CTRL.DS` == `1`.
 pub const GICR_IGROUPR0_OFFSET: usize = GICR_FRAME_SIZE + 0x0080; // u32
 
 /// 0x0084-0x0088 - Interrupt Group Registers for extended PPI range (GICR_IGROUPR<n>E)
@@ -751,6 +753,66 @@ impl DeviceRegisterArraySpec for GicrIpriorityr {
     const COUNT: usize = 8;
 }
 
+#[bitfield(u32)]
+pub struct GicrIsenabler {
+    sgis: u16,
+    ppis: u16,
+}
+
+impl DeviceRegisterSpec for GicrIsenabler {
+    type Raw = u32;
+    type Value = GicrIsenabler;
+    const OFFSET: usize = GICR_ISENABLER0_OFFSET;
+}
+
+#[bitfield(u32)]
+pub struct GicrIcenabler {
+    sgis: u16,
+    ppis: u16,
+}
+
+impl DeviceRegisterSpec for GicrIcenabler {
+    type Raw = u32;
+    type Value = GicrIcenabler;
+    const OFFSET: usize = GICR_ICENABLER0_OFFSET;
+}
+
+#[bitfield(u32)]
+pub struct GicrIspendr {
+    sgis: u16,
+    ppis: u16,
+}
+
+impl DeviceRegisterSpec for GicrIspendr {
+    type Raw = u32;
+    type Value = GicrIspendr;
+    const OFFSET: usize = GICR_ISPENDR0_OFFSET;
+}
+
+#[bitfield(u32)]
+pub struct GicrIcpendr {
+    sgis: u16,
+    ppis: u16,
+}
+
+impl DeviceRegisterSpec for GicrIcpendr {
+    type Raw = u32;
+    type Value = GicrIcpendr;
+    const OFFSET: usize = GICR_ICPENDR0_OFFSET;
+}
+
+#[bitfield(u32)]
+pub struct GicrIgroupr {
+    sgis: u16,
+    ppis: u16,
+}
+
+impl DeviceRegisterSpec for GicrIgroupr {
+    type Raw = u32;
+    type Value = GicrIgroupr;
+    const OFFSET: usize = GICR_IGROUPR0_OFFSET;
+}
+
 /// GIC version
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum GicVersion {
@@ -834,7 +896,7 @@ impl Gic {
         let mut gicd_ctrl = DeviceRegister::<GicdCtrl>::new(self.gicd_base);
 
         // Reset
-        gicd_ctrl.store(GicdCtrl::new());
+        gicd_ctrl.store(GicdCtrl::new().with_disable_secure(0));
         while gicd_ctrl.load().reg_write_pending() != 0 {
             unsafe { core::arch::asm!("yield", options(nostack)) }
         }
@@ -908,12 +970,13 @@ impl Gic {
             .with_p3(0xa0);
         ipriorityr.fill(4..8, ppi_prio);
 
-        // // Disable forwarding all PPI and SGI to the CPU interface
-        // sgi_ppi.icenabler0 = 0;
-        // sgi_ppi.isenabler0 = 0;
+        // Disable forwarding all PPI and SGI to the CPU interface
+        DeviceRegister::<GicrIcenabler>::new(gicr_base).store(GicrIcenabler::new());
+        DeviceRegister::<GicrIsenabler>::new(gicr_base).store(GicrIsenabler::new());
 
-        // // Set SGI and PPI as non-secure group 1
-        // sgi_ppi.igroupr0 = 0xffff_ffff;
+        // Set SGI and PPI as non-secure group 1 (set `GICD_CTLR.DS = 0` in GICD).
+        DeviceRegister::<GicrIgroupr>::new(gicr_base)
+            .store(GicrIgroupr::new().with_ppis(0xffff).with_sgis(0xffff));
 
         let gicr_ctrl = DeviceRegister::<GicrCtlr>::new(gicr_base);
         while gicr_ctrl.load().reg_write_pending() != 0 {
@@ -923,69 +986,87 @@ impl Gic {
         unsafe { core::arch::asm!("isb sy", options(nostack)) };
     }
 
-    //     fn enable_interrupt(&mut self, irq_num: usize, enable: bool) {
-    //         if enable {
-    //             self.sgi_ppi.icenabler0 &= !(1 << irq_num);
-    //             self.sgi_ppi.isenabler0 |= 1 << irq_num;
-    //         } else {
-    //             self.sgi_ppi.isenabler0 &= !(1 << irq_num);
-    //             self.sgi_ppi.icenabler0 |= 1 << irq_num;
-    //         }
+    fn enable_interrupt(&mut self, irq_num: usize, enable: bool, cpu: usize) {
+        let gicr_base = self.gicr_base + cpu * self.redist_size;
 
-    //         self.lpi.ctlr.wait_pending_store();
-    //     }
+        let mut icenable = DeviceRegister::<GicrIcenabler>::new(gicr_base);
+        let mut isenable = DeviceRegister::<GicrIsenabler>::new(gicr_base);
+        let mask = 1 << irq_num;
 
-    //     fn pend_interrupt(&mut self, irq_num: usize, pend: bool) {
-    //         if pend {
-    //             self.sgi_ppi.icpendr0 &= !(1 << irq_num);
-    //             self.sgi_ppi.ispendr0 |= 1 << irq_num;
-    //         } else {
-    //             self.sgi_ppi.ispendr0 &= !(1 << irq_num);
-    //             self.sgi_ppi.icpendr0 |= 1 << irq_num;
-    //         }
+        if enable {
+            icenable.fetch_and(GicrIcenabler::from(!mask));
+            isenable.fetch_or(GicrIsenabler::from(mask));
+        } else {
+            isenable.fetch_and(GicrIsenabler::from(!mask));
+            icenable.fetch_or(GicrIcenabler::from(mask));
+        }
 
-    //         self.lpi.ctlr.wait_pending_store();
-    //     }
+        let gicr_ctrl = DeviceRegister::<GicrCtlr>::new(gicr_base);
+        while gicr_ctrl.load().reg_write_pending() != 0 {
+            unsafe { core::arch::asm!("yield", options(nostack)) }
+        }
+    }
 
-    //     #[must_use]
-    //     pub fn enable_sgi(&mut self, irq_num: usize, enable: bool) -> bool {
-    //         if !(0..16).contains(&irq_num) {
-    //             return false;
-    //         }
+    fn pend_interrupt(&mut self, irq_num: usize, pend: bool, cpu: usize) {
+        let gicr_base = self.gicr_base + cpu * self.redist_size;
 
-    //         self.enable_interrupt(irq_num, enable);
-    //         true
-    //     }
+        let mut icpend = DeviceRegister::<GicrIcpendr>::new(gicr_base);
+        let mut ispend = DeviceRegister::<GicrIspendr>::new(gicr_base);
+        let mask = 1 << irq_num;
 
-    //     #[must_use]
-    //     pub fn enable_ppi(&mut self, irq_num: usize, enable: bool) -> bool {
-    //         if !(16..32).contains(&irq_num) {
-    //             return false;
-    //         }
+        if pend {
+            icpend.fetch_and(GicrIcpendr::from(!mask));
+            ispend.fetch_or(GicrIspendr::from(mask));
+        } else {
+            ispend.fetch_and(GicrIspendr::from(!mask));
+            icpend.fetch_or(GicrIcpendr::from(mask));
+        }
 
-    //         self.enable_interrupt(irq_num, enable);
-    //         true
-    //     }
+        let gicr_ctrl = DeviceRegister::<GicrCtlr>::new(gicr_base);
+        while gicr_ctrl.load().reg_write_pending() != 0 {
+            unsafe { core::arch::asm!("yield", options(nostack)) }
+        }
+    }
 
-    //     #[must_use]
-    //     pub fn pend_sgi(&mut self, irq_num: usize, pend: bool) -> bool {
-    //         if !(0..16).contains(&irq_num) {
-    //             return false;
-    //         }
+    #[must_use]
+    pub fn enable_sgi(&mut self, irq_num: usize, enable: bool, cpu: usize) -> bool {
+        if !(0..16).contains(&irq_num) {
+            return false;
+        }
 
-    //         self.pend_interrupt(irq_num, pend);
-    //         true
-    //     }
+        self.enable_interrupt(irq_num, enable, cpu);
+        true
+    }
 
-    //     #[must_use]
-    //     pub fn pend_ppi(&mut self, irq_num: usize, pend: bool) -> bool {
-    //         if !(16..32).contains(&irq_num) {
-    //             return false;
-    //         }
+    #[must_use]
+    pub fn enable_ppi(&mut self, irq_num: usize, enable: bool, cpu: usize) -> bool {
+        if !(16..32).contains(&irq_num) {
+            return false;
+        }
 
-    //         self.pend_interrupt(irq_num, pend);
-    //         true
-    //     }
+        self.enable_interrupt(irq_num, enable, cpu);
+        true
+    }
+
+    #[must_use]
+    pub fn pend_sgi(&mut self, irq_num: usize, pend: bool, cpu: usize) -> bool {
+        if !(0..16).contains(&irq_num) {
+            return false;
+        }
+
+        self.pend_interrupt(irq_num, pend, cpu);
+        true
+    }
+
+    #[must_use]
+    pub fn pend_ppi(&mut self, irq_num: usize, pend: bool, cpu: usize) -> bool {
+        if !(16..32).contains(&irq_num) {
+            return false;
+        }
+
+        self.pend_interrupt(irq_num, pend, cpu);
+        true
+    }
 
     /// Initialize the control interface to the CPU
     /// through the ICC_* system registers.
