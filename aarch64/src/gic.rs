@@ -400,7 +400,6 @@ impl DeviceRegisterSpec for GicdIcenabler {
 
 impl DeviceRegisterArraySpec for GicdIcenabler {
     const COUNT: usize = 32;
-    const STRIDE: usize = 0;
 }
 
 /// Clear pending interrupts
@@ -417,7 +416,6 @@ impl DeviceRegisterSpec for GicdIcpendr {
 
 impl DeviceRegisterArraySpec for GicdIcpendr {
     const COUNT: usize = 32;
-    const STRIDE: usize = 0;
 }
 
 /// Interrupt Group Registers
@@ -435,7 +433,6 @@ impl DeviceRegisterSpec for GicdIgroupr {
 
 impl DeviceRegisterArraySpec for GicdIgroupr {
     const COUNT: usize = 32;
-    const STRIDE: usize = 0;
 }
 
 /// Interrupt Group Modifier Registers
@@ -452,7 +449,6 @@ impl DeviceRegisterSpec for GicdIgrpmodr {
 
 impl DeviceRegisterArraySpec for GicdIgrpmodr {
     const COUNT: usize = 32;
-    const STRIDE: usize = 0;
 }
 
 /// Interrupt Routing Registers
@@ -469,7 +465,6 @@ impl DeviceRegisterSpec for GicdIrouter {
 
 impl DeviceRegisterArraySpec for GicdIrouter {
     const COUNT: usize = 1984;
-    const STRIDE: usize = 0;
 }
 // GICR registers, "12.11 The GIC Redistributor register descriptions"
 
@@ -702,6 +697,13 @@ pub const GICR_ICACTIVER0_OFFSET: usize = GICR_FRAME_SIZE + 0x0380; // u32
 pub const GICR_ICACTIVER_E_OFFSET: usize = GICR_FRAME_SIZE + 0x0384; // [u32; 2]
 
 /// 0x0400-0x041C - Interrupt Priority Registers (GICR_IPRIORITYR<n>)
+///
+/// - GICR_IPRIORITYR0-GICR_IPRIORITYR3 store the priority of SGIs.
+/// - GICR_IPRIORITYR4-GICR_IPRIORITYR7 store the priority of PPIs.
+///
+/// Interrupt priority value from an IMPLEMENTATION DEFINED range,
+/// takes 8 bits. Lower priority values correspond to greater priority
+/// of the interrupt. For an INTID configured as non-maskable, this field is RES0.
 pub const GICR_IPRIORITYR_OFFSET: usize = GICR_FRAME_SIZE + 0x0400; // [u32; 8]
 
 /// 0x0420-0x045C - Interrupt Priority for extended PPI range (GICR_IPRIORITYR<n>E)
@@ -730,6 +732,24 @@ pub const GICR_INMIR0_OFFSET: usize = GICR_FRAME_SIZE + 0x0F80; // u32
 
 /// 0x0F84-0x0FFC - Non-maskable Interrupt Registers for Extended PPIs (GICR_INMIR<n>E)
 pub const GICR_INMIR_E_OFFSET: usize = GICR_FRAME_SIZE + 0x0F84; // [u32; 31]
+
+#[bitfield(u32)]
+pub struct GicrIpriorityr {
+    p0: u8,
+    p1: u8,
+    p2: u8,
+    p3: u8,
+}
+
+impl DeviceRegisterSpec for GicrIpriorityr {
+    type Raw = u32;
+    type Value = GicrIpriorityr;
+    const OFFSET: usize = GICR_IPRIORITYR_OFFSET;
+}
+
+impl DeviceRegisterArraySpec for GicrIpriorityr {
+    const COUNT: usize = 8;
+}
 
 /// GIC version
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -858,8 +878,11 @@ impl Gic {
 
     /// Wake up the CPU and initialize its redistributor.
     pub fn wakeup_cpu_and_init_gicr(&mut self, cpu: usize) {
+        let gicr_base = self.gicr_base + cpu * self.redist_size;
+
         // Wake up the CPU
-        let mut waker = DeviceRegister::<GicrWaker>::new(self.gicr_base + cpu * self.redist_size);
+
+        let mut waker = DeviceRegister::<GicrWaker>::new(gicr_base);
         waker.store(waker.load().with_processor_sleep(0));
         while waker.load().children_asleep() != 0 {
             unsafe { core::arch::asm!("yield", options(nostack)) }
@@ -867,17 +890,23 @@ impl Gic {
 
         // Configure interrupts
 
-        // let sgi_ppi = &mut self.sgi_ppi;
+        let mut ipriorityr = DeviceRegisterArray::<GicrIpriorityr>::new(gicr_base);
 
-        // // SGI priorities, implementation defined
-        // for i in 0..4 {
-        //     sgi_ppi.ipriorityr[i] = 0x90909090;
-        // }
+        // SGI priorities, implementation defined
+        let sgi_prio = GicrIpriorityr::new()
+            .with_p0(0x90)
+            .with_p1(0x90)
+            .with_p2(0x90)
+            .with_p3(0x90);
+        ipriorityr.fill(0..4, sgi_prio);
 
-        // // PPI priorities, implementation defined
-        // for i in 4..8 {
-        //     sgi_ppi.ipriorityr[i] = 0xa0a0a0a0;
-        // }
+        // PPI priorities, implementation defined
+        let ppi_prio = GicrIpriorityr::new()
+            .with_p0(0xa0)
+            .with_p1(0xa0)
+            .with_p2(0xa0)
+            .with_p3(0xa0);
+        ipriorityr.fill(4..8, ppi_prio);
 
         // // Disable forwarding all PPI and SGI to the CPU interface
         // sgi_ppi.icenabler0 = 0;
@@ -886,7 +915,7 @@ impl Gic {
         // // Set SGI and PPI as non-secure group 1
         // sgi_ppi.igroupr0 = 0xffff_ffff;
 
-        let gicr_ctrl = DeviceRegister::<GicrCtlr>::new(self.gicr_base + cpu * self.gicr_base);
+        let gicr_ctrl = DeviceRegister::<GicrCtlr>::new(gicr_base);
         while gicr_ctrl.load().reg_write_pending() != 0 {
             unsafe { core::arch::asm!("yield", options(nostack)) }
         }
