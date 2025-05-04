@@ -21,6 +21,24 @@ pub trait AtomicAccess<T: Copy> {
     /// # Safety
     /// The address is valid.
     unsafe fn store(ptr: *mut T, v: T, order: Ordering);
+
+    /// Bitwise "or" with the current value.
+    ///
+    /// Performs a bitwise "or" operation on the current value and the argument `v`, and
+    /// sets the new value to the result.
+    ///
+    /// # Safety
+    /// The address is valid.
+    unsafe fn fetch_or(ptr: *mut T, v: T, order: Ordering) -> T;
+
+    /// Bitwise "and" with the current value.
+    ///
+    /// Performs a bitwise "and" operation on the current value and the argument `v`, and
+    /// sets the new value to the result.
+    ///
+    /// # Safety
+    /// The address is valid.
+    unsafe fn fetch_and(ptr: *mut T, v: T, order: Ordering) -> T;
 }
 
 impl AtomicAccess<u64> for u64 {
@@ -40,6 +58,30 @@ impl AtomicAccess<u64> for u64 {
     unsafe fn store(ptr: *mut u64, v: u64, order: Ordering) {
         // SAFETY: atomic access, the address is valid.
         unsafe { AtomicU64::from_ptr(ptr).store(v, order) };
+    }
+
+    /// Bitwise "or" with the current value.
+    ///
+    /// Performs a bitwise "or" operation on the current value and the argument `v`, and
+    /// sets the new value to the result.
+    ///
+    /// # Safety
+    /// The address is valid.
+    unsafe fn fetch_or(ptr: *mut u64, v: u64, order: Ordering) -> u64 {
+        // SAFETY: atomic access, the address is valid.
+        unsafe { AtomicU64::from_ptr(ptr).fetch_or(v, order) }
+    }
+
+    /// Bitwise "and" with the current value.
+    ///
+    /// Performs a bitwise "and" operation on the current value and the argument `v`, and
+    /// sets the new value to the result.
+    ///
+    /// # Safety
+    /// The address is valid.
+    unsafe fn fetch_and(ptr: *mut u64, v: u64, order: Ordering) -> u64 {
+        // SAFETY: atomic access, the address is valid.
+        unsafe { AtomicU64::from_ptr(ptr).fetch_and(v, order) }
     }
 }
 
@@ -61,6 +103,30 @@ impl AtomicAccess<u32> for u32 {
     unsafe fn store(ptr: *mut u32, v: u32, order: Ordering) {
         // SAFETY: atomic access, the address is valid.
         unsafe { AtomicU32::from_ptr(ptr).store(v, order) };
+    }
+
+    /// Bitwise "or" with the current value.
+    ///
+    /// Performs a bitwise "or" operation on the current value and the argument `v`, and
+    /// sets the new value to the result.
+    ///
+    /// # Safety
+    /// The address is valid.
+    unsafe fn fetch_or(ptr: *mut u32, v: u32, order: Ordering) -> u32 {
+        // SAFETY: atomic access, the address is valid.
+        unsafe { AtomicU32::from_ptr(ptr).fetch_or(v, order) }
+    }
+
+    /// Bitwise "and" with the current value.
+    ///
+    /// Performs a bitwise "and" operation on the current value and the argument `v`, and
+    /// sets the new value to the result.
+    ///
+    /// # Safety
+    /// The address is valid.
+    unsafe fn fetch_and(ptr: *mut u32, v: u32, order: Ordering) -> u32 {
+        // SAFETY: atomic access, the address is valid.
+        unsafe { AtomicU32::from_ptr(ptr).fetch_and(v, order) }
     }
 }
 
@@ -135,6 +201,22 @@ impl<S: DeviceRegisterSpec> DeviceRegister<S> {
         unsafe {
             S::Raw::store(self.address, value.into(), S::ORDERING_STORE);
         }
+    }
+
+    /// Atomically bitise "or" load the register value using memory ordering
+    /// from the specification, and return the old value.
+    pub fn fetch_or(&mut self, value: S::Value) -> S::Value {
+        // SAFETY: atomic access provides a correct way to interact with the
+        // hardware, and the address comes from the trusted source.
+        unsafe { S::Raw::fetch_or(self.address, value.into(), S::ORDERING_LOAD).into() }
+    }
+
+    /// Atomically bitise "and" load the register value using memory ordering
+    /// from the specification, and return the old value.
+    pub fn fetch_and(&mut self, value: S::Value) -> S::Value {
+        // SAFETY: atomic access provides a correct way to interact with the
+        // hardware, and the address comes from the trusted source.
+        unsafe { S::Raw::fetch_and(self.address, value.into(), S::ORDERING_LOAD).into() }
     }
 }
 
