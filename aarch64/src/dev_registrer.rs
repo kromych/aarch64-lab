@@ -223,7 +223,7 @@ impl<S: DeviceRegisterSpec> DeviceRegister<S> {
 /// Trait defining the specification for an array of device registers
 pub trait DeviceRegisterArraySpec: DeviceRegisterSpec {
     /// The stride between consecutive registers in bytes
-    const STRIDE: usize;
+    const STRIDE: usize = 0;
     /// The number of registers in the array
     const COUNT: usize;
 }
